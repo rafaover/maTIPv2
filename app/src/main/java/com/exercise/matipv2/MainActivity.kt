@@ -23,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,7 +48,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MatipLayout() {
-    // hoisting the state
+    /* hoisting the state for EditNumber func */
     var amountInput by remember { mutableStateOf("") }
     val amount = amountInput.toDoubleOrNull() ?: 0.0
     val tip = calculateTip(amount)
@@ -59,6 +60,7 @@ fun MatipLayout() {
     ) {
         Text(
             text = stringResource(R.string.calculate_tip),
+            fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .padding(bottom = 16.dp)
                 .align(alignment = Alignment.Start)
@@ -72,7 +74,8 @@ fun MatipLayout() {
         )
         Text(
             text = stringResource(R.string.tip_amount, tip),
-            style = MaterialTheme.typography.displaySmall
+            style = MaterialTheme.typography.displaySmall,
+            modifier = Modifier.align(alignment = Alignment.Start)
         )
         Spacer(modifier = Modifier.height(150.dp))
     }
