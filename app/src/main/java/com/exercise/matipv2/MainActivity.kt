@@ -3,12 +3,14 @@ package com.exercise.matipv2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -22,6 +24,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.exercise.matipv2.ui.theme.MaTIPv2Theme
@@ -45,6 +49,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MatipLayout() {
+    /* hoisting the state for EditNumber func */
+    var amountInput by remember { mutableStateOf("") }
+    val amount = amountInput.toDoubleOrNull() ?: 0.0
+    var tipPercentInput by remember { mutableStateOf("") }
+    val tipPercent = tipPercentInput.toDoubleOrNull() ?: 0.0
+    val tip = calculateTip(amount, tipPercent)
+
     Column(
         modifier = Modifier.padding(40.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -52,18 +63,33 @@ fun MatipLayout() {
     ) {
         Text(
             text = stringResource(R.string.calculate_tip),
+            fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .padding(bottom = 16.dp)
                 .align(alignment = Alignment.Start)
         )
+        // Function to edit Bill Amount
         EditNumber(
+            label = R.string.bill_amount,
+            value = amountInput,
+            onValueChange = { amountInput = it },
+            modifier = Modifier
+                .padding(bottom = 15.dp)
+                .align(alignment = Alignment.Start),
+        )
+        // function to edit Tip percentage
+        EditNumber(
+            label = R.string.tip_percentage,
+            value = tipPercentInput,
+            onValueChange = { tipPercentInput = it },
             modifier = Modifier
                 .padding(bottom = 40.dp)
-                .align(alignment = Alignment.Start)
+                .align(alignment = Alignment.Start),
         )
         Text(
-            text = stringResource(R.string.tip_amount, "$0.00"),
-            style = MaterialTheme.typography.displaySmall
+            text = stringResource(R.string.tip_amount, tip),
+            style = MaterialTheme.typography.displaySmall,
+            modifier = Modifier.align(alignment = Alignment.Start)
         )
         Spacer(modifier = Modifier.height(150.dp))
     }
@@ -71,18 +97,24 @@ fun MatipLayout() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditNumber(modifier: Modifier = Modifier) {
-    // added state for tip input changes
-    var amountInput by remember { mutableStateOf("") }
+fun EditNumber(
+    @StringRes label: Int,
+    modifier: Modifier = Modifier,
+    onValueChange: (String) -> Unit = {},
+    value: String
+) {
     OutlinedTextField(
-        value = amountInput,
-        label = { Text(stringResource(R.string.tip_amount_label)) },
-        onValueChange = { amountInput = it },
-        modifier = modifier
+        modifier = modifier,
+        value = value,
+        onValueChange = onValueChange,
+        // onValueChange = { input -> amountInput = input.filter { it.isDigit() }},
+        label = { Text(stringResource(label)) },
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
     )
 }
 
-private fun calculateTip(amount: Double, tipPercent: Double = 15.0): String {
+private fun calculateTip(amount: Double, tipPercent: Double = 5.0): String {
     val tip = tipPercent / 100 * amount
     return NumberFormat.getCurrencyInstance().format(tip)
 }

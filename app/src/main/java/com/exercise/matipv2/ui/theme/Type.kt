@@ -18,7 +18,7 @@ val Typography = Typography(
     displaySmall = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Bold,
-        fontSize = 36.sp,
+        fontSize = 30.sp,
         lineHeight = 44.sp,
         letterSpacing = 0.sp,
 )
