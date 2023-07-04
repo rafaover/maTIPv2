@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,7 +52,7 @@ fun MatipLayout() {
                 .padding(bottom = 16.dp)
                 .align(alignment = Alignment.Start)
         )
-        EditNumberField(
+        EditNumber(
             modifier = Modifier
                 .padding(bottom = 40.dp)
                 .align(alignment = Alignment.Start)
@@ -67,9 +67,10 @@ fun MatipLayout() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditNumberField(modifier: Modifier = Modifier) {
-    TextField(
+fun EditNumber(modifier: Modifier = Modifier) {
+    OutlinedTextField(
         value = "",
+        label = { Text(stringResource(R.string.tip_amount_label)) },
         onValueChange = {},
         modifier = modifier
     )
