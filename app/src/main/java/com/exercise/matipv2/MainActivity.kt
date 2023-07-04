@@ -3,6 +3,7 @@ package com.exercise.matipv2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -51,7 +52,9 @@ fun MatipLayout() {
     /* hoisting the state for EditNumber func */
     var amountInput by remember { mutableStateOf("") }
     val amount = amountInput.toDoubleOrNull() ?: 0.0
-    val tip = calculateTip(amount)
+    var tipPercentInput by remember { mutableStateOf("") }
+    val tipPercent = tipPercentInput.toDoubleOrNull() ?: 0.0
+    val tip = calculateTip(amount, tipPercent)
 
     Column(
         modifier = Modifier.padding(40.dp),
@@ -65,9 +68,20 @@ fun MatipLayout() {
                 .padding(bottom = 16.dp)
                 .align(alignment = Alignment.Start)
         )
+        // Function to edit Bill Amount
         EditNumber(
+            label = R.string.bill_amount,
             value = amountInput,
             onValueChange = { amountInput = it },
+            modifier = Modifier
+                .padding(bottom = 15.dp)
+                .align(alignment = Alignment.Start),
+        )
+        // function to edit Tip percentage
+        EditNumber(
+            label = R.string.tip_percentage,
+            value = tipPercentInput,
+            onValueChange = { tipPercentInput = it },
             modifier = Modifier
                 .padding(bottom = 40.dp)
                 .align(alignment = Alignment.Start),
@@ -84,6 +98,7 @@ fun MatipLayout() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditNumber(
+    @StringRes label: Int,
     modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit = {},
     value: String
@@ -93,13 +108,13 @@ fun EditNumber(
         value = value,
         onValueChange = onValueChange,
         // onValueChange = { input -> amountInput = input.filter { it.isDigit() }},
-        label = { Text(stringResource(R.string.tip_amount_label)) },
+        label = { Text(stringResource(label)) },
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
     )
 }
 
-private fun calculateTip(amount: Double, tipPercent: Double = 15.0): String {
+private fun calculateTip(amount: Double, tipPercent: Double = 5.0): String {
     val tip = tipPercent / 100 * amount
     return NumberFormat.getCurrencyInstance().format(tip)
 }
