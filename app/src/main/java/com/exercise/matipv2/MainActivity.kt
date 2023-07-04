@@ -52,6 +52,11 @@ fun MatipLayout() {
                 .padding(bottom = 16.dp)
                 .align(alignment = Alignment.Start)
         )
+        EditNumberField(
+            modifier = Modifier
+                .padding(bottom = 40.dp)
+                .align(alignment = Alignment.Start)
+        )
         Text(
             text = stringResource(R.string.tip_amount, "$0.00"),
             style = MaterialTheme.typography.displaySmall
