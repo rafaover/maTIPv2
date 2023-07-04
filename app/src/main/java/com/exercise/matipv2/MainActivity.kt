@@ -50,7 +50,7 @@ fun MatipLayout() {
     // hoisting the state
     var amountInput by remember { mutableStateOf("") }
     val amount = amountInput.toDoubleOrNull() ?: 0.0
-    var tip = calculateTip(amount)
+    val tip = calculateTip(amount)
 
     Column(
         modifier = Modifier.padding(40.dp),
@@ -71,7 +71,7 @@ fun MatipLayout() {
                 .align(alignment = Alignment.Start),
         )
         Text(
-            text = stringResource(R.string.tip_amount, "$0.00"),
+            text = stringResource(R.string.tip_amount, tip),
             style = MaterialTheme.typography.displaySmall
         )
         Spacer(modifier = Modifier.height(150.dp))
