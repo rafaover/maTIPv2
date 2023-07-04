@@ -47,6 +47,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MatipLayout() {
+    // hoisting the state
+    var amountInput by remember { mutableStateOf("") }
+    val amount = amountInput.toDoubleOrNull() ?: 0.0
+    var tip = calculateTip(amount)
+
     Column(
         modifier = Modifier.padding(40.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -59,9 +64,11 @@ fun MatipLayout() {
                 .align(alignment = Alignment.Start)
         )
         EditNumber(
+            value = amountInput,
+            onValueChange = { amountInput = it },
             modifier = Modifier
                 .padding(bottom = 40.dp)
-                .align(alignment = Alignment.Start)
+                .align(alignment = Alignment.Start),
         )
         Text(
             text = stringResource(R.string.tip_amount, "$0.00"),
@@ -73,17 +80,19 @@ fun MatipLayout() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditNumber(modifier: Modifier = Modifier) {
-    // added state for tip input changes
-    var amountInput by remember { mutableStateOf("") }
+fun EditNumber(
+    modifier: Modifier = Modifier,
+    onValueChange: (String) -> Unit = {},
+    value: String
+) {
     OutlinedTextField(
-        value = amountInput,
-        label = { Text(stringResource(R.string.tip_amount_label)) },
-        onValueChange = { amountInput = it },
+        modifier = modifier,
+        value = value,
+        onValueChange = onValueChange,
         // onValueChange = { input -> amountInput = input.filter { it.isDigit() }},
+        label = { Text(stringResource(R.string.tip_amount_label)) },
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-        modifier = modifier
     )
 }
 
