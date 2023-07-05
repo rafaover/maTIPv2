@@ -7,4 +7,6 @@ A user can donate a value to another user. The receiver will receive a complimen
 The donation is going to a personal life project.
 
 ---------------
-Kotlin + Jetpack Compose
+- Kotlin
+- Jetpack Compose
+- Material Design 3
