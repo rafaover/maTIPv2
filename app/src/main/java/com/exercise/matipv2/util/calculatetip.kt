@@ -1,8 +1,10 @@
 package com.exercise.matipv2.util
 
+import androidx.annotation.VisibleForTesting
 import java.text.NumberFormat
 
-fun calculateTip(
+@VisibleForTesting
+internal fun calculateTip(
     amount: Double,
     tipPercent: Double = 5.0,
     roundUp: Boolean,
