@@ -6,15 +6,20 @@ import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -56,6 +61,7 @@ fun MatipLayout() {
     var tipPercentInput by remember { mutableStateOf("") }
     val tipPercent = tipPercentInput.toDoubleOrNull() ?: 0.0
     val tip = calculateTip(amount, tipPercent)
+    var roundUp by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.padding(40.dp),
@@ -95,10 +101,13 @@ fun MatipLayout() {
                 imeAction = ImeAction.Done
             )
         )
+        RoundTheTipSwitch(roundUp, onRoundUpChange = { roundUp = it })
         Text(
             text = stringResource(R.string.tip_amount, tip),
             style = MaterialTheme.typography.displaySmall,
-            modifier = Modifier.align(alignment = Alignment.Start)
+            modifier = Modifier
+                .align(alignment = Alignment.Start)
+                .padding(bottom = 16.dp)
         )
         Spacer(modifier = Modifier.height(150.dp))
     }
@@ -114,7 +123,7 @@ fun EditNumber(
     keyboardOptions: KeyboardOptions
 ) {
     OutlinedTextField(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         value = value,
         onValueChange = onValueChange,
         // onValueChange = { input -> amountInput = input.filter { it.isDigit() }},
@@ -122,6 +131,30 @@ fun EditNumber(
         singleLine = true,
         keyboardOptions = keyboardOptions
         )
+}
+
+@Composable
+fun RoundTheTipSwitch(
+    roundUp: Boolean,
+    onRoundUpChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+)
+{
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .size(50.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ){
+        Text(text = stringResource(R.string.round_up_tip))
+        Switch(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentWidth(Alignment.End),
+            checked = roundUp,
+            onCheckedChange = onRoundUpChange
+        )
+    }
 }
 
 private fun calculateTip(amount: Double, tipPercent: Double = 5.0): String {
