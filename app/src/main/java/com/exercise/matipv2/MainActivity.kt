@@ -60,8 +60,8 @@ fun MatipLayout() {
     val amount = amountInput.toDoubleOrNull() ?: 0.0
     var tipPercentInput by remember { mutableStateOf("") }
     val tipPercent = tipPercentInput.toDoubleOrNull() ?: 0.0
-    val tip = calculateTip(amount, tipPercent)
     var roundUp by remember { mutableStateOf(false) }
+    val tip = calculateTip(amount, tipPercent, roundUp)
 
     Column(
         modifier = Modifier.padding(40.dp),
@@ -157,8 +157,14 @@ fun RoundTheTipSwitch(
     }
 }
 
-private fun calculateTip(amount: Double, tipPercent: Double = 5.0): String {
-    val tip = tipPercent / 100 * amount
+private fun calculateTip(
+    amount: Double,
+    tipPercent: Double = 5.0,
+    roundUp: Boolean,
+): String {
+    var tip = tipPercent / 100 * amount
+    if(roundUp)
+        tip = kotlin.math.ceil(tip)
     return NumberFormat.getCurrencyInstance().format(tip)
 }
 @Preview(showBackground = true)
