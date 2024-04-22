@@ -5,7 +5,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
-import com.exercise.matipv2.layout.MainLayout
+import com.exercise.matipv2.ui.MainLayout
 import com.exercise.matipv2.ui.theme.MaTIPv2Theme
 import org.junit.Rule
 import org.junit.Test
