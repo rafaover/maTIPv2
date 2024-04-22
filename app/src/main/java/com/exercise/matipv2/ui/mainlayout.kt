@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -97,6 +96,8 @@ fun MainLayout() {
             text = stringResource(R.string.tip_amount, tip),
             style = MaterialTheme.typography.displaySmall,
         )
-//        Spacer(modifier = Modifier.height(150.dp))
+
+        /* TODO("Add feature to split the total tip by a number and give a result, save this
+            value instead the whole tip.") */
     }
 }
