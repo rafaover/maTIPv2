@@ -5,9 +5,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.text.NumberFormat
 
-/**
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 class TipCalculatorTests {
     @Test
     fun calculateTip_20Percent() {
