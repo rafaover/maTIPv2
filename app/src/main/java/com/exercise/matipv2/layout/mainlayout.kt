@@ -1,5 +1,6 @@
 package com.exercise.matipv2.layout
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,6 +29,7 @@ import com.exercise.matipv2.components.EditNumber
 import com.exercise.matipv2.components.RoundTheTipSwitch
 import com.exercise.matipv2.util.calculateTip
 
+@SuppressLint("VisibleForTests")
 @Composable
 fun MainLayout() {
     /* hoisting the state for EditNumber func */
