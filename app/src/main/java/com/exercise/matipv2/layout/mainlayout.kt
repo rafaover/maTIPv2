@@ -1,8 +1,10 @@
 package com.exercise.matipv2.layout
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -27,6 +29,7 @@ import com.exercise.matipv2.components.EditNumber
 import com.exercise.matipv2.components.RoundTheTipSwitch
 import com.exercise.matipv2.util.calculateTip
 
+@SuppressLint("VisibleForTests")
 @Composable
 fun MainLayout() {
     /* hoisting the state for EditNumber func */
@@ -39,6 +42,7 @@ fun MainLayout() {
 
     Column(
         modifier = Modifier
+            .fillMaxSize()
             .padding(40.dp)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,

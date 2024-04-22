@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.exercise.matipv2.R
@@ -30,7 +31,8 @@ fun RoundTheTipSwitch(
         Switch(
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentWidth(Alignment.End),
+                .wrapContentWidth(Alignment.End)
+                .testTag("RoundTheTipSwitch"),
             checked = roundUp,
             onCheckedChange = onRoundUpChange
         )
