@@ -1,12 +1,12 @@
 # maTIP App
-Your TIP instead of being just a number, will be an excellent act to help a life project.
 
-The main focus is not on the monetary value of the action but associated with a positive attitude and compliments. 
-A user can donate a value to another user. The receiver will receive a compliment but only will see the values donated in 24hrs.
+Application to calculate, split and Store Tips given.
 
-The donation is going to a personal life project.
+(Soon) Store Tips based on events or trips, so you have access to total money spent.
 
----------------
-- Kotlin
-- Jetpack Compose
+TOOLS:
+
+- 100% Kotlin
+- Ui using Jetpack Compose
+- State Management using Jetpack Compose
 - Material Design 3
