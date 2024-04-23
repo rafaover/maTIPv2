@@ -1,7 +1,7 @@
 package com.exercise.matipv2.model
 
 data class MainLayoutState(
-    var amountInput: Double = 0.0,
-    var tipPercentInput: Double = 0.0,
+    var amountInput: String = "",
+    var tipPercentInput: String = "",
     var roundUp: Boolean = false
 )
