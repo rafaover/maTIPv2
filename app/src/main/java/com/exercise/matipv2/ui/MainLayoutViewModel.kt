@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import com.exercise.matipv2.model.MainLayoutState
 import com.exercise.matipv2.util.calculateTip
+import com.exercise.matipv2.util.splitTipValue
 import com.exercise.matipv2.util.stringAmountToDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -32,4 +33,8 @@ class MainLayoutViewModel : ViewModel() {
             roundUp = uiState.value.roundUp
         )
     }
+
+//    fun finalSplit(finalTip: Double): Double {
+//        return splitTipValue(finalTip, uiState.value.splitShare)
+//    }
 }

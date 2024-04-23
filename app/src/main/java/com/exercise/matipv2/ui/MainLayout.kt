@@ -3,6 +3,7 @@ package com.exercise.matipv2.ui
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -15,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -45,7 +47,7 @@ fun MainLayout() {
 
         Text(
             modifier = Modifier
-                .padding(bottom = 16.dp)
+                .padding(bottom = dimensionResource(R.dimen.padding_mid))
                 .align(alignment = Alignment.Start),
             text = stringResource(R.string.calculate_tip),
             fontWeight = FontWeight.Bold,
@@ -55,7 +57,7 @@ fun MainLayout() {
         /* Function to edit Bill Amount */
         EditNumber(
             modifier = Modifier
-                .padding(bottom = 15.dp)
+                .padding(bottom = dimensionResource(R.dimen.padding_mid))
                 .align(alignment = Alignment.Start),
             label = R.string.bill_amount,
             value = uiState.amountInput,
@@ -82,28 +84,40 @@ fun MainLayout() {
             leadingIcon = R.drawable.percent
         )
         RoundTheTipSwitch(
+            modifier = Modifier
+                .padding(bottom = dimensionResource(R.dimen.padding_mid))
+                .align(alignment = Alignment.Start),
             roundUp = uiState.roundUp,
             onRoundUpChange = { viewModel.updateRoundUp(it) }
         )
 
         /* Text Box for total Tip Amount */
+        Row(
+            modifier = Modifier
+                .padding(bottom = dimensionResource(R.dimen.padding_mid))
+                .fillMaxSize(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = stringResource(R.string.tip_amount),
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.titleLarge,
+            )
+            Text(
+                text = viewModel.finalTip(),
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.titleLarge,
+            )
+        }
+
+        /* Split value */
         Text(
             modifier = Modifier
                 .align(alignment = Alignment.Start)
-                .padding(bottom = 14.dp),
-            text = stringResource(R.string.tip_amount),
-            fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.titleLarge,
-        )
-        Text(
-            modifier = Modifier
-                .align(alignment = Alignment.Start)
-                .padding(bottom = 16.dp),
+                .padding(bottom = dimensionResource(R.dimen.padding_mid)),
             text = viewModel.finalTip(),
             style = MaterialTheme.typography.displaySmall,
         )
-
-        /* TODO("Add feature to split the total tip by a number and give a result, save this
-            value instead the whole tip.") */
     }
 }
