@@ -9,5 +9,5 @@ Application to calculate, split and Store Tips given.
 
 - 100% Kotlin
 - Ui using Jetpack Compose
-- State Management using Jetpack Compose
+- StateFlow and ViewModel for State management
 - Material Design 3
