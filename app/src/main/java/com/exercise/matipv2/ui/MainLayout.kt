@@ -49,6 +49,7 @@ fun MainLayout() {
                 .align(alignment = Alignment.Start),
             text = stringResource(R.string.calculate_tip),
             fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleLarge,
         )
 
         /* Function to edit Bill Amount */
@@ -89,8 +90,16 @@ fun MainLayout() {
         Text(
             modifier = Modifier
                 .align(alignment = Alignment.Start)
+                .padding(bottom = 14.dp),
+            text = stringResource(R.string.tip_amount),
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleLarge,
+        )
+        Text(
+            modifier = Modifier
+                .align(alignment = Alignment.Start)
                 .padding(bottom = 16.dp),
-            text = stringResource(R.string.tip_amount, viewModel.finalTip()),
+            text = viewModel.finalTip(),
             style = MaterialTheme.typography.displaySmall,
         )
 
