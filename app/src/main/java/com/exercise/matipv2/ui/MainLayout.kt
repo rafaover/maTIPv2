@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -26,7 +27,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.exercise.matipv2.R
 import com.exercise.matipv2.components.EditNumber
 import com.exercise.matipv2.components.RoundTheTipSwitch
@@ -85,19 +88,14 @@ fun MainLayout(viewModel: MainLayoutViewModel) {
             ),
             leadingIcon = R.drawable.percent
         )
-        RoundTheTipSwitch(
-            modifier = Modifier
-                .padding(bottom = dimensionResource(R.dimen.padding_mid))
-                .align(alignment = Alignment.Start),
-            roundUp = uiState.roundUp,
-            onRoundUpChange = { viewModel.updateRoundUp(it) }
-        )
 
         /* Split value */
         Row(
-            modifier = Modifier.padding(dimensionResource(R.dimen.padding_mid)),
-            horizontalArrangement = Arrangement.End,
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier
+                .padding(bottom = dimensionResource(R.dimen.padding_mid))
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
                 text = stringResource(R.string.split),
@@ -110,13 +108,11 @@ fun MainLayout(viewModel: MainLayoutViewModel) {
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors()
             ) { Text(text = "+") }
-            Spacer(modifier = Modifier.padding(5.dp))
             Text(
                 text = uiState.counter.toString(),
                 style = MaterialTheme.typography.displaySmall,
                 textAlign = TextAlign.Center,
             )
-            Spacer(modifier = Modifier.padding(5.dp))
             Button(
                 onClick = { viewModel.decrementCounter() },
                 shape = CircleShape,
@@ -143,5 +139,19 @@ fun MainLayout(viewModel: MainLayoutViewModel) {
                 style = MaterialTheme.typography.titleLarge,
             )
         }
+
+        RoundTheTipSwitch(
+            modifier = Modifier
+                .padding(bottom = dimensionResource(R.dimen.padding_mid))
+                .align(alignment = Alignment.Start),
+            roundUp = uiState.roundUp,
+            onRoundUpChange = { viewModel.updateRoundUp(it) }
+        )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MainLayoutPreview() {
+    MainLayout(viewModel())
 }
