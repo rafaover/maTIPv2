@@ -19,8 +19,8 @@ class TipUtilsTests() {
 
     @Test
     fun testCalculateTip() {
-        val amount = 100.0
-        val tipPercent = 15.0
+        val amount = "100"
+        val tipPercent = "15"
         val roundUp = false
         val expected = "$15.00"
         val actual = calculateTip(amount, tipPercent, roundUp)
@@ -30,7 +30,7 @@ class TipUtilsTests() {
     @Test
     fun testSplitTipValue() {
         val tipAmount = "15.0"
-        val splitShare = "2"
+        val splitShare = 2
         val expected = 7.5
         val actual = splitTipValue(tipAmount, splitShare)
         assertEquals(expected, actual, 0.0)
