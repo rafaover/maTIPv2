@@ -9,6 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.exercise.matipv2.ui.MainLayout
 import com.exercise.matipv2.ui.theme.MaTIPv2Theme
 
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainLayout()
+                    MainLayout(viewModel())
                 }
             }
         }
@@ -32,6 +33,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MatipPreview() {
     MaTIPv2Theme {
-        MainLayout()
+        MainLayout(viewModel())
     }
 }

@@ -29,6 +29,14 @@ class MainLayoutViewModel : ViewModel() {
         _uiState.value = uiState.value.copy(splitShare = splitShare)
     }
 
+    fun incrementCounter() {
+        _uiState.value = uiState.value.copy(counter = uiState.value.counter + 1)
+    }
+
+    fun decrementCounter() {
+        _uiState.value = uiState.value.copy(counter = uiState.value.counter - 1)
+    }
+
     @SuppressLint("VisibleForTests")
     fun finalTip(): String {
         return calculateTip(

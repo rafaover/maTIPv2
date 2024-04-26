@@ -4,11 +4,15 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,17 +25,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.exercise.matipv2.R
 import com.exercise.matipv2.components.EditNumber
 import com.exercise.matipv2.components.RoundTheTipSwitch
 
 @SuppressLint("VisibleForTests")
 @Composable
-fun MainLayout() {
-
-    val viewModel: MainLayoutViewModel = viewModel()
+fun MainLayout(viewModel: MainLayoutViewModel) {
     val uiState by viewModel.uiState.collectAsState()
 
     Column(
@@ -91,10 +93,41 @@ fun MainLayout() {
             onRoundUpChange = { viewModel.updateRoundUp(it) }
         )
 
+        /* Split value */
+        Row(
+            modifier = Modifier.padding(dimensionResource(R.dimen.padding_mid)),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = stringResource(R.string.split),
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.titleLarge,
+            )
+            Spacer(modifier = Modifier.padding(20.dp))
+            Button(
+                onClick = { viewModel.incrementCounter() },
+                shape = CircleShape,
+                colors = ButtonDefaults.buttonColors()
+            ) { Text(text = "+") }
+            Spacer(modifier = Modifier.padding(5.dp))
+            Text(
+                text = uiState.counter.toString(),
+                style = MaterialTheme.typography.displaySmall,
+                textAlign = TextAlign.Center,
+            )
+            Spacer(modifier = Modifier.padding(5.dp))
+            Button(
+                onClick = { viewModel.decrementCounter() },
+                shape = CircleShape,
+                colors = ButtonDefaults.buttonColors()
+            ) { Text(text = "-") }
+        }
+
         /* Text Box for total Tip Amount */
         Row(
             modifier = Modifier
-                .padding(bottom = dimensionResource(R.dimen.padding_mid))
+                .padding(bottom = dimensionResource(R.dimen.padding_sml))
                 .fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
@@ -110,14 +143,5 @@ fun MainLayout() {
                 style = MaterialTheme.typography.titleLarge,
             )
         }
-
-        /* Split value */
-        Text(
-            modifier = Modifier
-                .align(alignment = Alignment.Start)
-                .padding(bottom = dimensionResource(R.dimen.padding_mid)),
-            text = viewModel.finalTip(),
-            style = MaterialTheme.typography.displaySmall,
-        )
     }
 }
