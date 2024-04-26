@@ -34,6 +34,5 @@ fun EditNumber(
         label = { Text(stringResource(label)) },
         value = value,
         onValueChange = onValueChange,
-        // onValueChange = { input -> amountInput = input.filter { it.isDigit() }},
     )
 }
