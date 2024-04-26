@@ -108,10 +108,10 @@ fun MainLayout(viewModel: MainLayoutViewModel) {
             )
             Spacer(modifier = Modifier.padding(20.dp))
             Button(
-                onClick = { viewModel.incrementCounter() },
+                onClick = { viewModel.decrementCounter() },
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors()
-            ) { Text(text = "+") }
+            ) { Text(text = "-") }
             AnimatedContent(
                 targetState = uiState.counter,
                 transitionSpec = {
@@ -128,16 +128,11 @@ fun MainLayout(viewModel: MainLayoutViewModel) {
                     textAlign = TextAlign.Center,
                 )
             }
-//            Text(
-//                text = uiState.counter.toString(),
-//                style = MaterialTheme.typography.displaySmall,
-//                textAlign = TextAlign.Center,
-//            )
             Button(
-                onClick = { viewModel.decrementCounter() },
+                onClick = { viewModel.incrementCounter() },
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors()
-            ) { Text(text = "-") }
+            ) { Text(text = "+") }
         }
 
         /* Text Box for total Tip Amount */
