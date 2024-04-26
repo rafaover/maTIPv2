@@ -108,12 +108,12 @@ fun MainLayout(viewModel: MainLayoutViewModel) {
             )
             Spacer(modifier = Modifier.padding(20.dp))
             Button(
-                onClick = { viewModel.decrementCounter() },
+                onClick = { viewModel.decreaseCounter() },
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors()
             ) { Text(text = "-") }
             AnimatedContent(
-                targetState = uiState.counter,
+                targetState = uiState.splitShare,
                 transitionSpec = {
                     if (targetState > initialState) {
                         slideInVertically { -it } togetherWith slideOutVertically { it }
@@ -129,7 +129,7 @@ fun MainLayout(viewModel: MainLayoutViewModel) {
                 )
             }
             Button(
-                onClick = { viewModel.incrementCounter() },
+                onClick = { viewModel.increaseCounter() },
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors()
             ) { Text(text = "+") }
