@@ -1,6 +1,10 @@
 package com.exercise.matipv2.ui
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -108,11 +112,27 @@ fun MainLayout(viewModel: MainLayoutViewModel) {
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors()
             ) { Text(text = "+") }
-            Text(
-                text = uiState.counter.toString(),
-                style = MaterialTheme.typography.displaySmall,
-                textAlign = TextAlign.Center,
-            )
+            AnimatedContent(
+                targetState = uiState.counter,
+                transitionSpec = {
+                    if (targetState > initialState) {
+                        slideInVertically { -it } togetherWith slideOutVertically { it }
+                    } else {
+                        slideInVertically { it } togetherWith slideOutVertically { -it }
+                    }
+                }, label = "Animated Counter"
+            ) { count ->
+                Text(
+                    text = "$count",
+                    style = MaterialTheme.typography.displaySmall,
+                    textAlign = TextAlign.Center,
+                )
+            }
+//            Text(
+//                text = uiState.counter.toString(),
+//                style = MaterialTheme.typography.displaySmall,
+//                textAlign = TextAlign.Center,
+//            )
             Button(
                 onClick = { viewModel.decrementCounter() },
                 shape = CircleShape,
