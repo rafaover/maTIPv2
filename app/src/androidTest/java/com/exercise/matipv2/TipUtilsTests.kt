@@ -1,7 +1,5 @@
 package com.exercise.matipv2
 
-import androidx.lifecycle.ViewModel
-import com.exercise.matipv2.ui.MainLayoutViewModel
 import com.exercise.matipv2.util.calculateTip
 import com.exercise.matipv2.util.splitTipValue
 import com.exercise.matipv2.util.stringAmountToDouble
