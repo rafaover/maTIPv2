@@ -25,6 +25,10 @@ class MainLayoutViewModel : ViewModel() {
         _uiState.value = uiState.value.copy(roundUp = roundUp)
     }
 
+    fun updateSplitShare(splitShare: String) {
+        _uiState.value = uiState.value.copy(splitShare = splitShare)
+    }
+
     @SuppressLint("VisibleForTests")
     fun finalTip(): String {
         return calculateTip(
@@ -34,7 +38,7 @@ class MainLayoutViewModel : ViewModel() {
         )
     }
 
-//    fun finalSplit(finalTip: Double): Double {
-//        return splitTipValue(finalTip, uiState.value.splitShare)
-//    }
+    fun finalSplit(finalTip: String): Double {
+        return splitTipValue(finalTip, uiState.value.splitShare)
+    }
 }

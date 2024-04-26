@@ -4,5 +4,5 @@ data class MainLayoutState(
     var amountInput: String = "",
     var tipPercentInput: String = "",
     var roundUp: Boolean = false,
-    var splitShare: Int = 0
+    var splitShare: String = ""
 )
