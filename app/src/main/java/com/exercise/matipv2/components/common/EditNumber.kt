@@ -1,4 +1,4 @@
-package com.exercise.matipv2.components
+package com.exercise.matipv2.components.common
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
