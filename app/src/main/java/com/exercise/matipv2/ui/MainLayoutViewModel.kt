@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import com.exercise.matipv2.model.MainLayoutState
 import com.exercise.matipv2.util.calculateTip
-import com.exercise.matipv2.util.splitTipValue
-import com.exercise.matipv2.util.stringAmountToDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -35,17 +33,12 @@ class MainLayoutViewModel : ViewModel() {
 
     @SuppressLint("VisibleForTests")
     fun finalTip(): String {
-        return if (uiState.value.splitShare > 1) {
-            splitTipValue(
-                amount = uiState.value.amountInput,
-                splitShare = uiState.value.splitShare
-            ).toString()
-        } else {
-            calculateTip(
-                amount = uiState.value.amountInput,
-                tipPercent = uiState.value.tipPercentInput,
-                roundUp = uiState.value.roundUp
-            )
-        }
+        return calculateTip(
+            amount = uiState.value.amountInput,
+            tipPercent = uiState.value.tipPercentInput,
+            roundUp = uiState.value.roundUp,
+            tipSplit = uiState.value.splitShare
+        )
     }
 }
+

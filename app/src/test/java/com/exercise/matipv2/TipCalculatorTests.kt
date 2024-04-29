@@ -11,7 +11,7 @@ class TipCalculatorTests {
         val amount = "10"
         val tipPercent = "20"
         val expectedTip = NumberFormat.getCurrencyInstance().format(2)
-        val actualTip = calculateTip(amount, tipPercent, false)
+        val actualTip = calculateTip(amount, tipPercent, 1, false)
         assertEquals(expectedTip, actualTip)
     }
     @Test
@@ -19,7 +19,7 @@ class TipCalculatorTests {
         val amount = "16"
         val tipPercent = "20"
         val expectedTip = NumberFormat.getCurrencyInstance().format(4)
-        val actualTip = calculateTip(amount, tipPercent, true)
+        val actualTip = calculateTip(amount, tipPercent, 1, true)
         assertEquals(expectedTip, actualTip)
     }
     @Test
@@ -27,7 +27,7 @@ class TipCalculatorTests {
         val amount = "16"
         val tipPercent = "20"
         val expectedTip = NumberFormat.getCurrencyInstance().format(3.2)
-        val actualTip = calculateTip(amount, tipPercent, false)
+        val actualTip = calculateTip(amount, tipPercent, 1, false)
         assertEquals(expectedTip, actualTip)
     }
 }
