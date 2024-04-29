@@ -25,6 +25,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -149,6 +150,7 @@ fun MainLayout(viewModel: MainLayoutViewModel) {
                 style = MaterialTheme.typography.titleLarge,
             )
             Text(
+                modifier = Modifier.testTag("TipAmount"),
                 text = viewModel.finalTip(),
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.titleLarge,
