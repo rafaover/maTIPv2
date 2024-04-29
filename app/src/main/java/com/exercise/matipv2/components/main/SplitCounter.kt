@@ -44,7 +44,7 @@ fun SplitCounter(
         )
         Spacer(modifier = Modifier.padding(20.dp))
         Button(
-            onClick = onclickPositive,
+            onClick = onclickNegative,
             shape = CircleShape,
             colors = ButtonDefaults.buttonColors()
         ) { Text(text = "-") }
@@ -65,7 +65,7 @@ fun SplitCounter(
             )
         }
         Button(
-            onClick = onclickNegative,
+            onClick = onclickPositive,
             shape = CircleShape,
             colors = ButtonDefaults.buttonColors()
         ) { Text(text = "+") }
