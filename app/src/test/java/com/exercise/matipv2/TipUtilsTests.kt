@@ -5,7 +5,7 @@ import com.exercise.matipv2.util.stringAmountToDouble
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class TipUtilsTests() {
+class TipUtilsTests {
     @Test
     fun testStringAmountToDouble() {
         val amount = "100"
