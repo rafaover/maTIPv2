@@ -1,9 +1,9 @@
-# maTIP App
+# maTip App
 
 Application to calculate, split and Store Tips given.
 
 - [ ] Store Tips based on events or trips, so you have access to total money spent.
-- [ ] Split Tips among friends.
+- [x] Split Tips among friends.
 
 ## TOOLS:
 
@@ -11,3 +11,4 @@ Application to calculate, split and Store Tips given.
 - Ui using Jetpack Compose
 - StateFlow and ViewModel for State management
 - Material Design 3
+- Room for local storage
