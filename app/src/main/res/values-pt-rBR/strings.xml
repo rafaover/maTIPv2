@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calculate_tip">Calcular Gorjeta</string>
+    <string name="bill_amount">Total da Conta</string>
+    <string name="tip_amount">Gorjeta</string>
+    <string name="tip_percentage">Porcentagem</string>
+    <string name="split">Divide?</string>
+    <string name="round_up_tip">Arrendonda?</string>
+</resources>
