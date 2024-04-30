@@ -32,7 +32,9 @@ class MainLayoutViewModel : ViewModel() {
     }
 
     fun decreaseCounter() {
-        _uiState.value = uiState.value.copy(splitShare = uiState.value.splitShare - 1)
+        if (uiState.value.splitShare > 0) {
+            _uiState.value = uiState.value.copy(splitShare = uiState.value.splitShare - 1)
+        }
     }
 
     @SuppressLint("VisibleForTests")
