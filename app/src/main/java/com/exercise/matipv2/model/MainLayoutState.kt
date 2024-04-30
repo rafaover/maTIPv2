@@ -5,4 +5,5 @@ data class MainLayoutState(
     var tipPercentInput: String = "",
     var roundUp: Boolean = false,
     var splitShare: Int = 0,
+    var selectedTabIndex: Int = 0
 )

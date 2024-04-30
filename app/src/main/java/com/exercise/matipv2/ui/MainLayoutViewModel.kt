@@ -23,6 +23,10 @@ class MainLayoutViewModel : ViewModel() {
         _uiState.value = uiState.value.copy(roundUp = roundUp)
     }
 
+    fun updateSelectedTabIndex(index: Int) {
+        _uiState.value = uiState.value.copy(selectedTabIndex = index)
+    }
+
     fun increaseCounter() {
         _uiState.value = uiState.value.copy(splitShare = uiState.value.splitShare + 1)
     }
