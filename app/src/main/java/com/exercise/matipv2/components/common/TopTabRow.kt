@@ -6,17 +6,19 @@ import androidx.compose.material.icons.automirrored.filled.ViewList
 import androidx.compose.material.icons.automirrored.outlined.ViewList
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.exercise.matipv2.R
 import com.exercise.matipv2.model.TabItem
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavigationTopTabRow(
+fun TopTabRow(
     currentTabIndex: Int,
     selectedTabIndex: (Int) -> Unit
 ) {
@@ -34,7 +36,7 @@ fun NavigationTopTabRow(
     )
 
     Column {
-        TabRow(
+        PrimaryTabRow(
             selectedTabIndex = currentTabIndex,
         ) {
             tabItems.forEachIndexed { index, tabItem ->

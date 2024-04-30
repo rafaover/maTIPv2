@@ -25,8 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.exercise.matipv2.R
 import com.exercise.matipv2.components.common.EditNumber
-import com.exercise.matipv2.components.common.NavigationTopTabRow
 import com.exercise.matipv2.components.common.RoundTheTipSwitch
+import com.exercise.matipv2.components.common.TopTabRow
 import com.exercise.matipv2.components.main.SplitCounter
 import com.exercise.matipv2.components.main.TotalTipAmount
 
@@ -36,7 +36,7 @@ fun MainLayout(viewModel: MainLayoutViewModel) {
     val uiState by viewModel.uiState.collectAsState()
 
     Column {
-        NavigationTopTabRow(
+        TopTabRow(
             currentTabIndex = uiState.selectedTabIndex,
             selectedTabIndex = { viewModel.updateSelectedTabIndex(it) }
         )
@@ -49,9 +49,6 @@ fun MainLayout(viewModel: MainLayoutViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top,
         ) {
-
-            /* TODO("Add Branding") */
-
             /* Title */
             Text(
                 modifier = Modifier
