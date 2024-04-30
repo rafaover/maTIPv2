@@ -6,4 +6,6 @@
     <string name="tip_percentage">Tip Percentage</string>
     <string name="split">Split</string>
     <string name="round_up_tip">Round up tip?</string>
+    <string name="tipping_tab">Tipping</string>
+    <string name="event_tab">Events</string>
 </resources>
