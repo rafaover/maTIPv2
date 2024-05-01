@@ -56,5 +56,28 @@ class TipUITests {
         val expectedTip = NumberFormat.getCurrencyInstance().format(3)
         composeTestRule.onNodeWithText(expectedTip).assertExists()
     }
+
+    @Test
+    fun splitCounter_afterClick_plusAndMinus() {
+        composeTestRule.setContent {
+            MaTIPv2Theme {
+                MainLayout(viewModel())
+            }
+        }
+        composeTestRule.onNodeWithText("+").performClick().performClick()
+        composeTestRule.onNodeWithTag("SplitCounter").assert(hasText("2"))
+        composeTestRule.onNodeWithText("-").performClick()
+        composeTestRule.onNodeWithTag("SplitCounter").assert(hasText("1"))
+    }
+    @Test
+    fun splitCounter_nonNegative() {
+        composeTestRule.setContent {
+            MaTIPv2Theme {
+                MainLayout(viewModel())
+            }
+        }
+        composeTestRule.onNodeWithText("-").performClick()
+        composeTestRule.onNodeWithTag("SplitCounter").assert(hasText("0"))
+    }
 }
 
