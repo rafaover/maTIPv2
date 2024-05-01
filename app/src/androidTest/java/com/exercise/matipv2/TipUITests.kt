@@ -8,7 +8,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.exercise.matipv2.ui.MainLayout
+import com.exercise.matipv2.ui.MainScreen
 import com.exercise.matipv2.ui.theme.MaTIPv2Theme
 import org.junit.Rule
 import org.junit.Test
@@ -23,7 +23,7 @@ class TipUITests {
     fun calculate_20_percent_tip() {
         composeTestRule.setContent {
             MaTIPv2Theme {
-                MainLayout(viewModel())
+                MainScreen(viewModel())
             }
         }
         composeTestRule.onNodeWithText("Bill Amount").performTextInput("10")
@@ -35,7 +35,7 @@ class TipUITests {
     fun calculate_20_percent_tip_NoRound() {
         composeTestRule.setContent {
             MaTIPv2Theme {
-                MainLayout(viewModel())
+                MainScreen(viewModel())
             }
         }
         composeTestRule.onNodeWithText("Bill Amount").performTextInput("13")
@@ -47,7 +47,7 @@ class TipUITests {
     fun calculate_20_percent_tip_Rounded() {
         composeTestRule.setContent {
             MaTIPv2Theme {
-                MainLayout(viewModel())
+                MainScreen(viewModel())
             }
         }
         composeTestRule.onNodeWithText("Bill Amount").performTextInput("13")
@@ -61,7 +61,7 @@ class TipUITests {
     fun splitCounter_afterClick_plusAndMinus() {
         composeTestRule.setContent {
             MaTIPv2Theme {
-                MainLayout(viewModel())
+                MainScreen(viewModel())
             }
         }
         composeTestRule.onNodeWithText("+").performClick().performClick()
@@ -73,7 +73,7 @@ class TipUITests {
     fun splitCounter_nonNegative() {
         composeTestRule.setContent {
             MaTIPv2Theme {
-                MainLayout(viewModel())
+                MainScreen(viewModel())
             }
         }
         composeTestRule.onNodeWithText("-").performClick()
