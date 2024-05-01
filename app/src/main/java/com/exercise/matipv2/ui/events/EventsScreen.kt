@@ -1,4 +1,4 @@
-package com.exercise.matipv2.ui
+package com.exercise.matipv2.ui.events
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun EventMain() {
+fun EventsScreen() {
     Column(
         modifier = Modifier
             .padding(16.dp)
