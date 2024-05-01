@@ -24,15 +24,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.exercise.matipv2.R
+import com.exercise.matipv2.components.calculator.SplitCounter
+import com.exercise.matipv2.components.calculator.TotalTipAmount
 import com.exercise.matipv2.components.common.EditNumber
 import com.exercise.matipv2.components.common.RoundTheTipSwitch
 import com.exercise.matipv2.components.common.TopTabRow
-import com.exercise.matipv2.components.calculator.SplitCounter
-import com.exercise.matipv2.components.calculator.TotalTipAmount
 
 @SuppressLint("VisibleForTests")
 @Composable
-fun MainScreen(viewModel: MainScreenViewModel) {
+fun MainScreen(viewModel: MainScreenViewModel = viewModel()) {
     val uiState by viewModel.uiState.collectAsState()
 
     Column {
@@ -111,5 +111,5 @@ fun MainScreen(viewModel: MainScreenViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun MainLayoutPreview() {
-    MainScreen(viewModel())
+    MainScreen()
 }
