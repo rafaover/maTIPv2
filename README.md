@@ -11,4 +11,5 @@ Application to calculate, split and Store Tips given.
 - Ui using Jetpack Compose
 - StateFlow and ViewModel for State management
 - Material Design 3
+- Navigation Compose
 - Room for local storage
