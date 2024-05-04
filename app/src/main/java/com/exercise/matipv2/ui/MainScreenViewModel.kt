@@ -2,7 +2,7 @@ package com.exercise.matipv2.ui
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
-import com.exercise.matipv2.model.MainScreenState
+import com.exercise.matipv2.data.model.MainScreenState
 import com.exercise.matipv2.util.calculateTip
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

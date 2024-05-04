@@ -14,7 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.exercise.matipv2.R
-import com.exercise.matipv2.model.TabItem
+import com.exercise.matipv2.data.model.TabItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
