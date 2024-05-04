@@ -1,4 +1,4 @@
-package com.exercise.matipv2.data.model
+package com.exercise.matipv2.data
 
 data class MainScreenState(
     var amountInput: String = "",

@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.exercise.matipv2.data.model.MainScreenState
+import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.ui.MainScreenViewModel
 import com.exercise.matipv2.ui.events.EventsScreen
 import com.exercise.matipv2.ui.tipcalculator.TipCalculatorScreen
