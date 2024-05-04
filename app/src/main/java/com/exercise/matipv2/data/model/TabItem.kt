@@ -1,4 +1,4 @@
-package com.exercise.matipv2.model
+package com.exercise.matipv2.data.model
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

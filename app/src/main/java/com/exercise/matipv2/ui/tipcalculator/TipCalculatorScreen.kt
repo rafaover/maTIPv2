@@ -23,7 +23,7 @@ import com.exercise.matipv2.components.calculator.SplitCounter
 import com.exercise.matipv2.components.calculator.TotalTipAmount
 import com.exercise.matipv2.components.common.EditNumber
 import com.exercise.matipv2.components.common.RoundTheTipSwitch
-import com.exercise.matipv2.model.MainScreenState
+import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.ui.MainScreenViewModel
 
 @Composable
