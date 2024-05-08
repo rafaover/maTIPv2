@@ -8,7 +8,7 @@ import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.Tip
 
 @Database(entities = [Event::class, Tip::class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
+abstract class MatipDatabase : RoomDatabase() {
     abstract fun eventDao(): EventDao
     abstract fun tipDao(): TipDao
 
@@ -38,11 +38,11 @@ abstract class AppDatabase : RoomDatabase() {
      */
     companion object {
         @Volatile
-        private var Instance: AppDatabase? = null
+        private var Instance: MatipDatabase? = null
         private const val DATABASE_NAME = "app_database"
-        fun getDatabase(context: Context): AppDatabase {
+        fun getDatabase(context: Context): MatipDatabase {
             return Instance ?: synchronized(this) {
-                Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
+                Room.databaseBuilder(context, MatipDatabase::class.java, DATABASE_NAME)
                     .fallbackToDestructiveMigration()
                     .build()
                     .also { Instance = it }
