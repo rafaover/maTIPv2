@@ -6,15 +6,16 @@ import com.exercise.matipv2.data.model.Tip
 class OfflineMatipRepository(
     private val tipDao: TipDao,
     private val eventDao: EventDao
-) {
+) : MatipRepository {
+
     // Tip Methods
-    fun insertTip(tip: Tip) = tipDao.insertTip(tip)
-    fun deleteTip(tip: Tip) = tipDao.deleteTip(tip)
-    fun getAllTips() = tipDao.getAllTips()
-    fun getTipsByEventId(eventId: Int) = tipDao.getTipsByEventId(eventId)
+    override suspend fun insertTip(tip: Tip) = tipDao.insertTip(tip)
+    override suspend fun deleteTip(tip: Tip) = tipDao.deleteTip(tip)
+    override fun getAllTips() = tipDao.getAllTips()
+    override fun getTipsByEventId(eventId: Int) = tipDao.getTipsByEventId(eventId)
 
     // Event Methods
-    fun insertEvent(event: Event) = eventDao.insert(event)
-    fun deleteEvent(event: Event) = eventDao.delete(event)
-    fun getAllEvents() = eventDao.getAllEvents()
+    override suspend fun insertEvent(event: Event) = eventDao.insert(event)
+    override suspend fun deleteEvent(event: Event) = eventDao.delete(event)
+    override fun getAllEvents() = eventDao.getAllEvents()
 }
