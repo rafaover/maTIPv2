@@ -5,7 +5,9 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.exercise.matipv2.data.model.Event
+import com.exercise.matipv2.data.model.EventWithTips
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -19,11 +21,8 @@ interface EventDao {
 
     @Query("SELECT * FROM events")
     fun getAllEvents(): Flow<List<Event>>
-}
 
-/*
-Please note that Room doesn't support storing complex data types like List<Tip> directly.
-Convert the List<Tip> to a supported data type (like a String or a ByteArray)
-before storing it in the database, and convert it back to List<Tip> when reading it from the
-database. This can be done using a TypeConverter.
- */
+    @Transaction
+    @Query("SELECT * FROM events WHERE id = :eventId")
+    fun getEventWithTips(eventId: Int): Flow<EventWithTips>
+}
