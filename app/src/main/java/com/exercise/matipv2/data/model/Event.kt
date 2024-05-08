@@ -10,6 +10,4 @@ data class Event(
     val id: Int,
     @ColumnInfo(name = "event_name")
     val name: String,
-    @ColumnInfo(name = "tip_list")
-    val tipList: List<Tip>
 )

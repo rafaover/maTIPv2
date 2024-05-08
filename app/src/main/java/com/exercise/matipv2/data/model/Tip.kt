@@ -14,6 +14,6 @@ data class Tip(
     val tipPercent: String,
     @ColumnInfo(name = "tip_date")
     val tipDate: String,
-    @ColumnInfo(name = "tip_event")
-    val tipEvent: Event
+    @ColumnInfo(name = "event_id")
+    val eventId: Int
 )
