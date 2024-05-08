@@ -19,3 +19,10 @@ interface EventDao {
     @Query("SELECT * FROM events")
     fun getAll(): List<Event>
 }
+
+/*
+Please note that Room doesn't support storing complex data types like List<Tip> directly.
+Convert the List<Tip> to a supported data type (like a String or a ByteArray)
+before storing it in the database, and convert it back to List<Tip> when reading it from the
+database. This can be done using a TypeConverter.
+ */
