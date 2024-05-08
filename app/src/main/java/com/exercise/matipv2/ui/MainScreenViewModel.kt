@@ -3,11 +3,15 @@ package com.exercise.matipv2.ui
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import com.exercise.matipv2.data.MainScreenState
+import com.exercise.matipv2.data.MatipRepository
 import com.exercise.matipv2.util.calculateTip
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class MainScreenViewModel : ViewModel() {
+class MainScreenViewModel(
+    private val itemsRepository: MatipRepository
+) : ViewModel() {
+
     private val _uiState = MutableStateFlow(MainScreenState())
     val uiState = _uiState.asStateFlow()
 

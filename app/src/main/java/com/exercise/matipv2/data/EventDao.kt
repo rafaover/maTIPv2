@@ -5,17 +5,24 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.exercise.matipv2.data.model.Event
+import com.exercise.matipv2.data.model.EventWithTips
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface EventDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(event: Event)
+    suspend fun insert(event: Event)
 
     @Delete
-    fun delete(event: Event)
+    suspend fun delete(event: Event)
 
     @Query("SELECT * FROM events")
-    fun getAll(): List<Event>
+    fun getAllEvents(): Flow<List<Event>>
+
+    @Transaction
+    @Query("SELECT * FROM events WHERE id = :eventId")
+    fun getEventWithTips(eventId: Int): Flow<EventWithTips>
 }
