@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.exercise.matipv2.data.model.Tip
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TipDao {
@@ -16,8 +17,8 @@ interface TipDao {
     fun deleteTip(tip: Tip)
 
     @Query("SELECT * FROM tips")
-    fun getAllTips(): List<Tip>
+    fun getAllTips(): Flow<List<Tip>>
 
     @Query("SELECT * FROM tips WHERE tip_event = :eventId")
-    fun getTipsByEventId(eventId: Int): List<Tip>
+    fun getTipsByEventId(eventId: Int): Flow<List<Tip>>
 }
