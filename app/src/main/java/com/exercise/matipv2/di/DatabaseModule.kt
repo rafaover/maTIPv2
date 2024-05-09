@@ -3,11 +3,11 @@ package com.exercise.matipv2.di
 import android.content.Context
 import android.util.Log
 import androidx.room.Room
-import com.exercise.matipv2.data.EventDao
+import com.exercise.matipv2.data.dao.EventDao
 import com.exercise.matipv2.data.MatipDatabase
 import com.exercise.matipv2.data.MatipRepository
 import com.exercise.matipv2.data.OfflineMatipRepository
-import com.exercise.matipv2.data.TipDao
+import com.exercise.matipv2.data.dao.TipDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

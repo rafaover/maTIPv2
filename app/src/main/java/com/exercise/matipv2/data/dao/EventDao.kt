@@ -1,4 +1,4 @@
-package com.exercise.matipv2.data
+package com.exercise.matipv2.data.dao
 
 import androidx.room.Dao
 import androidx.room.Delete

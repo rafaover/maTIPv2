@@ -1,5 +1,7 @@
 package com.exercise.matipv2.data
 
+import com.exercise.matipv2.data.dao.EventDao
+import com.exercise.matipv2.data.dao.TipDao
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.EventWithTips
 import com.exercise.matipv2.data.model.Tip
