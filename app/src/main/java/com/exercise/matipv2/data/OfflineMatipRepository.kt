@@ -4,8 +4,9 @@ import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.EventWithTips
 import com.exercise.matipv2.data.model.Tip
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class OfflineMatipRepository(
+class OfflineMatipRepository @Inject constructor (
     private val tipDao: TipDao,
     private val eventDao: EventDao
 ) : MatipRepository {
