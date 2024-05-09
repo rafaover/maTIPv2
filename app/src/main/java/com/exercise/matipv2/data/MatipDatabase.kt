@@ -25,27 +25,19 @@ abstract class MatipDatabase : RoomDatabase() {
      * time, only one of them will create the database, and the others will wait until it's
      * created and then use the same instance.
      *
-     * 3. Pre-populated Database: The `createFromAsset` method is used to create the database from
+     * Pre-populated Database: The `createFromAsset` method is used to create the database from
      * an existing database file included in your app's assets. This is useful if you want to
      * distribute your app with a pre-populated database.
-     *
-     * 4. Migration Strategy: The `fallbackToDestructiveMigration` method is used to specify that
-     * if a migration is needed (i.e., if you increase the version number of your database), but
-     * no migration strategy is provided, Room should just delete all the old data and create a
-     * new empty database. This is a simple way to handle migrations, but it might not be
-     * suitable if you want to preserve your users' data when updating the database schema.
-     *
      */
     companion object {
         @Volatile
-        private var Instance: MatipDatabase? = null
+        private var dbInstance: MatipDatabase? = null
         private const val DATABASE_NAME = "app_database"
         fun getDatabase(context: Context): MatipDatabase {
-            return Instance ?: synchronized(this) {
+            return dbInstance ?: synchronized(this) {
                 Room.databaseBuilder(context, MatipDatabase::class.java, DATABASE_NAME)
-                    .fallbackToDestructiveMigration()
                     .build()
-                    .also { Instance = it }
+                    .also { dbInstance = it }
             }
         }
     }

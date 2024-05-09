@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class MainScreenViewModel(
-    private val itemsRepository: MatipRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(MainScreenState())
