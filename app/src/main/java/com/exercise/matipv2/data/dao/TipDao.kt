@@ -18,4 +18,9 @@ interface TipDao {
 
     @Query("SELECT * FROM tips")
     fun getAllTips(): Flow<List<Tip>>
+
+    // TODO("Comment this before going to production")
+    @Query("DELETE FROM tips")
+    suspend fun deleteAllTips()
+    //
 }

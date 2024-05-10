@@ -9,11 +9,21 @@ interface MatipRepository {
     // Tip Methods
     suspend fun insertTip(tip: Tip)
     suspend fun deleteTip(tip: Tip)
+
+    // TODO("Comment this before going to production")
+    suspend fun deleteAllTips()
+    //
+
     fun getAllTips(): Flow<List<Tip>>
 
     // Event Methods
     suspend fun insertEvent(event: Event)
     suspend fun deleteEvent(event: Event)
+
+    // TODO("Comment this before going to production")
+    suspend fun deleteAllEvents()
+    //
+
     fun getAllEvents(): Flow<List<Event>>
     fun getEventWithTips(eventId: Int): Flow<EventWithTips>
 }

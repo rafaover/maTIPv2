@@ -25,8 +25,13 @@ class MainScreenViewModel @Inject constructor (
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            matipRepository.insertEvent(Event(0, "Event"))
-            matipRepository.insertTip(Tip(0, "200", "10", 0) )
+            // TODO("Comment this before going to production")
+            matipRepository.deleteAllEvents()
+            matipRepository.deleteAllTips()
+            //
+
+            matipRepository.insertEvent(Event(1, "Event"))
+            matipRepository.insertTip(Tip(1, "200", "10", 1) )
         }
     }
 
