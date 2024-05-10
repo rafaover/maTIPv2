@@ -28,6 +28,6 @@ interface EventDao {
     //
 
     @Transaction
-    @Query("SELECT * FROM events WHERE id = :eventId")
-    fun getEventWithTips(eventId: Int): Flow<EventWithTips>
+    @Query("SELECT * FROM events")
+    fun getEventWithTips(): Flow<List<EventWithTips>>
 }
