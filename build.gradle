@@ -1,5 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+    ext {
+        room_version = '2.6.1'
+        hilt_version = '2.44'
+        nav_version = '2.7.7'
+    }
     dependencies {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.44'
     }
@@ -12,4 +17,7 @@ plugins {
 
     // Hilt
     id 'com.google.dagger.hilt.android' version '2.44' apply false
+
+    // Room
+    id 'androidx.room' version "$room_version" apply false
 }
