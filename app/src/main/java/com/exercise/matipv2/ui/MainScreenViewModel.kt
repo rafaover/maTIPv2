@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.MatipRepository
 import com.exercise.matipv2.data.model.Event
+import com.exercise.matipv2.data.model.Tip
 import com.exercise.matipv2.util.calculateTip
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +26,7 @@ class MainScreenViewModel @Inject constructor (
     init {
         CoroutineScope(Dispatchers.IO).launch {
             matipRepository.insertEvent(Event(0, "Event"))
+            matipRepository.insertTip(Tip(0, "200", "10", 0) )
         }
     }
 
