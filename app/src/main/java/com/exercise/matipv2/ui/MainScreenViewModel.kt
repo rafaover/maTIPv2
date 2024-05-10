@@ -4,10 +4,14 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.MatipRepository
+import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.util.calculateTip
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,6 +21,12 @@ class MainScreenViewModel @Inject constructor (
 
     private val _uiState = MutableStateFlow(MainScreenState())
     val uiState = _uiState.asStateFlow()
+
+    init {
+        CoroutineScope(Dispatchers.IO).launch {
+            matipRepository.insertEvent(Event(0, "Event"))
+        }
+    }
 
     fun updateAmountInput(amount: String) {
         _uiState.value = uiState.value.copy(amountInput = amount)
