@@ -25,5 +25,5 @@ interface MatipRepository {
     //
 
     fun getAllEvents(): Flow<List<Event>>
-    fun getEventWithTips(eventId: Int): Flow<EventWithTips>
+    fun getEventWithTips(): Flow<List<EventWithTips>>
 }
