@@ -1,4 +1,4 @@
-package com.exercise.matipv2.data
+package com.exercise.matipv2.data.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -22,7 +22,12 @@ interface EventDao {
     @Query("SELECT * FROM events")
     fun getAllEvents(): Flow<List<Event>>
 
+    // TODO("Comment this before going to production")
+    @Query("DELETE FROM events")
+    suspend fun deleteAllEvents()
+    //
+
     @Transaction
-    @Query("SELECT * FROM events WHERE id = :eventId")
-    fun getEventWithTips(eventId: Int): Flow<EventWithTips>
+    @Query("SELECT * FROM events")
+    fun getEventWithTips(): Flow<List<EventWithTips>>
 }

@@ -1,10 +1,7 @@
 package com.exercise.matipv2
 
 import android.app.Application
-import com.exercise.matipv2.data.MatipDatabase
+import dagger.hilt.android.HiltAndroidApp
 
-class MatipApplication : Application() {
-    val db: MatipDatabase by lazy {
-        MatipDatabase.getDatabase(this)
-    }
-}
+@HiltAndroidApp
+class MatipApplication : Application()
