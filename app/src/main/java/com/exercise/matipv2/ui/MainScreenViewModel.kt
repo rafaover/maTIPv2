@@ -2,6 +2,7 @@ package com.exercise.matipv2.ui
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.MatipRepository
 import com.exercise.matipv2.data.model.Event
@@ -36,11 +37,11 @@ class MainScreenViewModel @Inject constructor (
     }
 
     fun updateAmountInput(amount: String) {
-        _uiState.value = uiState.value.copy(amountInput = amount)
+        _uiState.value = uiState.value.copy(tipAmount = amount)
     }
 
     fun updateTipPercentInput(tipPercent: String) {
-        _uiState.value = uiState.value.copy(tipPercentInput = tipPercent)
+        _uiState.value = uiState.value.copy(tipPercent = tipPercent)
     }
 
     fun updateRoundUp(roundUp: Boolean) {
@@ -68,13 +69,31 @@ class MainScreenViewModel @Inject constructor (
     @SuppressLint("VisibleForTests")
     fun updateFinalTip(): String {
         val calculatedTip = calculateTip(
-            amount = uiState.value.amountInput,
-            tipPercent = uiState.value.tipPercentInput,
+            amount = uiState.value.tipAmount,
+            tipPercent = uiState.value.tipPercent,
             roundUp = uiState.value.roundUp,
             tipSplit = uiState.value.splitShare
         )
         _uiState.value = uiState.value.copy(finalTip = calculatedTip)
         return calculatedTip
+    }
+
+    fun getAllEvents() {
+        viewModelScope.launch {
+            matipRepository.getAllEvents()
+        }
+    }
+
+    fun insertTip(tip: Tip) {
+        viewModelScope.launch {
+            matipRepository.insertTip(tip)
+        }
+    }
+
+    fun addTipToEvent(tip: Tip, event: Event) {
+        viewModelScope.launch {
+            matipRepository.addTipToEvent(tip.id, event.id)
+        }
     }
 }
 
