@@ -61,14 +61,20 @@ class MainScreenViewModel @Inject constructor (
         }
     }
 
+    fun updateShowDialog(showDialog: Boolean) {
+        _uiState.value = uiState.value.copy(showDialog = showDialog)
+    }
+
     @SuppressLint("VisibleForTests")
-    fun finalTip(): String {
-        return calculateTip(
+    fun updateFinalTip(): String {
+        val calculatedTip = calculateTip(
             amount = uiState.value.amountInput,
             tipPercent = uiState.value.tipPercentInput,
             roundUp = uiState.value.roundUp,
             tipSplit = uiState.value.splitShare
         )
+        _uiState.value = uiState.value.copy(finalTip = calculatedTip)
+        return calculatedTip
     }
 }
 
