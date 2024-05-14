@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.exercise.matipv2.data.model.Tip
 import kotlinx.coroutines.flow.Flow
 
@@ -15,6 +16,9 @@ interface TipDao {
 
     @Delete
     suspend fun deleteTip(tip: Tip)
+
+    @Update
+    suspend fun updateTip(tip: Tip)
 
     @Query("SELECT * FROM tips")
     fun getAllTips(): Flow<List<Tip>>
