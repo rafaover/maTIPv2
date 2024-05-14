@@ -19,6 +19,9 @@ interface TipDao {
     @Query("SELECT * FROM tips")
     fun getAllTips(): Flow<List<Tip>>
 
+    @Query("UPDATE tips SET event_id = :eventId WHERE id = :tipId")
+    suspend fun addTipToEvent(tipId: Int, eventId: Int)
+
     // TODO("Comment this before going to production")
     @Query("DELETE FROM tips")
     suspend fun deleteAllTips()
