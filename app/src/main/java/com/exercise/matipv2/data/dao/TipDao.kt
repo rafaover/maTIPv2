@@ -22,8 +22,6 @@ interface TipDao {
     @Query("UPDATE tips SET event_id = :eventId WHERE id = :tipId")
     suspend fun addTipToEvent(tipId: Int, eventId: Int)
 
-    // TODO("Comment this before going to production")
-    @Query("DELETE FROM tips")
-    suspend fun deleteAllTips()
-    //
+    @Query("SELECT * FROM tips ORDER BY id DESC LIMIT 1")
+    suspend fun getLastTipSaved(): Tip
 }
