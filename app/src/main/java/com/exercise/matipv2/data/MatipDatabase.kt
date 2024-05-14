@@ -7,7 +7,7 @@ import com.exercise.matipv2.data.dao.TipDao
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.Tip
 
-@Database(entities = [Event::class, Tip::class], version = 1)
+@Database(entities = [Event::class, Tip::class], version = 2)
 abstract class MatipDatabase : RoomDatabase() {
     abstract fun eventDao(): EventDao
     abstract fun tipDao(): TipDao
