@@ -6,7 +6,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
+import com.exercise.matipv2.R
 
 @Composable
 fun ButtonToOpenDialog(
@@ -15,7 +16,7 @@ fun ButtonToOpenDialog(
 ) {
     Row {
         Button(
-            modifier = Modifier.padding(10.dp),
+            modifier = Modifier.padding(dimensionResource(R.dimen.padding_sml)),
             // Update to "true" to show the dialog box
             onClick = { updateShowDialog() }
         ) {
