@@ -2,8 +2,10 @@
 
 Application to calculate, split and Store Tips given.
 
-- [ ] Store Tips based on events or trips, so you have access to total money spent.
+- [x] Store Tips based on events or trips, so you have access to total money spent.
 - [x] Split Tips among friends.
+- [ ] Create lists so you can have access to a total spent on a specific event or trip.
+- [ ] Share the total amount spent with friends.
 
 ## TOOLS:
 
@@ -14,3 +16,4 @@ Application to calculate, split and Store Tips given.
 - Navigation Compose
 - Hilt for Dependency Injection
 - Room for local storage
+- Coroutines

@@ -9,7 +9,6 @@ import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.Tip
 import com.exercise.matipv2.util.calculateTip
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,39 +25,45 @@ class MainScreenViewModel @Inject constructor (
     val uiState = _uiState.asStateFlow()
 
     init {
-        CoroutineScope(Dispatchers.IO).launch {
-            matipRepository.insertEvent(Event(1, "Test List"))
-        }
+        insertTestEvent()
+    }
+
+    private fun insertTestEvent() = viewModelScope.launch(Dispatchers.IO) {
+        matipRepository.insertEvent(Event(1, "Test List"))
+    }
+
+    private fun updateState(update: (MainScreenState) -> MainScreenState) {
+        _uiState.value = update(_uiState.value)
     }
 
     fun updateTipAmount(amount: String) {
-        _uiState.value = uiState.value.copy(tipAmount = amount)
+        updateState { it.copy(tipAmount = amount) }
     }
 
     fun updateTipPercent(tipPercent: String) {
-        _uiState.value = uiState.value.copy(tipPercent = tipPercent)
+        updateState { it.copy(tipPercent = tipPercent)}
     }
 
     fun updateRoundUp(roundUp: Boolean) {
-        _uiState.value = uiState.value.copy(roundUp = roundUp)
+        updateState { it.copy(roundUp = roundUp) }
     }
 
     fun updateSelectedTabIndex(index: Int) {
-        _uiState.value = uiState.value.copy(selectedTabIndex = index)
+        updateState { it.copy(selectedTabIndex = index) }
     }
 
     fun increaseCounter() {
-        _uiState.value = uiState.value.copy(splitShare = uiState.value.splitShare + 1)
+        updateState { it.copy(splitShare = uiState.value.splitShare + 1)}
     }
 
     fun decreaseCounter() {
         if (uiState.value.splitShare > 0) {
-            _uiState.value = uiState.value.copy(splitShare = uiState.value.splitShare - 1)
+            updateState { it.copy(splitShare = uiState.value.splitShare - 1)}
         }
     }
 
     fun updateShowDialog(showDialog: Boolean) {
-        _uiState.value = uiState.value.copy(showDialog = showDialog)
+        updateState { it.copy(showDialog = showDialog) }
     }
 
     @SuppressLint("VisibleForTests")
