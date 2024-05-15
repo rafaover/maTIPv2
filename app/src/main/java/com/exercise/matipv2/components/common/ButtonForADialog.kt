@@ -12,10 +12,12 @@ import com.exercise.matipv2.R
 @Composable
 fun ButtonToOpenDialog(
     updateShowDialog: () -> Unit,
-    buttonText: String
+    buttonText: String,
+    dataIsPresent: Boolean = false
 ) {
     Row {
         Button(
+            enabled = dataIsPresent,
             modifier = Modifier.padding(dimensionResource(R.dimen.padding_sml)),
             // Update to "true" to show the dialog box
             onClick = { updateShowDialog() }
