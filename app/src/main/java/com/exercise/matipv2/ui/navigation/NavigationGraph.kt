@@ -27,7 +27,9 @@ fun NavigationGraph(
         }
         composable(TabRowScreens.Events.route) {
             EventsScreen(
-                allEvents = viewModel.getAllEvents()
+                allEvents = viewModel.getAllEvents(),
+                uiState = uiState,
+                viewModel = viewModel
             )
         }
     }
