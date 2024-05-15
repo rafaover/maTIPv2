@@ -8,4 +8,6 @@
     <string name="round_up_tip">Round up tip?</string>
     <string name="tipping_tab">Tipping</string>
     <string name="event_tab">Events</string>
+    <string name="add_tip_to_event">Add Tip to Event</string>
+    <string name="confirm">Confirm</string>
 </resources>
