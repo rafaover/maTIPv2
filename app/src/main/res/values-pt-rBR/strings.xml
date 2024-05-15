@@ -10,4 +10,5 @@
     <string name="tipping_tab">Gorjetas</string>
     <string name="add_tip_to_event">Adicionar Gorjeta em Lista</string>
     <string name="confirm">Confirmar</string>
+    <string name="event_dialog_title">Listas</string>
 </resources>
