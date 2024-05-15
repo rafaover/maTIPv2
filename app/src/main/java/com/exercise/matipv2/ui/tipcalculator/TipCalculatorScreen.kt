@@ -18,13 +18,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.R
+import com.exercise.matipv2.components.calculator.AddTipToEventDialogBox
 import com.exercise.matipv2.components.calculator.SplitCounter
 import com.exercise.matipv2.components.calculator.TotalTipAmount
+import com.exercise.matipv2.components.common.ButtonToOpenDialog
 import com.exercise.matipv2.components.common.EditNumber
 import com.exercise.matipv2.components.common.RoundTheTipSwitch
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.ui.MainScreenViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun TipCalculatorScreen(
@@ -55,8 +59,8 @@ fun TipCalculatorScreen(
                 .padding(bottom = dimensionResource(R.dimen.padding_mid))
                 .align(alignment = Alignment.Start),
             label = R.string.bill_amount,
-            value = uiState.amountInput,
-            onValueChange = { viewModel.updateAmountInput(it) },
+            value = uiState.tipAmount,
+            onValueChange = { viewModel.updateTipAmount(it) },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Next
@@ -70,8 +74,8 @@ fun TipCalculatorScreen(
                 .padding(bottom = 40.dp)
                 .align(alignment = Alignment.Start),
             label = R.string.tip_percentage,
-            value = uiState.tipPercentInput,
-            onValueChange = { viewModel.updateTipPercentInput(it) },
+            value = uiState.tipPercent,
+            onValueChange = { viewModel.updateTipPercent(it) },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
@@ -85,7 +89,7 @@ fun TipCalculatorScreen(
             onclickNegative = { viewModel.decreaseCounter() }
         )
 
-        TotalTipAmount(viewModel.finalTip())
+        TotalTipAmount(viewModel.updateFinalTip())
 
         RoundTheTipSwitch(
             modifier = Modifier
@@ -94,5 +98,28 @@ fun TipCalculatorScreen(
             roundUp = uiState.roundUp,
             onRoundUpChange = { viewModel.updateRoundUp(it) }
         )
+
+        ButtonToOpenDialog(
+            dataIsPresent = uiState.tipAmount.isNotEmpty() && uiState.tipPercent.isNotEmpty(),
+            updateShowDialog = { viewModel.updateShowDialog(true) },
+            buttonText = stringResource(R.string.add_tip_to_event)
+        )
+
+        /* Conditional attached to the ButtonToOpenDialog above */
+        if(uiState.showDialog) {
+            AddTipToEventDialogBox(
+                onDismissRequest = { viewModel.updateShowDialog(false) },
+                allEvents = viewModel.getAllEvents(),
+                onEventSelected = {
+                    viewModel.viewModelScope.launch {
+                        viewModel.insertTip()
+                        viewModel.addTipToEvent(
+                            viewModel.getLastTipSaved(),
+                            it
+                        )
+                    }
+                }
+            )
+        }
     }
 }

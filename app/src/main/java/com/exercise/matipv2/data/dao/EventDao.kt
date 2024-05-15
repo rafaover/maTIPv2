@@ -22,11 +22,6 @@ interface EventDao {
     @Query("SELECT * FROM events")
     fun getAllEvents(): Flow<List<Event>>
 
-    // TODO("Comment this before going to production")
-    @Query("DELETE FROM events")
-    suspend fun deleteAllEvents()
-    //
-
     @Transaction
     @Query("SELECT * FROM events")
     fun getEventWithTips(): Flow<List<EventWithTips>>

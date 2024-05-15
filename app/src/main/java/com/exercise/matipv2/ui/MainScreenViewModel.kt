@@ -2,6 +2,7 @@ package com.exercise.matipv2.ui
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.MatipRepository
 import com.exercise.matipv2.data.model.Event
@@ -10,6 +11,7 @@ import com.exercise.matipv2.util.calculateTip
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -25,22 +27,16 @@ class MainScreenViewModel @Inject constructor (
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            // TODO("Comment this before going to production")
-            matipRepository.deleteAllEvents()
-            matipRepository.deleteAllTips()
-            //
-
-            matipRepository.insertEvent(Event(1, "Event"))
-            matipRepository.insertTip(Tip(1, "200", "10", 1) )
+            matipRepository.insertEvent(Event(1, "Test List"))
         }
     }
 
-    fun updateAmountInput(amount: String) {
-        _uiState.value = uiState.value.copy(amountInput = amount)
+    fun updateTipAmount(amount: String) {
+        _uiState.value = uiState.value.copy(tipAmount = amount)
     }
 
-    fun updateTipPercentInput(tipPercent: String) {
-        _uiState.value = uiState.value.copy(tipPercentInput = tipPercent)
+    fun updateTipPercent(tipPercent: String) {
+        _uiState.value = uiState.value.copy(tipPercent = tipPercent)
     }
 
     fun updateRoundUp(roundUp: Boolean) {
@@ -61,14 +57,45 @@ class MainScreenViewModel @Inject constructor (
         }
     }
 
+    fun updateShowDialog(showDialog: Boolean) {
+        _uiState.value = uiState.value.copy(showDialog = showDialog)
+    }
+
     @SuppressLint("VisibleForTests")
-    fun finalTip(): String {
-        return calculateTip(
-            amount = uiState.value.amountInput,
-            tipPercent = uiState.value.tipPercentInput,
+    fun updateFinalTip(): String {
+        val calculatedTip = calculateTip(
+            amount = uiState.value.tipAmount,
+            tipPercent = uiState.value.tipPercent,
             roundUp = uiState.value.roundUp,
             tipSplit = uiState.value.splitShare
         )
+        _uiState.value = uiState.value.copy(finalTip = calculatedTip)
+        return calculatedTip
     }
+
+    /* This insertTip method has a return Tip mainly to use on AddTipToEventDialog when
+    * adding a Tip to an List(or Event) */
+    suspend fun insertTip() {
+        val tip = uiState.value.toTip()
+        matipRepository.insertTip(tip)
+    }
+
+    fun addTipToEvent(tip: Tip, event: Event) {
+        viewModelScope.launch(Dispatchers.IO) {
+            tip.eventId = event.id
+            matipRepository.updateTip(tip)
+        }
+    }
+
+    suspend fun getLastTipSaved() = matipRepository.getLastTipSaved()
+
+    fun getAllEvents(): Flow<List<Event>> {
+        return matipRepository.getAllEvents()
+    }
+
+    private fun MainScreenState.toTip(): Tip = Tip(
+        tipAmount = finalTip,
+        tipPercent = tipPercent
+    )
 }
 
