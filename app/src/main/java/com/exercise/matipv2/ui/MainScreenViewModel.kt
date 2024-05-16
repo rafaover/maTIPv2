@@ -62,6 +62,10 @@ class MainScreenViewModel @Inject constructor (
         }
     }
 
+    fun updateEventName(eventName: String) {
+        updateState { it.copy(eventName = eventName) }
+    }
+
     fun updateShowDialog(showDialog: Boolean) {
         updateState { it.copy(showDialog = showDialog) }
     }
@@ -83,6 +87,10 @@ class MainScreenViewModel @Inject constructor (
     suspend fun insertTip() {
         val tip = uiState.value.toTip()
         matipRepository.insertTip(tip)
+    }
+
+    suspend fun insertEvent(event: Event) {
+        matipRepository.insertEvent(event)
     }
 
     fun addTipToEvent(tip: Tip, event: Event) {
