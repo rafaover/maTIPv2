@@ -11,4 +11,6 @@
     <string name="add_tip_to_event">Add Tip to Event</string>
     <string name="confirm">Confirm</string>
     <string name="event_dialog_title">Lists</string>
+    <string name="create_list">Create List</string>
+    <string name="save">Save</string>
 </resources>
