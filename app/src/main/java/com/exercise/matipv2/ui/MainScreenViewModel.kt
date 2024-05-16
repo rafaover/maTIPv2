@@ -9,7 +9,6 @@ import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.Tip
 import com.exercise.matipv2.util.calculateTip
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,39 +25,47 @@ class MainScreenViewModel @Inject constructor (
     val uiState = _uiState.asStateFlow()
 
     init {
-        CoroutineScope(Dispatchers.IO).launch {
-            matipRepository.insertEvent(Event(1, "Test List"))
-        }
+        resetState()
+    }
+
+    /* Update Functions */
+
+    private fun updateState(update: (MainScreenState) -> MainScreenState) {
+        _uiState.value = update(_uiState.value)
     }
 
     fun updateTipAmount(amount: String) {
-        _uiState.value = uiState.value.copy(tipAmount = amount)
+        updateState { it.copy(tipAmount = amount) }
     }
 
     fun updateTipPercent(tipPercent: String) {
-        _uiState.value = uiState.value.copy(tipPercent = tipPercent)
+        updateState { it.copy(tipPercent = tipPercent)}
     }
 
     fun updateRoundUp(roundUp: Boolean) {
-        _uiState.value = uiState.value.copy(roundUp = roundUp)
+        updateState { it.copy(roundUp = roundUp) }
     }
 
     fun updateSelectedTabIndex(index: Int) {
-        _uiState.value = uiState.value.copy(selectedTabIndex = index)
+        updateState { it.copy(selectedTabIndex = index) }
+    }
+
+    fun updateEventName(eventName: String) {
+        updateState { it.copy(eventName = eventName) }
+    }
+
+    fun updateShowDialog(showDialog: Boolean) {
+        updateState { it.copy(showDialog = showDialog) }
     }
 
     fun increaseCounter() {
-        _uiState.value = uiState.value.copy(splitShare = uiState.value.splitShare + 1)
+        updateState { it.copy(splitShare = uiState.value.splitShare + 1)}
     }
 
     fun decreaseCounter() {
         if (uiState.value.splitShare > 0) {
-            _uiState.value = uiState.value.copy(splitShare = uiState.value.splitShare - 1)
+            updateState { it.copy(splitShare = uiState.value.splitShare - 1)}
         }
-    }
-
-    fun updateShowDialog(showDialog: Boolean) {
-        _uiState.value = uiState.value.copy(showDialog = showDialog)
     }
 
     @SuppressLint("VisibleForTests")
@@ -73,11 +80,19 @@ class MainScreenViewModel @Inject constructor (
         return calculatedTip
     }
 
-    /* This insertTip method has a return Tip mainly to use on AddTipToEventDialog when
-    * adding a Tip to an List(or Event) */
+    fun resetState() {
+        _uiState.value = MainScreenState()
+    }
+
+    /* Insert Functions */
+
     suspend fun insertTip() {
         val tip = uiState.value.toTip()
         matipRepository.insertTip(tip)
+    }
+
+    suspend fun insertEvent(event: Event) {
+        matipRepository.insertEvent(event)
     }
 
     fun addTipToEvent(tip: Tip, event: Event) {
@@ -87,11 +102,15 @@ class MainScreenViewModel @Inject constructor (
         }
     }
 
+    /* Get Functions */
+
     suspend fun getLastTipSaved() = matipRepository.getLastTipSaved()
 
     fun getAllEvents(): Flow<List<Event>> {
         return matipRepository.getAllEvents()
     }
+
+    /* Extension Functions */
 
     private fun MainScreenState.toTip(): Tip = Tip(
         tipAmount = finalTip,

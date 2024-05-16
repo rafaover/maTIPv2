@@ -6,9 +6,11 @@
     <string name="tip_percentage">Porcentagem</string>
     <string name="split">Divide?</string>
     <string name="round_up_tip">Arrendonda?</string>
-    <string name="event_tab">Eventos</string>
+    <string name="event_tab">Listas</string>
     <string name="tipping_tab">Gorjetas</string>
     <string name="add_tip_to_event">Adicionar Gorjeta em Lista</string>
     <string name="confirm">Confirmar</string>
-    <string name="event_dialog_title">Listas</string>
+    <string name="select_list">Selecione uma Lista</string>
+    <string name="create_list">Criar Lista</string>
+    <string name="save">Salvar</string>
 </resources>
