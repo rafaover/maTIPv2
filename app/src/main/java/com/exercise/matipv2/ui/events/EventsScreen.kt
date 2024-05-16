@@ -16,12 +16,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.R
 import com.exercise.matipv2.components.common.FabAdd
+import com.exercise.matipv2.components.events.AddAnEventDialog
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.ui.MainScreenViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
 @Composable
 fun EventsScreen(
@@ -62,7 +65,17 @@ fun EventsScreen(
         )
         /* Conditional attached to the FabAdd component above */
         if(uiState.showDialog) {
-            TODO("Add the dialog composable here")
+            AddAnEventDialog(
+                viewModel = viewModel,
+                uiState = uiState,
+                onSaveRequest = {
+                    viewModel.viewModelScope.launch {
+                        viewModel.insertEvent(Event(name = uiState.eventName))
+                        viewModel.updateShowDialog(false)
+                        uiState.eventName = ""
+                    }
+                }
+            )
         }
     }
 }

@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,6 +36,8 @@ fun TipCalculatorScreen(
     viewModel: MainScreenViewModel,
     uiState: MainScreenState,
 ) {
+    val focusManager = LocalFocusManager.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -108,15 +111,14 @@ fun TipCalculatorScreen(
         /* Conditional attached to the ButtonToOpenDialog above */
         if(uiState.showDialog) {
             AddTipToEventDialogBox(
-                onDismissRequest = { viewModel.updateShowDialog(false) },
+                viewModel = viewModel,
                 allEvents = viewModel.getAllEvents(),
                 onEventSelected = {
                     viewModel.viewModelScope.launch {
                         viewModel.insertTip()
-                        viewModel.addTipToEvent(
-                            viewModel.getLastTipSaved(),
-                            it
-                        )
+                        viewModel.addTipToEvent(viewModel.getLastTipSaved(), it)
+                        viewModel.resetState()
+                        focusManager.clearFocus()
                     }
                 }
             )
