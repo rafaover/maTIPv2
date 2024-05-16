@@ -14,21 +14,23 @@ import androidx.compose.ui.res.stringResource
 
 @Composable
 fun EditTextForm(
-    @StringRes label: Int,
-    @DrawableRes leadingIcon: Int,
     modifier: Modifier = Modifier,
+    @StringRes label: Int,
+    @DrawableRes leadingIcon: Int? = null,
     onValueChange: (String) -> Unit = {},
     value: String,
-    keyboardOptions: KeyboardOptions
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
 ) {
     OutlinedTextField(
         modifier = modifier.fillMaxWidth(),
         singleLine = true,
-        leadingIcon = {
-            Icon(
-                painter = painterResource(leadingIcon),
-                contentDescription = null
-            )
+        leadingIcon = leadingIcon?.let {
+            {
+                Icon(
+                    painter = painterResource(leadingIcon),
+                    contentDescription = null
+                )
+            }
         },
         keyboardOptions = keyboardOptions,
         label = { Text(stringResource(label)) },
