@@ -1,4 +1,5 @@
 <resources>
+<!--    Main Screen Strings-->
     <string name="app_name" translatable="false">maTIP</string>
     <string name="calculate_tip">Calculate Tip</string>
     <string name="bill_amount">Bill Amount</string>
@@ -7,10 +8,15 @@
     <string name="split">Split</string>
     <string name="round_up_tip">Round up tip?</string>
     <string name="tipping_tab">Tipping</string>
-    <string name="event_tab">Lists</string>
     <string name="add_tip_to_event">Add Tip to Event</string>
+
+<!--    Button Actions-->
     <string name="confirm">Confirm</string>
-    <string name="event_dialog_title">Lists</string>
-    <string name="create_list">Create List</string>
     <string name="save">Save</string>
+
+<!--    Lists Screen Strings-->
+    <string name="event_tab">Lists</string>
+    <string name="select_list">Select a List</string>
+    <string name="create_list">Create List</string>
+    <string name="list_name">List Name</string>
 </resources>
