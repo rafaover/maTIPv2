@@ -25,12 +25,10 @@ class MainScreenViewModel @Inject constructor (
     val uiState = _uiState.asStateFlow()
 
     init {
-        insertTestEvent()
+        resetState()
     }
 
-    private fun insertTestEvent() = viewModelScope.launch(Dispatchers.IO) {
-        matipRepository.insertEvent(Event(1, "Test List"))
-    }
+    /* Update Functions */
 
     private fun updateState(update: (MainScreenState) -> MainScreenState) {
         _uiState.value = update(_uiState.value)
@@ -52,6 +50,14 @@ class MainScreenViewModel @Inject constructor (
         updateState { it.copy(selectedTabIndex = index) }
     }
 
+    fun updateEventName(eventName: String) {
+        updateState { it.copy(eventName = eventName) }
+    }
+
+    fun updateShowDialog(showDialog: Boolean) {
+        updateState { it.copy(showDialog = showDialog) }
+    }
+
     fun increaseCounter() {
         updateState { it.copy(splitShare = uiState.value.splitShare + 1)}
     }
@@ -60,14 +66,6 @@ class MainScreenViewModel @Inject constructor (
         if (uiState.value.splitShare > 0) {
             updateState { it.copy(splitShare = uiState.value.splitShare - 1)}
         }
-    }
-
-    fun updateEventName(eventName: String) {
-        updateState { it.copy(eventName = eventName) }
-    }
-
-    fun updateShowDialog(showDialog: Boolean) {
-        updateState { it.copy(showDialog = showDialog) }
     }
 
     @SuppressLint("VisibleForTests")
@@ -82,8 +80,12 @@ class MainScreenViewModel @Inject constructor (
         return calculatedTip
     }
 
-    /* This insertTip method has a return Tip mainly to use on AddTipToEventDialog when
-    * adding a Tip to an List(or Event) */
+    fun resetState() {
+        _uiState.value = MainScreenState()
+    }
+
+    /* Insert Functions */
+
     suspend fun insertTip() {
         val tip = uiState.value.toTip()
         matipRepository.insertTip(tip)
@@ -100,11 +102,15 @@ class MainScreenViewModel @Inject constructor (
         }
     }
 
+    /* Get Functions */
+
     suspend fun getLastTipSaved() = matipRepository.getLastTipSaved()
 
     fun getAllEvents(): Flow<List<Event>> {
         return matipRepository.getAllEvents()
     }
+
+    /* Extension Functions */
 
     private fun MainScreenState.toTip(): Tip = Tip(
         tipAmount = finalTip,
