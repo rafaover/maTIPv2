@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.exercise.matipv2.data.MainScreenState
+import com.exercise.matipv2.data.NavBarItemDetails
 import com.exercise.matipv2.ui.MainScreenViewModel
 import com.exercise.matipv2.ui.events.EventsScreen
 import com.exercise.matipv2.ui.tipcalculator.TipCalculatorScreen
@@ -17,15 +18,15 @@ fun NavigationGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavigationScreens.TipCalculator.route
+        startDestination = NavBarItemDetails.TipCalculator.route
     ) {
-        composable(NavigationScreens.TipCalculator.route) {
+        composable(NavBarItemDetails.TipCalculator.route) {
             TipCalculatorScreen(
                 viewModel = viewModel,
                 uiState = uiState
             )
         }
-        composable(NavigationScreens.Events.route) {
+        composable(NavBarItemDetails.Events.route) {
             EventsScreen(
                 allEvents = viewModel.getAllEvents(),
                 uiState = uiState,
