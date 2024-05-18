@@ -46,10 +46,6 @@ class MainScreenViewModel @Inject constructor (
         updateState { it.copy(roundUp = roundUp) }
     }
 
-    fun updateSelectedTabIndex(index: Int) {
-        updateState { it.copy(selectedTabIndex = index) }
-    }
-
     fun updateEventName(eventName: String) {
         updateState { it.copy(eventName = eventName) }
     }
