@@ -17,15 +17,15 @@ fun NavigationGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = TabRowScreens.TipCalculator.route
+        startDestination = NavigationScreens.TipCalculator.route
     ) {
-        composable(TabRowScreens.TipCalculator.route) {
+        composable(NavigationScreens.TipCalculator.route) {
             TipCalculatorScreen(
                 viewModel = viewModel,
                 uiState = uiState
             )
         }
-        composable(TabRowScreens.Events.route) {
+        composable(NavigationScreens.Events.route) {
             EventsScreen(
                 allEvents = viewModel.getAllEvents(),
                 uiState = uiState,
