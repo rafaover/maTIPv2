@@ -1,4 +1,4 @@
-package com.exercise.matipv2.data
+package com.exercise.matipv2.data.repository
 
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.EventWithTips

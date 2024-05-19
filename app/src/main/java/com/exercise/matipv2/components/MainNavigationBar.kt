@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.exercise.matipv2.data.NavBarItemDetails
+import com.exercise.matipv2.data.NavBarItems
 
 @Composable
 fun MainNavigationBar(
@@ -23,7 +23,7 @@ fun MainNavigationBar(
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
-        NavBarItemDetails.values.forEach { navBarItem ->
+        NavBarItems.values.forEach { navBarItem ->
             NavigationBarItem(
                 selected = currentRoute == navBarItem.route,
                 onClick = {

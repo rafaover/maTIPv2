@@ -9,19 +9,19 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.exercise.matipv2.R
 
-sealed class NavBarItemDetails(
+sealed class NavBarItems(
     @StringRes val title: Int,
     val route: String,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector
 ) {
-    object TipCalculator : NavBarItemDetails(
+    object TipCalculator : NavBarItems(
         R.string.tipping_tab,
         "tipCalculator",
         selectedIcon = Icons.Filled.Home,
         unselectedIcon = Icons.Outlined.Home
     )
-    object Events : NavBarItemDetails(
+    object Events : NavBarItems(
         R.string.event_tab,
         "events",
         selectedIcon = Icons.AutoMirrored.Filled.ViewList,
