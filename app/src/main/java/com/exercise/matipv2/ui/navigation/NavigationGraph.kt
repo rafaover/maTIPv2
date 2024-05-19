@@ -1,7 +1,6 @@
 package com.exercise.matipv2.ui.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,7 +12,6 @@ import com.exercise.matipv2.ui.tipcalculator.TipCalculatorScreen
 
 @Composable
 fun NavigationGraph(
-    modifier: Modifier = Modifier,
     viewModel: MainScreenViewModel,
     navController: NavHostController,
     uiState: MainScreenState
