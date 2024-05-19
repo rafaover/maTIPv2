@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.data.MainScreenState
-import com.exercise.matipv2.data.MatipRepository
+import com.exercise.matipv2.data.repository.MatipRepository
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.Tip
 import com.exercise.matipv2.util.calculateTip
