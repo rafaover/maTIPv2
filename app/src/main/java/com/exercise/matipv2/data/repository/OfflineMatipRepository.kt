@@ -24,6 +24,9 @@ class OfflineMatipRepository @Inject constructor (
     override suspend fun getLastTipSaved(): Tip {
         return tipDao.getLastTipSaved()
     }
+    override fun getAllTipsFromEvent(eventId: Int): Flow<List<Tip>> {
+        return tipDao.getAllTipsFromEvent(eventId)
+    }
 
     // Event Methods
     override suspend fun insertEvent(event: Event) = eventDao.insert(event)
