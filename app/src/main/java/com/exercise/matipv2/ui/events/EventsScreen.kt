@@ -20,6 +20,7 @@ import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.R
 import com.exercise.matipv2.components.common.FabAdd
 import com.exercise.matipv2.components.events.AddAnEventDialog
+import com.exercise.matipv2.components.events.AllTipsFromEventCounter
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.ui.MainScreenViewModel
@@ -47,10 +48,10 @@ fun EventsScreen(
                     headlineContent = {
                         Text(
                             text = event.name,
-                            style = MaterialTheme.typography.headlineSmall
+                            style = MaterialTheme.typography.bodyLarge
                         ) },
                     modifier = Modifier,
-                    trailingContent = { Text(text = "100") }
+                    trailingContent = { AllTipsFromEventCounter(viewModel, event) }
                 )
                 if (allEventsFlow.size > 1) {
                     HorizontalDivider()
@@ -71,8 +72,8 @@ fun EventsScreen(
                 onSaveRequest = {
                     viewModel.viewModelScope.launch {
                         viewModel.insertEvent(Event(name = uiState.eventName))
-                        viewModel.updateShowDialog(false)
                         uiState.eventName = ""
+                        viewModel.updateShowDialog(false)
                     }
                 }
             )
