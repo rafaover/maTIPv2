@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.exercise.matipv2.components.MainNavigationBar
+import com.exercise.matipv2.components.common.MainTopBar
 import com.exercise.matipv2.ui.navigation.NavigationGraph
 
 @SuppressLint("VisibleForTests")
@@ -20,13 +20,8 @@ fun MainScreen(viewModel: MainScreenViewModel) {
     val navController = rememberNavController()
 
     Scaffold(
-        topBar = {
-            Text(text = "Main Screen")
-            // TODO("Build Top Bar")
-                 },
-        bottomBar = {
-            MainNavigationBar(navController = navController)
-        }
+        topBar = { MainTopBar() },
+        bottomBar = { MainNavigationBar(navController = navController) }
     ) {
         Column(modifier = Modifier.padding(it)) {
             NavigationGraph(

@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.exercise.matipv2.di
 
 import com.exercise.matipv2.data.repository.MatipRepository
