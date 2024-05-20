@@ -128,6 +128,10 @@ class MainScreenViewModel @Inject constructor (
         return matipRepository.getAllEvents()
     }
 
+    fun getAllTipsFromEvent(eventId: Int): Flow<List<Tip>> {
+        return matipRepository.getAllTipsFromEvent(eventId)
+    }
+
     /* Extension Functions */
 
     private fun MainScreenState.toTip(): Tip = Tip(

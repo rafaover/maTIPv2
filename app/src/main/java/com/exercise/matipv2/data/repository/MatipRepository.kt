@@ -13,6 +13,7 @@ interface MatipRepository {
     fun getAllTips(): Flow<List<Tip>>
     suspend fun addTipToEvent(tipId: Int, eventId: Int)
     suspend fun getLastTipSaved(): Tip
+    fun getAllTipsFromEvent(eventId: Int): Flow<List<Tip>>
 
     /* Event Methods */
     suspend fun insertEvent(event: Event)
