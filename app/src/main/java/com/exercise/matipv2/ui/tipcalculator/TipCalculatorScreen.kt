@@ -19,7 +19,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.R
 import com.exercise.matipv2.components.calculator.AddTipToEventDialogBox
 import com.exercise.matipv2.components.calculator.SplitCounter
@@ -29,7 +28,6 @@ import com.exercise.matipv2.components.common.EditTextForm
 import com.exercise.matipv2.components.common.RoundTheTipSwitch
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.ui.MainScreenViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun TipCalculatorScreen(
@@ -114,12 +112,10 @@ fun TipCalculatorScreen(
                 viewModel = viewModel,
                 allEvents = viewModel.getAllEvents(),
                 onEventSelected = {
-                    viewModel.viewModelScope.launch {
-                        viewModel.insertTip()
-                        viewModel.addTipToEvent(viewModel.getLastTipSaved(), it)
-                        viewModel.resetState()
-                        focusManager.clearFocus()
-                    }
+                    viewModel.insertTip()
+                    viewModel.addTipToEvent(it)
+                    viewModel.resetState()
+                    focusManager.clearFocus()
                 }
             )
         }

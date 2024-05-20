@@ -56,6 +56,7 @@ fun AddAnEventDialog(
                         fontWeight = FontWeight.Bold,
                     )
                     TextButton(
+                        enabled = uiState.eventName.isNotBlank(),
                         onClick = { onSaveRequest() },
                     ) {
                         Text(stringResource(R.string.save))

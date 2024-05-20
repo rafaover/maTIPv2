@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.data.MainScreenState
-import com.exercise.matipv2.data.repository.MatipRepository
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.Tip
+import com.exercise.matipv2.data.repository.MatipRepository
 import com.exercise.matipv2.util.calculateTip
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +46,12 @@ class MainScreenViewModel @Inject constructor (
         updateState { it.copy(roundUp = roundUp) }
     }
 
+    fun updateEvent(event: Event) {
+        viewModelScope.launch(Dispatchers.IO) {
+            matipRepository.updateEvent(event)
+        }
+    }
+
     fun updateEventName(eventName: String) {
         updateState { it.copy(eventName = eventName) }
     }
@@ -82,25 +88,40 @@ class MainScreenViewModel @Inject constructor (
 
     /* Insert Functions */
 
-    suspend fun insertTip() {
-        val tip = uiState.value.toTip()
-        matipRepository.insertTip(tip)
-    }
-
-    suspend fun insertEvent(event: Event) {
-        matipRepository.insertEvent(event)
-    }
-
-    fun addTipToEvent(tip: Tip, event: Event) {
+    fun insertTip() {
         viewModelScope.launch(Dispatchers.IO) {
-            tip.eventId = event.id
-            matipRepository.updateTip(tip)
+            val tip = uiState.value.toTip()
+            matipRepository.insertTip(tip)
+        }
+    }
+
+    fun insertEvent(event: Event) {
+        viewModelScope.launch(Dispatchers.IO) {
+            matipRepository.insertEvent(event)
+        }
+    }
+
+    fun addTipToEvent(event: Event) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val lastTip = getLastTipSaved()
+            lastTip.eventId = event.id
+            matipRepository.updateTip(lastTip)
+        }
+    }
+
+    /* Delete Functions */
+
+    fun deleteEvent(event: Event) {
+        viewModelScope.launch(Dispatchers.IO) {
+            matipRepository.deleteEvent(event)
         }
     }
 
     /* Get Functions */
 
-    suspend fun getLastTipSaved() = matipRepository.getLastTipSaved()
+    private suspend fun getLastTipSaved(): Tip {
+        return matipRepository.getLastTipSaved()
+    }
 
     fun getAllEvents(): Flow<List<Event>> {
         return matipRepository.getAllEvents()

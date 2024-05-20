@@ -17,6 +17,7 @@ interface MatipRepository {
     /* Event Methods */
     suspend fun insertEvent(event: Event)
     suspend fun deleteEvent(event: Event)
+    suspend fun updateEvent(event: Event)
     fun getAllEvents(): Flow<List<Event>>
     fun getEventWithTips(): Flow<List<EventWithTips>>
 }

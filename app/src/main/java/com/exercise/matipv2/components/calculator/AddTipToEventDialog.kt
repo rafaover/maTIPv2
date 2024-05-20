@@ -80,32 +80,34 @@ fun AddTipToEventDialogBox(
                         Text(stringResource(R.string.confirm))
                     }
                 }
-                LazyColumn(
-                    modifier = Modifier.weight(1f),
-                    userScrollEnabled = true
-                ) {
-                    itemsIndexed(allEventsFlow) { _, event ->
-                        Row(
-                            Modifier
-                                .fillMaxWidth()
-                                .height(56.dp)
-                                .selectable(
+                if (allEventsFlow.isNotEmpty()) {
+                    LazyColumn(
+                        modifier = Modifier.weight(1f),
+                        userScrollEnabled = true
+                    ) {
+                        itemsIndexed(allEventsFlow) { _, event ->
+                            Row(
+                                Modifier
+                                    .fillMaxWidth()
+                                    .height(56.dp)
+                                    .selectable(
+                                        selected = (event == selectedOption),
+                                        onClick = { onOptionSelected(event) },
+                                        role = Role.RadioButton
+                                    ),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                RadioButton(
                                     selected = (event == selectedOption),
-                                    onClick = { onOptionSelected(event) },
-                                    role = Role.RadioButton
-                                ),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            RadioButton(
-                                selected = (event == selectedOption),
-                                onClick = null
-                            )
-                            Text(
-                                text = event.name,
-                                style = MaterialTheme.typography.bodyLarge,
-                                modifier = Modifier
-                                    .padding(start = dimensionResource(R.dimen.padding_mid))
-                            )
+                                    onClick = null
+                                )
+                                Text(
+                                    text = event.name,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    modifier = Modifier
+                                        .padding(start = dimensionResource(R.dimen.padding_mid))
+                                )
+                            }
                         }
                     }
                 }
