@@ -38,26 +38,30 @@ fun EventsScreen(
             .padding(16.dp)
             .fillMaxSize()
     ) {
-        LazyColumn(
-            userScrollEnabled = true
-        ) {
-            itemsIndexed(allEventsFlow) { _, event ->
-                SwipeBox(
-                    onDelete = { viewModel.deleteEvent(event) },
-                    onEdit = { viewModel.updateEvent(event) }
-                ) { ListItem(
-                    headlineContent = {
-                        Text(
-                            text = event.name,
-                            style = MaterialTheme.typography.bodyLarge
-                        )},
-                    modifier = Modifier,
-                    trailingContent = {
-                        Text(text = "100")
-                    }
-                )
-                    if (allEventsFlow.size > 1) {
-                        HorizontalDivider()
+        if (allEventsFlow.isNotEmpty()) {
+            LazyColumn(
+                userScrollEnabled = true
+            ) {
+                itemsIndexed(allEventsFlow) { _, event ->
+                    SwipeBox(
+                        onDelete = { viewModel.deleteEvent(event) },
+                        onEdit = { viewModel.updateEvent(event) }
+                    ) {
+                        ListItem(
+                            headlineContent = {
+                                Text(
+                                    text = event.name,
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                            },
+                            modifier = Modifier,
+                            trailingContent = {
+                                Text(text = "100")
+                            }
+                        )
+                        if (allEventsFlow.size > 1) {
+                            HorizontalDivider()
+                        }
                     }
                 }
             }
@@ -76,7 +80,6 @@ fun EventsScreen(
                 onSaveRequest = {
                     viewModel.insertEvent(Event(name = uiState.eventName))
                     viewModel.updateShowDialog(false)
-                    uiState.eventName = ""
                 }
             )
         }

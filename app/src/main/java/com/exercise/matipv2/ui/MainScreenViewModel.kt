@@ -99,9 +99,10 @@ class MainScreenViewModel @Inject constructor (
         viewModelScope.launch(Dispatchers.IO) {
             matipRepository.insertEvent(event)
         }
+        updateEventName("")
     }
 
-    fun addTipToEvent(event: Event) {
+    suspend fun addTipToEvent(event: Event) {
         viewModelScope.launch(Dispatchers.IO) {
             val lastTip = getLastTipSaved()
             lastTip.eventId = event.id
