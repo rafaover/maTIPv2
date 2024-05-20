@@ -16,15 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.R
 import com.exercise.matipv2.components.common.FabAdd
 import com.exercise.matipv2.components.events.AddAnEventDialog
+import com.exercise.matipv2.components.events.SwipeBox
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.ui.MainScreenViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 
 @Composable
 fun EventsScreen(
@@ -43,17 +42,23 @@ fun EventsScreen(
             userScrollEnabled = true
         ) {
             itemsIndexed(allEventsFlow) { _, event ->
-                ListItem(
+                SwipeBox(
+                    onDelete = { viewModel.deleteEvent(event) },
+                    onEdit = { viewModel.updateEvent(event) }
+                ) { ListItem(
                     headlineContent = {
                         Text(
                             text = event.name,
-                            style = MaterialTheme.typography.headlineSmall
-                        ) },
+                            style = MaterialTheme.typography.bodyLarge
+                        )},
                     modifier = Modifier,
-                    trailingContent = { Text(text = "100") }
+                    trailingContent = {
+                        Text(text = "100")
+                    }
                 )
-                if (allEventsFlow.size > 1) {
-                    HorizontalDivider()
+                    if (allEventsFlow.size > 1) {
+                        HorizontalDivider()
+                    }
                 }
             }
         }
@@ -69,11 +74,9 @@ fun EventsScreen(
                 viewModel = viewModel,
                 uiState = uiState,
                 onSaveRequest = {
-                    viewModel.viewModelScope.launch {
-                        viewModel.insertEvent(Event(name = uiState.eventName))
-                        viewModel.updateShowDialog(false)
-                        uiState.eventName = ""
-                    }
+                    viewModel.insertEvent(Event(name = uiState.eventName))
+                    viewModel.updateShowDialog(false)
+                    uiState.eventName = ""
                 }
             )
         }
