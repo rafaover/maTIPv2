@@ -60,6 +60,10 @@ class MainScreenViewModel @Inject constructor (
         updateState { it.copy(showAddEventDialog = showDialog) }
     }
 
+    fun updateShowDeleteEventAlertDialog(showDialog: Boolean) {
+        updateState { it.copy(showDeleteEventDialog = showDialog) }
+    }
+
     fun increaseCounter() {
         updateState { it.copy(splitShare = uiState.value.splitShare + 1)}
     }
