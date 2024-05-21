@@ -31,7 +31,7 @@ fun AddAnEventDialog(
     onSaveRequest: () -> Unit
 ) {
     Dialog(
-        onDismissRequest = { viewModel.updateShowDialog(false) },
+        onDismissRequest = { viewModel.updateShowAddEventDialog(false) },
     ) {
         Card(
             modifier = Modifier
@@ -56,6 +56,7 @@ fun AddAnEventDialog(
                         fontWeight = FontWeight.Bold,
                     )
                     TextButton(
+                        enabled = uiState.eventName.isNotBlank(),
                         onClick = { onSaveRequest() },
                     ) {
                         Text(stringResource(R.string.save))

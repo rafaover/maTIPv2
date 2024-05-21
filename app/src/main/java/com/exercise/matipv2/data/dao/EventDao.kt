@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.EventWithTips
 import kotlinx.coroutines.flow.Flow
@@ -18,6 +19,9 @@ interface EventDao {
 
     @Delete
     suspend fun delete(event: Event)
+
+    @Update
+    suspend fun update(event: Event)
 
     @Query("SELECT * FROM events")
     fun getAllEvents(): Flow<List<Event>>

@@ -31,6 +31,7 @@ class OfflineMatipRepository @Inject constructor (
     // Event Methods
     override suspend fun insertEvent(event: Event) = eventDao.insert(event)
     override suspend fun deleteEvent(event: Event) = eventDao.delete(event)
+    override suspend fun updateEvent(event: Event) = eventDao.update(event)
     override fun getAllEvents() = eventDao.getAllEvents()
     override fun getEventWithTips(): Flow<List<EventWithTips>> {
         return eventDao.getEventWithTips()

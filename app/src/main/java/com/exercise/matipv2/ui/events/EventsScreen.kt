@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -15,11 +17,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.R
+import com.exercise.matipv2.components.common.ConfirmationAlertDialog
 import com.exercise.matipv2.components.common.FabAdd
 import com.exercise.matipv2.components.events.AddAnEventDialog
+import com.exercise.matipv2.components.events.SwipeBox
 import com.exercise.matipv2.components.events.AllTipsFromEventCounter
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.model.Event
@@ -40,21 +45,34 @@ fun EventsScreen(
             .padding(16.dp)
             .fillMaxSize()
     ) {
-        LazyColumn(
-            userScrollEnabled = true
-        ) {
-            itemsIndexed(allEventsFlow) { _, event ->
-                ListItem(
-                    headlineContent = {
-                        Text(
-                            text = event.name,
-                            style = MaterialTheme.typography.bodyLarge
-                        ) },
-                    modifier = Modifier,
-                    trailingContent = { AllTipsFromEventCounter(viewModel, event) }
-                )
-                if (allEventsFlow.size > 1) {
-                    HorizontalDivider()
+        if (allEventsFlow.isNotEmpty()) {
+            LazyColumn(
+                userScrollEnabled = true
+            ) {
+                itemsIndexed(allEventsFlow) { _, event ->
+                    SwipeBox(
+                        onDelete = {
+                            viewModel.setEventToDelete(event)
+                            viewModel.updateShowDeleteEventDialog(true)
+                        },
+                        onEdit = { viewModel.updateEvent(event) }
+                    ) {
+                        ListItem(
+                            headlineContent = {
+                                Text(
+                                    text = event.name,
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                            },
+                            modifier = Modifier,
+                            trailingContent = {
+                                AllTipsFromEventCounter(viewModel, event)
+                            }
+                        )
+                        if (allEventsFlow.size > 1) {
+                            HorizontalDivider()
+                        }
+                    }
                 }
             }
         }
@@ -62,10 +80,10 @@ fun EventsScreen(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(dimensionResource(R.dimen.padding_mid)),
-            onClick = { viewModel.updateShowDialog(true) }
+            onClick = { viewModel.updateShowAddEventDialog(true) }
         )
         /* Conditional attached to the FabAdd component above */
-        if(uiState.showDialog) {
+        if(uiState.showAddEventDialog) {
             AddAnEventDialog(
                 viewModel = viewModel,
                 uiState = uiState,
@@ -73,8 +91,29 @@ fun EventsScreen(
                     viewModel.viewModelScope.launch {
                         viewModel.insertEvent(Event(name = uiState.eventName))
                         uiState.eventName = ""
-                        viewModel.updateShowDialog(false)
+                        viewModel.updateShowAddEventDialog(false)
                     }
+                }
+            )
+        }
+
+        // Alert Dialog to Delete an Event during SwipeBox
+        if (uiState.showDeleteEventDialog) {
+            val eventToDelete by viewModel.eventToDelete.collectAsState()
+            val eventName = eventToDelete?.name ?: ""
+            ConfirmationAlertDialog(
+                title = stringResource(R.string.dialog_title),
+                message = stringResource(R.string.dialog_delete_event_text, eventName),
+                icon = Icons.Filled.Info,
+                confirmButtonText = stringResource(R.string.delete),
+                onConfirm = {
+                    eventToDelete?.let { viewModel.deleteEvent(it) }
+                    viewModel.setEventToDelete(null)
+                    viewModel.updateShowDeleteEventDialog(false)
+                },
+                onDismiss = {
+                    viewModel.setEventToDelete(null)
+                    viewModel.updateShowDeleteEventDialog(false)
                 }
             )
         }

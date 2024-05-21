@@ -4,14 +4,15 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.data.MainScreenState
-import com.exercise.matipv2.data.repository.MatipRepository
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.Tip
+import com.exercise.matipv2.data.repository.MatipRepository
 import com.exercise.matipv2.util.calculateTip
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,6 +24,9 @@ class MainScreenViewModel @Inject constructor (
 
     private val _uiState = MutableStateFlow(MainScreenState())
     val uiState = _uiState.asStateFlow()
+
+    private val _eventToDelete = MutableStateFlow<Event?>(null)
+    val eventToDelete: StateFlow<Event?> = _eventToDelete
 
     init {
         resetState()
@@ -46,12 +50,22 @@ class MainScreenViewModel @Inject constructor (
         updateState { it.copy(roundUp = roundUp) }
     }
 
+    fun updateEvent(event: Event) {
+        viewModelScope.launch(Dispatchers.IO) {
+            matipRepository.updateEvent(event)
+        }
+    }
+
     fun updateEventName(eventName: String) {
         updateState { it.copy(eventName = eventName) }
     }
 
-    fun updateShowDialog(showDialog: Boolean) {
-        updateState { it.copy(showDialog = showDialog) }
+    fun updateShowAddEventDialog(showDialog: Boolean) {
+        updateState { it.copy(showAddEventDialog = showDialog) }
+    }
+
+    fun updateShowDeleteEventDialog(showDialog: Boolean) {
+        updateState { it.copy(showDeleteEventDialog = showDialog) }
     }
 
     fun increaseCounter() {
@@ -82,25 +96,45 @@ class MainScreenViewModel @Inject constructor (
 
     /* Insert Functions */
 
-    suspend fun insertTip() {
-        val tip = uiState.value.toTip()
-        matipRepository.insertTip(tip)
-    }
-
-    suspend fun insertEvent(event: Event) {
-        matipRepository.insertEvent(event)
-    }
-
-    fun addTipToEvent(tip: Tip, event: Event) {
+    fun insertTip() {
         viewModelScope.launch(Dispatchers.IO) {
-            tip.eventId = event.id
-            matipRepository.updateTip(tip)
+            val tip = uiState.value.toTip()
+            matipRepository.insertTip(tip)
         }
+    }
+
+    fun insertEvent(event: Event) {
+        viewModelScope.launch(Dispatchers.IO) {
+            matipRepository.insertEvent(event)
+        }
+        updateEventName("")
+    }
+
+    suspend fun addTipToEvent(event: Event) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val lastTip = getLastTipSaved()
+            lastTip.eventId = event.id
+            matipRepository.updateTip(lastTip)
+        }
+    }
+
+    /* Delete Functions */
+
+    fun deleteEvent(event: Event) {
+        viewModelScope.launch(Dispatchers.IO) {
+            matipRepository.deleteEvent(event)
+        }
+    }
+
+    fun setEventToDelete(event: Event?) {
+        _eventToDelete.value = event
     }
 
     /* Get Functions */
 
-    suspend fun getLastTipSaved() = matipRepository.getLastTipSaved()
+    private suspend fun getLastTipSaved(): Tip {
+        return matipRepository.getLastTipSaved()
+    }
 
     fun getAllEvents(): Flow<List<Event>> {
         return matipRepository.getAllEvents()
