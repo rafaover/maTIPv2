@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,6 +24,9 @@ class MainScreenViewModel @Inject constructor (
 
     private val _uiState = MutableStateFlow(MainScreenState())
     val uiState = _uiState.asStateFlow()
+
+    private val _eventToDelete = MutableStateFlow<Event?>(null)
+    val eventToDelete: StateFlow<Event?> = _eventToDelete
 
     init {
         resetState()
@@ -60,7 +64,7 @@ class MainScreenViewModel @Inject constructor (
         updateState { it.copy(showAddEventDialog = showDialog) }
     }
 
-    fun updateShowDeleteEventAlertDialog(showDialog: Boolean) {
+    fun updateShowDeleteEventDialog(showDialog: Boolean) {
         updateState { it.copy(showDeleteEventDialog = showDialog) }
     }
 
@@ -120,6 +124,10 @@ class MainScreenViewModel @Inject constructor (
         viewModelScope.launch(Dispatchers.IO) {
             matipRepository.deleteEvent(event)
         }
+    }
+
+    fun setEventToDelete(event: Event?) {
+        _eventToDelete.value = event
     }
 
     /* Get Functions */

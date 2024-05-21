@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -15,9 +17,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.R
+import com.exercise.matipv2.components.common.ConfirmationAlertDialog
 import com.exercise.matipv2.components.common.FabAdd
 import com.exercise.matipv2.components.events.AddAnEventDialog
 import com.exercise.matipv2.components.events.SwipeBox
@@ -48,8 +52,9 @@ fun EventsScreen(
                 itemsIndexed(allEventsFlow) { _, event ->
                     SwipeBox(
                         onDelete = {
-                            viewModel.deleteEvent(event)
-                                   },
+                            viewModel.setEventToDelete(event)
+                            viewModel.updateShowDeleteEventDialog(true)
+                        },
                         onEdit = { viewModel.updateEvent(event) }
                     ) {
                         ListItem(
@@ -88,6 +93,27 @@ fun EventsScreen(
                         uiState.eventName = ""
                         viewModel.updateShowAddEventDialog(false)
                     }
+                }
+            )
+        }
+
+        // Alert Dialog to Delete an Event during SwipeBox
+        if (uiState.showDeleteEventDialog) {
+            val eventToDelete by viewModel.eventToDelete.collectAsState()
+            val eventName = eventToDelete?.name ?: ""
+            ConfirmationAlertDialog(
+                title = stringResource(R.string.dialog_title),
+                message = stringResource(R.string.dialog_delete_event_text, eventName),
+                icon = Icons.Filled.Info,
+                confirmButtonText = stringResource(R.string.delete),
+                onConfirm = {
+                    eventToDelete?.let { viewModel.deleteEvent(it) }
+                    viewModel.setEventToDelete(null)
+                    viewModel.updateShowDeleteEventDialog(false)
+                },
+                onDismiss = {
+                    viewModel.setEventToDelete(null)
+                    viewModel.updateShowDeleteEventDialog(false)
                 }
             )
         }
