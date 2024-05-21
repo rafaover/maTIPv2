@@ -56,8 +56,8 @@ class MainScreenViewModel @Inject constructor (
         updateState { it.copy(eventName = eventName) }
     }
 
-    fun updateShowDialog(showDialog: Boolean) {
-        updateState { it.copy(showDialog = showDialog) }
+    fun updateShowAddEventDialog(showDialog: Boolean) {
+        updateState { it.copy(showAddEventDialog = showDialog) }
     }
 
     fun increaseCounter() {

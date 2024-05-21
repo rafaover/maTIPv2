@@ -44,7 +44,7 @@ fun AddTipToEventDialogBox(
         remember { mutableStateOf<Event?>(null) }
 
     Dialog(
-        onDismissRequest = { viewModel.updateShowDialog(false) }
+        onDismissRequest = { viewModel.updateShowAddEventDialog(false) }
     ) {
         Card(
             modifier = Modifier
@@ -72,7 +72,7 @@ fun AddTipToEventDialogBox(
                         enabled = selectedOption != null,
                         onClick = {
                             selectedOption?.let { onEventSelected(it) }
-                            viewModel.updateShowDialog(false)
+                            viewModel.updateShowAddEventDialog(false)
                         },
                         modifier = Modifier
                             .padding(dimensionResource(R.dimen.padding_button))

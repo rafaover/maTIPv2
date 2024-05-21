@@ -47,7 +47,9 @@ fun EventsScreen(
             ) {
                 itemsIndexed(allEventsFlow) { _, event ->
                     SwipeBox(
-                        onDelete = { viewModel.deleteEvent(event) },
+                        onDelete = {
+                            viewModel.deleteEvent(event)
+                                   },
                         onEdit = { viewModel.updateEvent(event) }
                     ) {
                         ListItem(
@@ -73,10 +75,10 @@ fun EventsScreen(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(dimensionResource(R.dimen.padding_mid)),
-            onClick = { viewModel.updateShowDialog(true) }
+            onClick = { viewModel.updateShowAddEventDialog(true) }
         )
         /* Conditional attached to the FabAdd component above */
-        if(uiState.showDialog) {
+        if(uiState.showAddEventDialog) {
             AddAnEventDialog(
                 viewModel = viewModel,
                 uiState = uiState,
@@ -84,7 +86,7 @@ fun EventsScreen(
                     viewModel.viewModelScope.launch {
                         viewModel.insertEvent(Event(name = uiState.eventName))
                         uiState.eventName = ""
-                        viewModel.updateShowDialog(false)
+                        viewModel.updateShowAddEventDialog(false)
                     }
                 }
             )

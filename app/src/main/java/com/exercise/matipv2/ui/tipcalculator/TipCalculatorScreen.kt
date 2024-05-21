@@ -104,12 +104,12 @@ fun TipCalculatorScreen(
 
         ButtonToOpenDialog(
             dataIsPresent = uiState.tipAmount.isNotEmpty() && uiState.tipPercent.isNotEmpty(),
-            updateShowDialog = { viewModel.updateShowDialog(true) },
+            updateShowDialog = { viewModel.updateShowAddEventDialog(true) },
             buttonText = stringResource(R.string.add_tip_to_event)
         )
 
         /* Conditional attached to the ButtonToOpenDialog above */
-        if(uiState.showDialog) {
+        if(uiState.showAddEventDialog) {
             AddTipToEventDialogBox(
                 viewModel = viewModel,
                 allEvents = viewModel.getAllEvents(),
