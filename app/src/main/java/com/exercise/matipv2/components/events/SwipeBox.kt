@@ -46,8 +46,7 @@ fun SwipeBox(
         SwipeToDismissBoxValue.StartToEnd -> {
             icon = Icons.Outlined.Edit
             alignment = Alignment.CenterStart
-            color =
-                Color.Green.copy(alpha = 0.3f) // You can generate theme for successContainer in themeBuilder
+            color = Color.Green.copy(alpha = 0.3f)
         }
 
         SwipeToDismissBoxValue.Settled -> {
@@ -80,7 +79,10 @@ fun SwipeBox(
 
     when (swipeState.currentValue) {
         SwipeToDismissBoxValue.EndToStart -> {
-            onDelete()
+            LaunchedEffect(swipeState) {
+                onDelete()
+                swipeState.snapTo(SwipeToDismissBoxValue.Settled)
+            }
         }
 
         SwipeToDismissBoxValue.StartToEnd -> {
