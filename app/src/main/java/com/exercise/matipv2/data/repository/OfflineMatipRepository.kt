@@ -36,4 +36,7 @@ class OfflineMatipRepository @Inject constructor (
     override fun getEventWithTips(): Flow<List<EventWithTips>> {
         return eventDao.getEventWithTips()
     }
+    override fun getEventByName(eventName: String): Flow<Event> {
+        return eventDao.getEventByName(eventName)
+    }
 }
