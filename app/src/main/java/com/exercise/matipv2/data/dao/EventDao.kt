@@ -26,6 +26,9 @@ interface EventDao {
     @Query("SELECT * FROM events")
     fun getAllEvents(): Flow<List<Event>>
 
+    @Query("SELECT * FROM events WHERE event_name = :eventName")
+    fun getEventByName(eventName: String): Flow<Event>
+
     @Transaction
     @Query("SELECT * FROM events")
     fun getEventWithTips(): Flow<List<EventWithTips>>
