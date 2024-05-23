@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.model.Event
+import com.exercise.matipv2.data.model.EventWithTips
 import com.exercise.matipv2.data.model.Tip
 import com.exercise.matipv2.data.repository.MatipRepository
 import com.exercise.matipv2.util.calculateTip
@@ -110,11 +111,10 @@ class MainScreenViewModel @Inject constructor (
         updateEventName("")
     }
 
-    suspend fun addTipToEvent(event: Event) {
+    suspend fun addTipToEvent(tip: Tip, eventId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val lastTip = getLastTipSaved()
-            lastTip.eventId = event.id
-            matipRepository.updateTip(lastTip)
+            tip.eventId = eventId
+            matipRepository.updateTip(tip)
         }
     }
 
@@ -132,12 +132,16 @@ class MainScreenViewModel @Inject constructor (
 
     /* Get Functions */
 
-    private suspend fun getLastTipSaved(): Tip {
+    suspend fun getLastTipSaved(): Tip {
         return matipRepository.getLastTipSaved()
     }
 
     fun getAllEvents(): Flow<List<Event>> {
         return matipRepository.getAllEvents()
+    }
+
+    fun getAllEventsWithTips(): Flow<List<EventWithTips>> {
+        return matipRepository.getAllEventsWithTips()
     }
 
     fun getAllTipsFromEvent(eventId: Int): Flow<List<Tip>> {
