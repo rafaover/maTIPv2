@@ -30,6 +30,7 @@ import com.exercise.matipv2.components.common.RoundTheTipSwitch
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.ui.MainScreenViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun TipCalculatorScreen(
@@ -114,12 +115,15 @@ fun TipCalculatorScreen(
                 viewModel = viewModel,
                 allEvents = viewModel.getAllEvents(),
                 onEventSelected = { event ->
-                    viewModel.insertTip()
-                    viewModel.viewModelScope.launch {
-                        viewModel.addTipToEvent(event)
+                    runBlocking {
+                        viewModel.insertTip()
+                        viewModel.viewModelScope.launch {
+                            val lastTipSaved = viewModel.getLastTipSaved()
+                            viewModel.addTipToEvent(lastTipSaved, event.id)
+                        }
+                        viewModel.resetState()
+                        focusManager.clearFocus()
                     }
-                    viewModel.resetState()
-                    focusManager.clearFocus()
                 }
             )
         }

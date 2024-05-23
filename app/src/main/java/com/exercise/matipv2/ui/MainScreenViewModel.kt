@@ -111,7 +111,7 @@ class MainScreenViewModel @Inject constructor (
         updateEventName("")
     }
 
-    suspend fun addTipToEvent(tip: Tip, eventId: Int) {
+    fun addTipToEvent(tip: Tip, eventId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             tip.eventId = eventId
             matipRepository.updateTip(tip)
