@@ -18,9 +18,6 @@ class OfflineMatipRepository @Inject constructor (
     override suspend fun deleteTip(tip: Tip) = tipDao.deleteTip(tip)
     override suspend fun updateTip(tip: Tip) = tipDao.updateTip(tip)
     override fun getAllTips() = tipDao.getAllTips()
-    override suspend fun addTipToEvent(tipId: Int, eventId: Int) {
-        tipDao.addTipToEvent(tipId, eventId)
-    }
     override suspend fun getLastTipSaved(): Tip {
         return tipDao.getLastTipSaved()
     }
@@ -33,8 +30,8 @@ class OfflineMatipRepository @Inject constructor (
     override suspend fun deleteEvent(event: Event) = eventDao.delete(event)
     override suspend fun updateEvent(event: Event) = eventDao.update(event)
     override fun getAllEvents() = eventDao.getAllEvents()
-    override fun getEventWithTips(): Flow<List<EventWithTips>> {
-        return eventDao.getEventWithTips()
+    override fun getAllEventsWithTips(): Flow<List<EventWithTips>> {
+        return eventDao.getAllEventsWithTips()
     }
     override fun getEventByName(eventName: String): Flow<Event> {
         return eventDao.getEventByName(eventName)

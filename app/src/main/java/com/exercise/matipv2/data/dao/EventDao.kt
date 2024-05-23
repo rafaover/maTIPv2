@@ -30,6 +30,10 @@ interface EventDao {
     fun getEventByName(eventName: String): Flow<Event>
 
     @Transaction
-    @Query("SELECT * FROM events")
-    fun getEventWithTips(): Flow<List<EventWithTips>>
+    @Query("""
+        SELECT * FROM events 
+        INNER JOIN tips ON events.id = tips.event_id 
+        GROUP BY events.id
+        """)
+    fun getAllEventsWithTips(): Flow<List<EventWithTips>>
 }
