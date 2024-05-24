@@ -1,10 +1,12 @@
 package com.exercise.matipv2
 
+import androidx.test.filters.SmallTest
 import com.exercise.matipv2.util.calculateTip
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.text.NumberFormat
 
+@SmallTest
 class TipCalculatorTests {
     @Test
     fun calculateTip_20Percent() {

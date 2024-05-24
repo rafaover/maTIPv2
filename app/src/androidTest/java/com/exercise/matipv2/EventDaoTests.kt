@@ -3,8 +3,7 @@ package com.exercise.matipv2
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.SmallTest
+import androidx.test.filters.MediumTest
 import com.exercise.matipv2.data.MatipDatabase
 import com.exercise.matipv2.data.dao.EventDao
 import com.exercise.matipv2.data.dao.TipDao
@@ -17,12 +16,10 @@ import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import java.io.IOException
 
-@RunWith(AndroidJUnit4::class)
-@SmallTest
-class RoomDbTests {
+@MediumTest
+class EventDaoTests {
 //    @get: Rule
 //    val dispatcherRule = TestDispatcherRule()
 
@@ -31,6 +28,7 @@ class RoomDbTests {
     private lateinit var tipDao: TipDao
 
     @Before
+    @Throws(IOException::class)
     fun createDb() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room
@@ -50,9 +48,9 @@ class RoomDbTests {
     /* Test case to insert and read event */
     @Test
     @Throws(Exception::class)
-    fun insertEvent_ReadNameInList() = runTest {
+    fun insertEvent_GetEvent() = runTest {
         val event = Event(id = 1, name = "EventTest")
-        eventDao.insert(event)
+        eventDao.insertEvent(event)
         val byEventName = eventDao.getEventByName("EventTest").first()
         assertEquals(byEventName, event)
     }
@@ -62,8 +60,8 @@ class RoomDbTests {
     @Throws(Exception::class)
     fun insertEvent_DeleteEvent() = runTest {
         val event = Event(id = 1, name = "EventTest")
-        eventDao.insert(event)
-        eventDao.delete(event)
+        eventDao.insertEvent(event)
+        eventDao.deleteEvent(event)
         val byEventName = eventDao.getEventByName("EventTest").first()
         assertEquals(byEventName, null)
     }
@@ -74,7 +72,7 @@ class RoomDbTests {
     fun insertEvents_getAllEvents() = runTest {
         for (i in 1..5) {
             val event = Event(id = i, name = "EventTest$i")
-            eventDao.insert(event)
+            eventDao.insertEvent(event)
         }
         val allEvents = eventDao.getAllEvents().first()
         assertEquals(allEvents.size, 5)
@@ -84,11 +82,22 @@ class RoomDbTests {
 
     @Test
     @Throws(Exception::class)
+    fun updateEvent_getEvent() = runTest {
+        val event = Event(id = 1, name = "EventTest")
+        eventDao.insertEvent(event)
+        val updatedEvent = Event(id = 1, name = "EventTestUpdated")
+        eventDao.updateEvent(updatedEvent)
+        val byEventName = eventDao.getEventByName("EventTestUpdated").first()
+        assertEquals(byEventName, updatedEvent)
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun getAllEventsWithTips() = runBlocking {
         // Add 10 events
         for (i in 1..10) {
             val event = Event(id = i, name = "EventTest$i")
-            eventDao.insert(event)
+            eventDao.insertEvent(event)
         }
         // Add 3 tips to EventTest1
         for (i in 1..3) {

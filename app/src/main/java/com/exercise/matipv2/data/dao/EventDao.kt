@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.RoomWarnings
 import androidx.room.Transaction
 import androidx.room.Update
 import com.exercise.matipv2.data.model.Event
@@ -15,13 +16,13 @@ import kotlinx.coroutines.flow.Flow
 interface EventDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(event: Event)
+    suspend fun insertEvent(event: Event)
 
     @Delete
-    suspend fun delete(event: Event)
+    suspend fun deleteEvent(event: Event)
 
     @Update
-    suspend fun update(event: Event)
+    suspend fun updateEvent(event: Event)
 
     @Query("SELECT * FROM events")
     fun getAllEvents(): Flow<List<Event>>
@@ -30,6 +31,7 @@ interface EventDao {
     fun getEventByName(eventName: String): Flow<Event>
 
     @Transaction
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("""
         SELECT * FROM events 
         INNER JOIN tips ON events.id = tips.event_id 

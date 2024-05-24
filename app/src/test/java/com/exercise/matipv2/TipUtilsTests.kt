@@ -1,11 +1,14 @@
 package com.exercise.matipv2
 
+import androidx.test.filters.SmallTest
 import com.exercise.matipv2.util.calculateTip
 import com.exercise.matipv2.util.stringAmountToDouble
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
+@SmallTest
 class TipUtilsTests {
+
     @Test
     fun testStringAmountToDouble() {
         val amount = "100"
