@@ -8,13 +8,19 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.MediumTest
 import com.exercise.matipv2.ui.MainScreen
 import com.exercise.matipv2.ui.theme.MaTIPv2Theme
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import java.text.NumberFormat
 
 // See [testing documentation](http://d.android.com/tools/testing).
+
+@RunWith(AndroidJUnit4::class)
+@MediumTest
 class TipUITests {
     @get: Rule
     val composeTestRule = createComposeRule()

@@ -3,8 +3,7 @@ package com.exercise.matipv2
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.SmallTest
+import androidx.test.filters.MediumTest
 import com.exercise.matipv2.data.MatipDatabase
 import com.exercise.matipv2.data.dao.EventDao
 import com.exercise.matipv2.data.dao.TipDao
@@ -15,11 +14,9 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import java.io.IOException
 
-@RunWith(AndroidJUnit4::class)
-@SmallTest
+@MediumTest
 class TipDaoTests {
 //    @get: Rule
 //    val dispatcherRule = TestDispatcherRule()

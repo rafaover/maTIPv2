@@ -16,13 +16,13 @@ import kotlinx.coroutines.flow.Flow
 interface EventDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(event: Event)
+    suspend fun insertEvent(event: Event)
 
     @Delete
-    suspend fun delete(event: Event)
+    suspend fun deleteEvent(event: Event)
 
     @Update
-    suspend fun update(event: Event)
+    suspend fun updateEvent(event: Event)
 
     @Query("SELECT * FROM events")
     fun getAllEvents(): Flow<List<Event>>
