@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.RoomWarnings
 import androidx.room.Transaction
 import androidx.room.Update
 import com.exercise.matipv2.data.model.Event
@@ -30,6 +31,7 @@ interface EventDao {
     fun getEventByName(eventName: String): Flow<Event>
 
     @Transaction
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("""
         SELECT * FROM events 
         INNER JOIN tips ON events.id = tips.event_id 

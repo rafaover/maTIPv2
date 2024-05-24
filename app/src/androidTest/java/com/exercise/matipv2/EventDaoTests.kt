@@ -22,7 +22,7 @@ import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
 @SmallTest
-class RoomDbTests {
+class EventDaoTests {
 //    @get: Rule
 //    val dispatcherRule = TestDispatcherRule()
 
@@ -31,6 +31,7 @@ class RoomDbTests {
     private lateinit var tipDao: TipDao
 
     @Before
+    @Throws(IOException::class)
     fun createDb() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room
@@ -50,7 +51,7 @@ class RoomDbTests {
     /* Test case to insert and read event */
     @Test
     @Throws(Exception::class)
-    fun insertEvent_ReadNameInList() = runTest {
+    fun insertEvent_GetEvent() = runTest {
         val event = Event(id = 1, name = "EventTest")
         eventDao.insert(event)
         val byEventName = eventDao.getEventByName("EventTest").first()
@@ -80,6 +81,17 @@ class RoomDbTests {
         assertEquals(allEvents.size, 5)
         assertEquals(allEvents[0].name, "EventTest1")
         assertEquals(allEvents[1].name, "EventTest2")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun updateEvent_getEvent() = runTest {
+        val event = Event(id = 1, name = "EventTest")
+        eventDao.insert(event)
+        val updatedEvent = Event(id = 1, name = "EventTestUpdated")
+        eventDao.update(updatedEvent)
+        val byEventName = eventDao.getEventByName("EventTestUpdated").first()
+        assertEquals(byEventName, updatedEvent)
     }
 
     @Test
