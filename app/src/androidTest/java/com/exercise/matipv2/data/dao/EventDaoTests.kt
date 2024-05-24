@@ -1,12 +1,10 @@
-package com.exercise.matipv2
+package com.exercise.matipv2.data.dao
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.filters.MediumTest
 import com.exercise.matipv2.data.MatipDatabase
-import com.exercise.matipv2.data.dao.EventDao
-import com.exercise.matipv2.data.dao.TipDao
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.Tip
 import junit.framework.TestCase.assertEquals
