@@ -1,11 +1,12 @@
-# maTip App
 
-Application to calculate, split and Store Tips given.
+![LOGO_whiteback](https://github.com/rafaover/maTIPv2/assets/59352318/6702bf58-7c68-4c4f-a063-8bacd616c52a)
 
-- [x] Store Tips based on events or trips, so you have access to total money spent.
+Crowdfunding life goals with a little tip
+
+- [x] Store Tips based on events or trips, so you access the total money spent.
 - [x] Split Tips among friends.
-- [ ] Create lists so you can have access to a total spent on a specific event or trip.
-- [ ] Share the total amount spent with friends.
+- [x] Create lists and access the total spent on a specific event or trip.
+- [ ] Share the total split with the group.
 
 ## TOOLS:
 
@@ -17,3 +18,4 @@ Application to calculate, split and Store Tips given.
 - Hilt for Dependency Injection
 - Room for local storage
 - Coroutines
+- JUnit/Mockito for tests
