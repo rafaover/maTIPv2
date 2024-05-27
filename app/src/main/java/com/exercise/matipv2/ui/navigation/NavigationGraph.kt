@@ -33,7 +33,8 @@ fun NavigationGraph(
             EventsScreen(
                 allEvents = viewModel.getAllEvents(),
                 uiState = uiState,
-                viewModel = viewModel
+                viewModel = viewModel,
+                snackbarHostState = snackbarHostState
             )
         }
     }

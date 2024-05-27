@@ -12,7 +12,7 @@ import com.exercise.matipv2.R
 @Composable
 fun ConfirmationAlertDialog(
     title: String,
-    message: String,
+    message: String?,
     icon: ImageVector,
     confirmButtonText: String,
     onConfirm: () -> Unit,
@@ -21,7 +21,11 @@ fun ConfirmationAlertDialog(
     AlertDialog(
         icon = { Icon(imageVector = icon, contentDescription = null) },
         title = { Text(text = title) },
-        text = { Text(text = message) },
+        text = {
+            if (message != null) {
+                Text(text = message)
+            }
+        },
         onDismissRequest = { onDismiss() },
         confirmButton = {
             TextButton(
