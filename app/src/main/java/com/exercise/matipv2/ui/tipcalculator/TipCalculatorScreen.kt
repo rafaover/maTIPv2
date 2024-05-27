@@ -51,7 +51,9 @@ fun TipCalculatorScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
     ) {
+
         /* Title */
+
         Text(
             modifier = Modifier
                 .padding(bottom = dimensionResource(R.dimen.padding_mid))
@@ -61,7 +63,8 @@ fun TipCalculatorScreen(
             style = MaterialTheme.typography.titleLarge,
         )
 
-        /* Edit Total Bill Amount */
+        /* EditTextForm for Total Bill Amount */
+
         EditTextForm(
             modifier = Modifier
                 .padding(bottom = dimensionResource(R.dimen.padding_mid))
@@ -76,7 +79,8 @@ fun TipCalculatorScreen(
             leadingIcon = R.drawable.attach_money
         )
 
-        /* Edit Tip percentage */
+        /** EditTextForm for Tip percentage **/
+
         EditTextForm(
             modifier = Modifier
                 .padding(bottom = 40.dp)
@@ -97,6 +101,9 @@ fun TipCalculatorScreen(
             onclickNegative = { viewModel.decreaseCounter() }
         )
 
+        /** Total Tip Amount calculated after [SplitCounter], [RoundTheTipSwitch] and
+         * [EditTextForm] elements.
+         **/
         TotalTipAmount(viewModel.updateFinalTip())
 
         RoundTheTipSwitch(
@@ -113,7 +120,8 @@ fun TipCalculatorScreen(
             buttonText = stringResource(R.string.add_tip_to_event)
         )
 
-        /* Conditional attached to the ButtonToOpenDialog above */
+        /** Conditional attached to [ButtonToOpenDialog] above, opening dialog */
+
         if(uiState.showAddEventDialog) {
             AddTipToEventDialogBox(
                 viewModel = viewModel,
@@ -132,6 +140,10 @@ fun TipCalculatorScreen(
                 }
             )
         }
+
+        /** Snackbar to show confirmation from [AddTipToEventDialogBox],
+         * that tip was added to event */
+
         if (uiState.showSnackBar) {
             LaunchedEffect(snackbarHostState) {
                 snackbarHostState.showSnackbar(
