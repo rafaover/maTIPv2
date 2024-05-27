@@ -9,4 +9,5 @@ data class MainScreenState(
     var eventName: String = "",
     var showAddEventDialog: Boolean = false,
     var showDeleteEventDialog: Boolean = false,
+    var showSnackBar: Boolean = false
 )
