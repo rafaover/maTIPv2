@@ -58,6 +58,7 @@ fun SwipeBox(
 
     SwipeToDismissBox(
         modifier = modifier.animateContentSize(),
+        enableDismissFromStartToEnd = false,
         state = swipeState,
         backgroundContent = {
             Box(
