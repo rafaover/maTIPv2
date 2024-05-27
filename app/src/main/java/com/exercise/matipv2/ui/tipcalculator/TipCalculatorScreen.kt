@@ -8,8 +8,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -36,6 +39,7 @@ import kotlinx.coroutines.runBlocking
 fun TipCalculatorScreen(
     viewModel: MainScreenViewModel,
     uiState: MainScreenState,
+    snackbarHostState: SnackbarHostState
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -47,7 +51,9 @@ fun TipCalculatorScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
     ) {
+
         /* Title */
+
         Text(
             modifier = Modifier
                 .padding(bottom = dimensionResource(R.dimen.padding_mid))
@@ -57,7 +63,8 @@ fun TipCalculatorScreen(
             style = MaterialTheme.typography.titleLarge,
         )
 
-        /* Edit Total Bill Amount */
+        /* EditTextForm for Total Bill Amount */
+
         EditTextForm(
             modifier = Modifier
                 .padding(bottom = dimensionResource(R.dimen.padding_mid))
@@ -72,7 +79,8 @@ fun TipCalculatorScreen(
             leadingIcon = R.drawable.attach_money
         )
 
-        /* Edit Tip percentage */
+        /** EditTextForm for Tip percentage **/
+
         EditTextForm(
             modifier = Modifier
                 .padding(bottom = 40.dp)
@@ -93,6 +101,9 @@ fun TipCalculatorScreen(
             onclickNegative = { viewModel.decreaseCounter() }
         )
 
+        /** Total Tip Amount calculated after [SplitCounter], [RoundTheTipSwitch] and
+         * [EditTextForm] elements.
+         **/
         TotalTipAmount(viewModel.updateFinalTip())
 
         RoundTheTipSwitch(
@@ -109,7 +120,8 @@ fun TipCalculatorScreen(
             buttonText = stringResource(R.string.add_tip_to_event)
         )
 
-        /* Conditional attached to the ButtonToOpenDialog above */
+        /** Conditional attached to [ButtonToOpenDialog] above, opening dialog */
+
         if(uiState.showAddEventDialog) {
             AddTipToEventDialogBox(
                 viewModel = viewModel,
@@ -123,9 +135,23 @@ fun TipCalculatorScreen(
                         }
                         viewModel.resetState()
                         focusManager.clearFocus()
+                        viewModel.updateShowSnackBar(true)
                     }
                 }
             )
+        }
+
+        /** Snackbar to show confirmation from [AddTipToEventDialogBox],
+         * that tip was added to event */
+
+        if (uiState.showSnackBar) {
+            LaunchedEffect(snackbarHostState) {
+                snackbarHostState.showSnackbar(
+                    message = "Tip added to event",
+                    duration = SnackbarDuration.Short
+                )
+                viewModel.updateShowSnackBar(false)
+            }
         }
     }
 }

@@ -13,7 +13,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,14 +25,13 @@ class MainScreenViewModel @Inject constructor (
     private val _uiState = MutableStateFlow(MainScreenState())
     val uiState = _uiState.asStateFlow()
 
-    private val _eventToDelete = MutableStateFlow<Event?>(null)
-    val eventToDelete: StateFlow<Event?> = _eventToDelete
-
     init {
         resetState()
     }
 
-    /* Update Functions */
+    /*
+    * Update Functions
+    */
 
     private fun updateState(update: (MainScreenState) -> MainScreenState) {
         _uiState.value = update(_uiState.value)
@@ -95,7 +93,13 @@ class MainScreenViewModel @Inject constructor (
         _uiState.value = MainScreenState()
     }
 
-    /* Insert Functions */
+    fun updateShowSnackBar (showSnackBar: Boolean) {
+        updateState { it.copy(showSnackBar = showSnackBar) }
+    }
+
+    /*
+    * Insert Functions
+    */
 
     fun insertTip() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -118,19 +122,21 @@ class MainScreenViewModel @Inject constructor (
         }
     }
 
-    /* Delete Functions */
+    /*
+    * Delete Functions
+    */
 
-    fun deleteEvent(event: Event) {
+    fun deleteEvent(event: Event?) {
         viewModelScope.launch(Dispatchers.IO) {
-            matipRepository.deleteEvent(event)
+            if (event != null) {
+                matipRepository.deleteEvent(event)
+            }
         }
     }
 
-    fun setEventToDelete(event: Event?) {
-        _eventToDelete.value = event
-    }
-
-    /* Get Functions */
+    /*
+    * Get Functions
+    */
 
     suspend fun getLastTipSaved(): Tip {
         return matipRepository.getLastTipSaved()
@@ -148,7 +154,9 @@ class MainScreenViewModel @Inject constructor (
         return matipRepository.getAllTipsFromEvent(eventId)
     }
 
-    /* Extension Functions */
+    /*
+    * Extension Functions
+    */
 
     private fun MainScreenState.toTip(): Tip = Tip(
         tipAmount = finalTip,

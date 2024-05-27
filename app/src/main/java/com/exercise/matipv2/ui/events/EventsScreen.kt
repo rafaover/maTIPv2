@@ -14,6 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -24,8 +26,8 @@ import com.exercise.matipv2.R
 import com.exercise.matipv2.components.common.ConfirmationAlertDialog
 import com.exercise.matipv2.components.common.FabAdd
 import com.exercise.matipv2.components.events.AddAnEventDialog
-import com.exercise.matipv2.components.events.SwipeBox
 import com.exercise.matipv2.components.events.AllTipsFromEventCounter
+import com.exercise.matipv2.components.events.SwipeBox
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.ui.MainScreenViewModel
@@ -36,9 +38,10 @@ import kotlinx.coroutines.launch
 fun EventsScreen(
     viewModel: MainScreenViewModel,
     uiState: MainScreenState,
-    allEvents: Flow<List<Event>>
+    allEvents: Flow<List<Event>>,
 ) {
     val allEventsFlow by allEvents.collectAsState(initial = emptyList())
+    val selectedEvent = remember { mutableStateOf<Event?>(null) }
 
     Box(
         modifier = Modifier
@@ -52,7 +55,7 @@ fun EventsScreen(
                 itemsIndexed(allEventsFlow) { _, event ->
                     SwipeBox(
                         onDelete = {
-                            viewModel.setEventToDelete(event)
+                            selectedEvent.value = event
                             viewModel.updateShowDeleteEventDialog(true)
                         },
                         onEdit = { viewModel.updateEvent(event) }
@@ -76,13 +79,19 @@ fun EventsScreen(
                 }
             }
         }
+
+        /** FAB to Add an Event via [AddAnEventDialog] */
+
         FabAdd(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(dimensionResource(R.dimen.padding_mid)),
             onClick = { viewModel.updateShowAddEventDialog(true) }
         )
-        /* Conditional attached to the FabAdd component above */
+
+        /** Conditional attached to [FabAdd] composable above to
+         * show dialog when clicked */
+
         if(uiState.showAddEventDialog) {
             AddAnEventDialog(
                 viewModel = viewModel,
@@ -97,22 +106,24 @@ fun EventsScreen(
             )
         }
 
-        // Alert Dialog to Delete an Event during SwipeBox
+        /** Conditional attached to [AddAnEventDialog]. Opens [ConfirmationAlertDialog] to
+         * confirm Delete an Event during SwipeBox.
+         **/
+
         if (uiState.showDeleteEventDialog) {
-            val eventToDelete by viewModel.eventToDelete.collectAsState()
-            val eventName = eventToDelete?.name ?: ""
+            val eventName = selectedEvent.value?.name
             ConfirmationAlertDialog(
                 title = stringResource(R.string.dialog_title),
-                message = stringResource(R.string.dialog_delete_event_text, eventName),
+                message = stringResource(
+                    id = R.string.dialog_delete_event_text, eventName ?: "Event"
+                ),
                 icon = Icons.Filled.Info,
                 confirmButtonText = stringResource(R.string.delete),
                 onConfirm = {
-                    eventToDelete?.let { viewModel.deleteEvent(it) }
-                    viewModel.setEventToDelete(null)
+                    viewModel.deleteEvent(selectedEvent.value)
                     viewModel.updateShowDeleteEventDialog(false)
                 },
                 onDismiss = {
-                    viewModel.setEventToDelete(null)
                     viewModel.updateShowDeleteEventDialog(false)
                 }
             )
