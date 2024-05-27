@@ -8,8 +8,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -36,6 +39,7 @@ import kotlinx.coroutines.runBlocking
 fun TipCalculatorScreen(
     viewModel: MainScreenViewModel,
     uiState: MainScreenState,
+    snackbarHostState: SnackbarHostState
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -123,9 +127,19 @@ fun TipCalculatorScreen(
                         }
                         viewModel.resetState()
                         focusManager.clearFocus()
+                        viewModel.updateShowSnackBar(true)
                     }
                 }
             )
+        }
+        if (uiState.showSnackBar) {
+            LaunchedEffect(snackbarHostState) {
+                snackbarHostState.showSnackbar(
+                    message = "Tip added to event",
+                    duration = SnackbarDuration.Short
+                )
+                viewModel.updateShowSnackBar(false)
+            }
         }
     }
 }
