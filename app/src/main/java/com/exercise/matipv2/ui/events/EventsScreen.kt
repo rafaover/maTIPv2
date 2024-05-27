@@ -10,7 +10,6 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -27,8 +26,8 @@ import com.exercise.matipv2.R
 import com.exercise.matipv2.components.common.ConfirmationAlertDialog
 import com.exercise.matipv2.components.common.FabAdd
 import com.exercise.matipv2.components.events.AddAnEventDialog
-import com.exercise.matipv2.components.events.SwipeBox
 import com.exercise.matipv2.components.events.AllTipsFromEventCounter
+import com.exercise.matipv2.components.events.SwipeBox
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.ui.MainScreenViewModel
@@ -40,7 +39,6 @@ fun EventsScreen(
     viewModel: MainScreenViewModel,
     uiState: MainScreenState,
     allEvents: Flow<List<Event>>,
-    snackbarHostState: SnackbarHostState
 ) {
     val allEventsFlow by allEvents.collectAsState(initial = emptyList())
     val selectedEvent = remember { mutableStateOf<Event?>(null) }
@@ -108,8 +106,8 @@ fun EventsScreen(
             )
         }
 
-        /** Conditional attached to [AddAnEventDialog] to Delete an Event
-         * during SwipeBox use.
+        /** Conditional attached to [AddAnEventDialog]. Opens [ConfirmationAlertDialog] to
+         * confirm Delete an Event during SwipeBox.
          **/
 
         if (uiState.showDeleteEventDialog) {
