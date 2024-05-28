@@ -44,12 +44,13 @@ fun NavigationGraph(
         }
         composable(
             route = "EventTipList/{eventId}",
-            arguments = listOf(navArgument("eventId") { type = NavType.StringType })
-        ) {backStackEntry ->
-            val eventId = backStackEntry.arguments?.getString("eventId")
+            arguments = listOf(navArgument("eventId") { type = NavType.IntType })
+        ) { navBackStackEntry ->
+            val eventId = navBackStackEntry.arguments?.getInt("eventId")
 
             if (eventId != null) {
                 EventTipListScreen(
+                    viewModel = viewModel,
                     eventId = eventId
                 )
             }
