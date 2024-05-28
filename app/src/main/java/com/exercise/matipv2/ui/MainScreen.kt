@@ -24,7 +24,10 @@ fun MainScreen(viewModel: MainScreenViewModel) {
     val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
-        topBar = { MainTopBar() },
+        topBar = { MainTopBar(
+            canNavigateBack = navController.previousBackStackEntry != null,
+            onBackClick = { navController.navigateUp() }
+        ) },
         bottomBar = { MainNavigationBar(navController = navController) },
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState)
