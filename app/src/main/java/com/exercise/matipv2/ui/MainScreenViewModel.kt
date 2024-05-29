@@ -146,6 +146,10 @@ class MainScreenViewModel @Inject constructor (
         return matipRepository.getAllEvents()
     }
 
+    fun getEventById(eventId: Int): Flow<Event> {
+        return matipRepository.getEventById(eventId)
+    }
+
     fun getAllEventsWithTips(): Flow<List<EventWithTips>> {
         return matipRepository.getAllEventsWithTips()
     }

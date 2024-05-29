@@ -1,5 +1,6 @@
 package com.exercise.matipv2.ui.events
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -39,6 +40,7 @@ fun EventsScreen(
     viewModel: MainScreenViewModel,
     uiState: MainScreenState,
     allEvents: Flow<List<Event>>,
+    navigateTo: (Event) -> Unit
 ) {
     val allEventsFlow by allEvents.collectAsState(initial = emptyList())
     val selectedEvent = remember { mutableStateOf<Event?>(null) }
@@ -67,7 +69,7 @@ fun EventsScreen(
                                     style = MaterialTheme.typography.bodyLarge
                                 )
                             },
-                            modifier = Modifier,
+                            modifier = Modifier.clickable { navigateTo(event) },
                             trailingContent = {
                                 AllTipsFromEventCounter(viewModel, event)
                             }

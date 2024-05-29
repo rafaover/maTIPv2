@@ -36,4 +36,7 @@ class OfflineMatipRepository @Inject constructor (
     override fun getEventByName(eventName: String): Flow<Event> {
         return eventDao.getEventByName(eventName)
     }
+    override fun getEventById(eventId: Int): Flow<Event> {
+        return eventDao.getEventById(eventId)
+    }
 }

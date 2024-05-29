@@ -26,9 +26,8 @@ fun MainScreen(viewModel: MainScreenViewModel) {
     Scaffold(
         topBar = { MainTopBar() },
         bottomBar = { MainNavigationBar(navController = navController) },
-        snackbarHost = {
-            SnackbarHost(hostState = snackbarHostState)
-        }
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+
     ) {
         Column(modifier = Modifier.padding(it)) {
             NavigationGraph(

@@ -29,6 +29,7 @@ fun MainTopBar() {
         },
         navigationIcon = {
             IconButton(
+                // TODO("Menu to be implemented")
                 onClick = { },
                 enabled = false
             ) {

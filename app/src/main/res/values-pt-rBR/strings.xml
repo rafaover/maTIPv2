@@ -18,4 +18,5 @@
     <string name="dialog_title">Apagar Evento</string>
     <string name="dialog_delete_event_text">Você tem certeza que deseja apagar %1$s e todas as gorjetas inclusas?</string>
     <string name="delete">Apagar</string>
+    <string name="back">Voltar</string>
 </resources>
