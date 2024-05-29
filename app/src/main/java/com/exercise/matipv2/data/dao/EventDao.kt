@@ -30,6 +30,9 @@ interface EventDao {
     @Query("SELECT * FROM events WHERE event_name = :eventName")
     fun getEventByName(eventName: String): Flow<Event>
 
+    @Query("SELECT * FROM events WHERE id = :eventId")
+    fun getEventById(eventId: Int): Flow<Event>
+
     @Transaction
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("""
