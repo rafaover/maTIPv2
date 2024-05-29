@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import androidx.navigation.navArgument
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.NavBarItems
@@ -42,18 +43,19 @@ fun NavigationGraph(
                 }
             )
         }
-        composable(
+        dialog(
             route = "EventTipList/{eventId}",
             arguments = listOf(navArgument("eventId") { type = NavType.IntType })
         ) { navBackStackEntry ->
             val eventId = navBackStackEntry.arguments?.getInt("eventId")
+                ?: error("eventId parameter wasn't found.")
 
-            if (eventId != null) {
-                EventTipListScreen(
-                    viewModel = viewModel,
-                    eventId = eventId
-                )
-            }
+            EventTipListScreen(
+                viewModel = viewModel,
+                eventId = eventId,
+                onDismissRequest = { navController.navigateUp() },
+                onBackClick = { navController.navigateUp() }
+            )
         }
     }
 }
