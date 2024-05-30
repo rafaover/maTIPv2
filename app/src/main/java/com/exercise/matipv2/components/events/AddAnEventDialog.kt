@@ -29,7 +29,10 @@ fun AddAnEventDialog(
     onSaveRequest: () -> Unit
 ) {
     Dialog(
-        onDismissRequest = { viewModel.updateShowAddEventDialog(false) },
+        onDismissRequest = {
+            viewModel.updateShowAddEventDialog(false)
+            viewModel.updateNewEventName("")
+        },
     ) {
         Card(
             modifier = Modifier

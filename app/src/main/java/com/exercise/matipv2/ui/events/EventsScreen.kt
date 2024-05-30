@@ -105,8 +105,8 @@ fun EventsScreen(
             )
         }
 
-        /** Conditional attached to [AddAnEventDialog]. Opens [ConfirmationAlertDialog] to
-         * confirm Delete an Event during SwipeBox.
+        /** Conditional attached to [SwipeBox] call on [EventsScreen] to show on delete action.
+         * Opens [ConfirmationAlertDialog] to confirm Delete an Event.
          **/
 
         if (viewModel.showDeleteEventDialog) {

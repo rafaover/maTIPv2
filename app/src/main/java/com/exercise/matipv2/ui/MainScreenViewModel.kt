@@ -32,6 +32,9 @@ class MainScreenViewModel @Inject constructor (
     var showSnackBar by mutableStateOf(false)
     var newEventName by mutableStateOf("")
 
+    var tipAmountInput by mutableStateOf("")
+    var tipPercentInput by mutableStateOf("")
+
     init {
         resetState()
     }
@@ -45,11 +48,11 @@ class MainScreenViewModel @Inject constructor (
     }
 
     fun updateTipAmount(amount: String) {
-        updateState { it.copy(tipAmount = amount) }
+        tipAmountInput = amount
     }
 
     fun updateTipPercent(tipPercent: String) {
-        updateState { it.copy(tipPercent = tipPercent)}
+        tipPercentInput = tipPercent
     }
 
     fun updateRoundUp(roundUp: Boolean) {
@@ -87,8 +90,8 @@ class MainScreenViewModel @Inject constructor (
     @SuppressLint("VisibleForTests")
     fun updateFinalTip(): String {
         val calculatedTip = calculateTip(
-            amount = uiState.value.tipAmount,
-            tipPercent = uiState.value.tipPercent,
+            amount = tipAmountInput,
+            tipPercent = tipPercentInput,
             roundUp = uiState.value.roundUp,
             tipSplit = uiState.value.splitShare
         )
@@ -167,7 +170,7 @@ class MainScreenViewModel @Inject constructor (
 
     private fun TipCalculatorScreenState.toTip(): Tip = Tip(
         tipAmount = finalTip,
-        tipPercent = tipPercent
+        tipPercent = tipPercentInput
     )
 }
 
