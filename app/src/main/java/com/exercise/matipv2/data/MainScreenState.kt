@@ -8,5 +8,4 @@ data class MainScreenState(
     var finalTip: String = "",
     var eventName: String = "",
     var showDeleteEventDialog: Boolean = false,
-    var showSnackBar: Boolean = false
 )

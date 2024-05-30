@@ -29,7 +29,7 @@ class MainScreenViewModel @Inject constructor (
     val uiState = _uiState.asStateFlow()
 
     var showAddEventDialog by mutableStateOf(false)
-        private set
+    var showSnackBar by mutableStateOf(false)
 
     init {
         resetState()
@@ -99,8 +99,8 @@ class MainScreenViewModel @Inject constructor (
         _uiState.value = MainScreenState()
     }
 
-    fun updateShowSnackBar (showSnackBar: Boolean) {
-        updateState { it.copy(showSnackBar = showSnackBar) }
+    fun updateShowSnackBar (snackBar: Boolean) {
+        showSnackBar = snackBar
     }
 
     /*

@@ -13,10 +13,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -148,7 +144,7 @@ fun TipCalculatorScreen(
         /** Snackbar to show confirmation from [AddTipToEventDialogBox],
          * that tip was added to event */
 
-        if (uiState.showSnackBar) {
+        if (viewModel.showSnackBar) {
             LaunchedEffect(snackbarHostState) {
                 snackbarHostState.showSnackbar(
                     message = "Tip added to event",
