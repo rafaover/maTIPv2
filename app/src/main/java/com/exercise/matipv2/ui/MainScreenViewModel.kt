@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.exercise.matipv2.data.MainScreenState
+import com.exercise.matipv2.data.TipCalculatorScreenState
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.data.model.Tip
 import com.exercise.matipv2.data.repository.MatipRepository
@@ -24,7 +24,7 @@ class MainScreenViewModel @Inject constructor (
     private val matipRepository: MatipRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(MainScreenState())
+    private val _uiState = MutableStateFlow(TipCalculatorScreenState())
     val uiState = _uiState.asStateFlow()
 
     var showAddEventDialog by mutableStateOf(false)
@@ -39,7 +39,7 @@ class MainScreenViewModel @Inject constructor (
     * Update Functions
     */
 
-    private fun updateState(update: (MainScreenState) -> MainScreenState) {
+    private fun updateState(update: (TipCalculatorScreenState) -> TipCalculatorScreenState) {
         _uiState.value = update(_uiState.value)
     }
 
@@ -96,7 +96,7 @@ class MainScreenViewModel @Inject constructor (
     }
 
     fun resetState() {
-        _uiState.value = MainScreenState()
+        _uiState.value = TipCalculatorScreenState()
     }
 
     fun updateShowSnackBar (snackBar: Boolean) {
@@ -164,7 +164,7 @@ class MainScreenViewModel @Inject constructor (
     * Extension Functions
     */
 
-    private fun MainScreenState.toTip(): Tip = Tip(
+    private fun TipCalculatorScreenState.toTip(): Tip = Tip(
         tipAmount = finalTip,
         tipPercent = tipPercent
     )

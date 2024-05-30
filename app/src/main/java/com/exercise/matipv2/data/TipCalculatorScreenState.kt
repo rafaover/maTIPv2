@@ -1,6 +1,6 @@
 package com.exercise.matipv2.data
 
-data class MainScreenState(
+data class TipCalculatorScreenState(
     var tipAmount: String = "",
     var tipPercent: String = "",
     var roundUp: Boolean = false,

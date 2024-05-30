@@ -21,13 +21,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.exercise.matipv2.R
 import com.exercise.matipv2.components.common.EditTextForm
-import com.exercise.matipv2.data.MainScreenState
+import com.exercise.matipv2.data.TipCalculatorScreenState
 import com.exercise.matipv2.ui.MainScreenViewModel
 
 @Composable
 fun AddAnEventDialog(
     viewModel: MainScreenViewModel,
-    uiState: MainScreenState,
+    uiState: TipCalculatorScreenState,
     onSaveRequest: () -> Unit
 ) {
     Dialog(
