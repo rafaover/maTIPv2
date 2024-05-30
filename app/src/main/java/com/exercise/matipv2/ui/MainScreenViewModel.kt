@@ -1,6 +1,9 @@
 package com.exercise.matipv2.ui
 
 import android.annotation.SuppressLint
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.data.MainScreenState
@@ -24,6 +27,9 @@ class MainScreenViewModel @Inject constructor (
 
     private val _uiState = MutableStateFlow(MainScreenState())
     val uiState = _uiState.asStateFlow()
+
+    var showAddEventDialog by mutableStateOf(false)
+        private set
 
     init {
         resetState()
@@ -60,7 +66,7 @@ class MainScreenViewModel @Inject constructor (
     }
 
     fun updateShowAddEventDialog(showDialog: Boolean) {
-        updateState { it.copy(showAddEventDialog = showDialog) }
+        showAddEventDialog = showDialog
     }
 
     fun updateShowDeleteEventDialog(showDialog: Boolean) {

@@ -7,7 +7,6 @@ data class MainScreenState(
     var splitShare: Int = 0,
     var finalTip: String = "",
     var eventName: String = "",
-    var showAddEventDialog: Boolean = false,
     var showDeleteEventDialog: Boolean = false,
     var showSnackBar: Boolean = false
 )
