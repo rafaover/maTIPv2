@@ -6,6 +6,5 @@ data class MainScreenState(
     var roundUp: Boolean = false,
     var splitShare: Int = 0,
     var finalTip: String = "",
-    var eventName: String = "",
-    var showDeleteEventDialog: Boolean = false,
+    var eventName: String = ""
 )

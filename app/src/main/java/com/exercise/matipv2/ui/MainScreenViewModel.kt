@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.data.model.Event
-import com.exercise.matipv2.data.model.EventWithTips
 import com.exercise.matipv2.data.model.Tip
 import com.exercise.matipv2.data.repository.MatipRepository
 import com.exercise.matipv2.util.calculateTip
@@ -29,6 +28,7 @@ class MainScreenViewModel @Inject constructor (
     val uiState = _uiState.asStateFlow()
 
     var showAddEventDialog by mutableStateOf(false)
+    var showDeleteEventDialog by mutableStateOf(false)
     var showSnackBar by mutableStateOf(false)
 
     init {
@@ -70,7 +70,7 @@ class MainScreenViewModel @Inject constructor (
     }
 
     fun updateShowDeleteEventDialog(showDialog: Boolean) {
-        updateState { it.copy(showDeleteEventDialog = showDialog) }
+        showDeleteEventDialog = showDialog
     }
 
     fun increaseCounter() {
@@ -154,10 +154,6 @@ class MainScreenViewModel @Inject constructor (
 
     fun getEventById(eventId: Int): Flow<Event> {
         return matipRepository.getEventById(eventId)
-    }
-
-    fun getAllEventsWithTips(): Flow<List<EventWithTips>> {
-        return matipRepository.getAllEventsWithTips()
     }
 
     fun getAllTipsFromEvent(eventId: Int): Flow<List<Tip>> {

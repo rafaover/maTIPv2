@@ -17,6 +17,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -43,7 +44,7 @@ fun EventsScreen(
     navigateTo: (Event) -> Unit
 ) {
     val allEventsFlow by allEvents.collectAsState(initial = emptyList())
-    val selectedEvent = remember { mutableStateOf<Event?>(null) }
+    var selectedEvent by remember { mutableStateOf<Event?>(null) }
 
     Box(
         modifier = Modifier
@@ -57,7 +58,7 @@ fun EventsScreen(
                 itemsIndexed(allEventsFlow) { _, event ->
                     SwipeBox(
                         onDelete = {
-                            selectedEvent.value = event
+                            selectedEvent = event
                             viewModel.updateShowDeleteEventDialog(true)
                         },
                         onEdit = { viewModel.updateEvent(event) }
@@ -94,7 +95,7 @@ fun EventsScreen(
         /** Conditional attached to [FabAdd] composable above to
          * show dialog when clicked */
 
-        if(uiState.showAddEventDialog) {
+        if(viewModel.showAddEventDialog) {
             AddAnEventDialog(
                 viewModel = viewModel,
                 uiState = uiState,
@@ -112,17 +113,18 @@ fun EventsScreen(
          * confirm Delete an Event during SwipeBox.
          **/
 
-        if (uiState.showDeleteEventDialog) {
-            val eventName = selectedEvent.value?.name
+        if (viewModel.showDeleteEventDialog) {
+            val eventName = selectedEvent?.name
             ConfirmationAlertDialog(
                 title = stringResource(R.string.dialog_title),
                 message = stringResource(
-                    id = R.string.dialog_delete_event_text, eventName ?: "Event"
+                    id = R.string.dialog_delete_event_text,
+                    eventName ?: "Event"
                 ),
                 icon = Icons.Filled.Info,
                 confirmButtonText = stringResource(R.string.delete),
                 onConfirm = {
-                    viewModel.deleteEvent(selectedEvent.value)
+                    viewModel.deleteEvent(selectedEvent)
                     viewModel.updateShowDeleteEventDialog(false)
                 },
                 onDismiss = {
