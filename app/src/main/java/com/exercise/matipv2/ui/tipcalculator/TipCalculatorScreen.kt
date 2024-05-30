@@ -42,6 +42,8 @@ fun TipCalculatorScreen(
     snackbarHostState: SnackbarHostState
 ) {
     val focusManager = LocalFocusManager.current
+    val tipAmountInput = viewModel.tipAmountInput
+    val tipPercentInput = viewModel.tipPercentInput
 
     Column(
         modifier = Modifier
@@ -70,7 +72,7 @@ fun TipCalculatorScreen(
                 .padding(bottom = dimensionResource(R.dimen.padding_mid))
                 .align(alignment = Alignment.Start),
             label = R.string.bill_amount,
-            value = uiState.tipAmount,
+            value = tipAmountInput,
             onValueChange = { viewModel.updateTipAmount(it) },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
@@ -86,7 +88,7 @@ fun TipCalculatorScreen(
                 .padding(bottom = 40.dp)
                 .align(alignment = Alignment.Start),
             label = R.string.tip_percentage,
-            value = uiState.tipPercent,
+            value = tipPercentInput,
             onValueChange = { viewModel.updateTipPercent(it) },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
@@ -115,7 +117,7 @@ fun TipCalculatorScreen(
         )
 
         ButtonToOpenDialog(
-            dataIsPresent = uiState.tipAmount.isNotEmpty() && uiState.tipPercent.isNotEmpty(),
+            dataIsPresent = tipAmountInput.isNotEmpty() && tipPercentInput.isNotEmpty(),
             updateShowDialog = { viewModel.updateShowAddEventDialog(true) },
             buttonText = stringResource(R.string.add_tip_to_event)
         )
