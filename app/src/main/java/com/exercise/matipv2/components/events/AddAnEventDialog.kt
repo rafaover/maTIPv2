@@ -21,13 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.exercise.matipv2.R
 import com.exercise.matipv2.components.common.EditTextForm
-import com.exercise.matipv2.data.MainScreenState
 import com.exercise.matipv2.ui.MainScreenViewModel
 
 @Composable
 fun AddAnEventDialog(
     viewModel: MainScreenViewModel,
-    uiState: MainScreenState,
     onSaveRequest: () -> Unit
 ) {
     Dialog(
@@ -56,7 +54,7 @@ fun AddAnEventDialog(
                         fontWeight = FontWeight.Bold,
                     )
                     TextButton(
-                        enabled = uiState.eventName.isNotBlank(),
+                        enabled = viewModel.newEventName.isNotBlank(),
                         onClick = { onSaveRequest() },
                     ) {
                         Text(stringResource(R.string.save))
@@ -66,10 +64,10 @@ fun AddAnEventDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 24.dp),
-                    value = uiState.eventName,
+                    value = viewModel.newEventName,
                     label = R.string.list_name,
                     keyboardOptions = KeyboardOptions.Default,
-                    onValueChange = { viewModel.updateEventName(it) }
+                    onValueChange = { viewModel.updateNewEventName(it) }
                 )
             }
         }

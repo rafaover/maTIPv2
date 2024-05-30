@@ -1,11 +1,13 @@
 package com.exercise.matipv2.ui
 
 import android.annotation.SuppressLint
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.exercise.matipv2.data.MainScreenState
+import com.exercise.matipv2.data.TipCalculatorScreenState
 import com.exercise.matipv2.data.model.Event
-import com.exercise.matipv2.data.model.EventWithTips
 import com.exercise.matipv2.data.model.Tip
 import com.exercise.matipv2.data.repository.MatipRepository
 import com.exercise.matipv2.util.calculateTip
@@ -22,8 +24,13 @@ class MainScreenViewModel @Inject constructor (
     private val matipRepository: MatipRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(MainScreenState())
+    private val _uiState = MutableStateFlow(TipCalculatorScreenState())
     val uiState = _uiState.asStateFlow()
+
+    var showAddEventDialog by mutableStateOf(false)
+    var showDeleteEventDialog by mutableStateOf(false)
+    var showSnackBar by mutableStateOf(false)
+    var newEventName by mutableStateOf("")
 
     init {
         resetState()
@@ -33,7 +40,7 @@ class MainScreenViewModel @Inject constructor (
     * Update Functions
     */
 
-    private fun updateState(update: (MainScreenState) -> MainScreenState) {
+    private fun updateState(update: (TipCalculatorScreenState) -> TipCalculatorScreenState) {
         _uiState.value = update(_uiState.value)
     }
 
@@ -55,16 +62,16 @@ class MainScreenViewModel @Inject constructor (
         }
     }
 
-    fun updateEventName(eventName: String) {
-        updateState { it.copy(eventName = eventName) }
+    fun updateNewEventName(eventName: String) {
+        newEventName = eventName
     }
 
     fun updateShowAddEventDialog(showDialog: Boolean) {
-        updateState { it.copy(showAddEventDialog = showDialog) }
+        showAddEventDialog = showDialog
     }
 
     fun updateShowDeleteEventDialog(showDialog: Boolean) {
-        updateState { it.copy(showDeleteEventDialog = showDialog) }
+        showDeleteEventDialog = showDialog
     }
 
     fun increaseCounter() {
@@ -90,11 +97,11 @@ class MainScreenViewModel @Inject constructor (
     }
 
     fun resetState() {
-        _uiState.value = MainScreenState()
+        _uiState.value = TipCalculatorScreenState()
     }
 
-    fun updateShowSnackBar (showSnackBar: Boolean) {
-        updateState { it.copy(showSnackBar = showSnackBar) }
+    fun updateShowSnackBar (snackBar: Boolean) {
+        showSnackBar = snackBar
     }
 
     /*
@@ -112,7 +119,7 @@ class MainScreenViewModel @Inject constructor (
         viewModelScope.launch(Dispatchers.IO) {
             matipRepository.insertEvent(event)
         }
-        updateEventName("")
+        updateNewEventName("")
     }
 
     fun addTipToEvent(tip: Tip, eventId: Int) {
@@ -150,10 +157,6 @@ class MainScreenViewModel @Inject constructor (
         return matipRepository.getEventById(eventId)
     }
 
-    fun getAllEventsWithTips(): Flow<List<EventWithTips>> {
-        return matipRepository.getAllEventsWithTips()
-    }
-
     fun getAllTipsFromEvent(eventId: Int): Flow<List<Tip>> {
         return matipRepository.getAllTipsFromEvent(eventId)
     }
@@ -162,7 +165,7 @@ class MainScreenViewModel @Inject constructor (
     * Extension Functions
     */
 
-    private fun MainScreenState.toTip(): Tip = Tip(
+    private fun TipCalculatorScreenState.toTip(): Tip = Tip(
         tipAmount = finalTip,
         tipPercent = tipPercent
     )

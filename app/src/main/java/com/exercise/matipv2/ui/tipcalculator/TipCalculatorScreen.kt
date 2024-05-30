@@ -30,7 +30,7 @@ import com.exercise.matipv2.components.calculator.TotalTipAmount
 import com.exercise.matipv2.components.common.ButtonToOpenDialog
 import com.exercise.matipv2.components.common.EditTextForm
 import com.exercise.matipv2.components.common.RoundTheTipSwitch
-import com.exercise.matipv2.data.MainScreenState
+import com.exercise.matipv2.data.TipCalculatorScreenState
 import com.exercise.matipv2.ui.MainScreenViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -38,7 +38,7 @@ import kotlinx.coroutines.runBlocking
 @Composable
 fun TipCalculatorScreen(
     viewModel: MainScreenViewModel,
-    uiState: MainScreenState,
+    uiState: TipCalculatorScreenState,
     snackbarHostState: SnackbarHostState
 ) {
     val focusManager = LocalFocusManager.current
@@ -122,7 +122,7 @@ fun TipCalculatorScreen(
 
         /** Conditional attached to [ButtonToOpenDialog] above, opening dialog */
 
-        if(uiState.showAddEventDialog) {
+        if(viewModel.showAddEventDialog) {
             AddTipToEventDialogBox(
                 viewModel = viewModel,
                 allEvents = viewModel.getAllEvents(),
@@ -144,7 +144,7 @@ fun TipCalculatorScreen(
         /** Snackbar to show confirmation from [AddTipToEventDialogBox],
          * that tip was added to event */
 
-        if (uiState.showSnackBar) {
+        if (viewModel.showSnackBar) {
             LaunchedEffect(snackbarHostState) {
                 snackbarHostState.showSnackbar(
                     message = "Tip added to event",
