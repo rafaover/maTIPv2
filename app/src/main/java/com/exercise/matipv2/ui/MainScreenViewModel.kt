@@ -30,6 +30,7 @@ class MainScreenViewModel @Inject constructor (
     var showAddEventDialog by mutableStateOf(false)
     var showDeleteEventDialog by mutableStateOf(false)
     var showSnackBar by mutableStateOf(false)
+    var newEventName by mutableStateOf("")
 
     init {
         resetState()
@@ -61,8 +62,8 @@ class MainScreenViewModel @Inject constructor (
         }
     }
 
-    fun updateEventName(eventName: String) {
-        updateState { it.copy(eventName = eventName) }
+    fun updateNewEventName(eventName: String) {
+        newEventName = eventName
     }
 
     fun updateShowAddEventDialog(showDialog: Boolean) {
@@ -118,7 +119,7 @@ class MainScreenViewModel @Inject constructor (
         viewModelScope.launch(Dispatchers.IO) {
             matipRepository.insertEvent(event)
         }
-        updateEventName("")
+        updateNewEventName("")
     }
 
     fun addTipToEvent(tip: Tip, eventId: Int) {

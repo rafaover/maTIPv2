@@ -30,7 +30,6 @@ import com.exercise.matipv2.components.common.FabAdd
 import com.exercise.matipv2.components.events.AddAnEventDialog
 import com.exercise.matipv2.components.events.AllTipsFromEventCounter
 import com.exercise.matipv2.components.events.SwipeBox
-import com.exercise.matipv2.data.TipCalculatorScreenState
 import com.exercise.matipv2.data.model.Event
 import com.exercise.matipv2.ui.MainScreenViewModel
 import kotlinx.coroutines.flow.Flow
@@ -39,7 +38,6 @@ import kotlinx.coroutines.launch
 @Composable
 fun EventsScreen(
     viewModel: MainScreenViewModel,
-    uiState: TipCalculatorScreenState,
     allEvents: Flow<List<Event>>,
     navigateTo: (Event) -> Unit
 ) {
@@ -98,11 +96,9 @@ fun EventsScreen(
         if(viewModel.showAddEventDialog) {
             AddAnEventDialog(
                 viewModel = viewModel,
-                uiState = uiState,
                 onSaveRequest = {
                     viewModel.viewModelScope.launch {
-                        viewModel.insertEvent(Event(name = uiState.eventName))
-                        uiState.eventName = ""
+                        viewModel.insertEvent(Event(name = viewModel.newEventName))
                         viewModel.updateShowAddEventDialog(false)
                     }
                 }

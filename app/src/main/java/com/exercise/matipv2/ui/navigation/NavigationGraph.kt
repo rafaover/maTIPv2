@@ -36,7 +36,6 @@ fun NavigationGraph(
         composable(NavBarItems.Events.route) {
             EventsScreen(
                 allEvents = viewModel.getAllEvents(),
-                uiState = uiState,
                 viewModel = viewModel,
                 navigateTo = { event ->
                     navController.navigate("EventTipList/${event.id}")
