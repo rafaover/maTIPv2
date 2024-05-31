@@ -1,4 +1,4 @@
-package com.exercise.matipv2.data
+package com.exercise.matipv2.ui.tipcalculator
 
 data class TipCalculatorScreenState(
     var roundUp: Boolean = false,

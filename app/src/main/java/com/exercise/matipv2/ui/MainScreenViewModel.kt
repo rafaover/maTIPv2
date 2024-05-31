@@ -6,9 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.exercise.matipv2.data.TipCalculatorScreenState
-import com.exercise.matipv2.data.model.Event
-import com.exercise.matipv2.data.model.Tip
+import com.exercise.matipv2.ui.tipcalculator.TipCalculatorScreenState
+import com.exercise.matipv2.data.local.model.Event
+import com.exercise.matipv2.data.local.model.Tip
 import com.exercise.matipv2.data.repository.MatipRepository
 import com.exercise.matipv2.util.calculateTip
 import dagger.hilt.android.lifecycle.HiltViewModel

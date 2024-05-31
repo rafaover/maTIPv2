@@ -8,8 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import androidx.navigation.navArgument
-import com.exercise.matipv2.data.TipCalculatorScreenState
-import com.exercise.matipv2.data.NavBarItems
+import com.exercise.matipv2.ui.tipcalculator.TipCalculatorScreenState
 import com.exercise.matipv2.ui.MainScreenViewModel
 import com.exercise.matipv2.ui.events.EventTipListScreen
 import com.exercise.matipv2.ui.events.EventsScreen

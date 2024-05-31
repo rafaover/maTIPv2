@@ -1,4 +1,4 @@
-package com.exercise.matipv2.data.dao
+package com.exercise.matipv2.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -8,8 +8,8 @@ import androidx.room.Query
 import androidx.room.RoomWarnings
 import androidx.room.Transaction
 import androidx.room.Update
-import com.exercise.matipv2.data.model.Event
-import com.exercise.matipv2.data.model.EventWithTips
+import com.exercise.matipv2.data.local.model.Event
+import com.exercise.matipv2.data.local.model.EventWithTips
 import kotlinx.coroutines.flow.Flow
 
 @Dao
