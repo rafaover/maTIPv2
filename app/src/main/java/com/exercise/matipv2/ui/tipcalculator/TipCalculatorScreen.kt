@@ -37,7 +37,7 @@ import kotlinx.coroutines.runBlocking
 @Composable
 fun TipCalculatorScreen(
     viewModel: MainScreenViewModel,
-    uiState: TipCalculatorScreenState,
+    uiState: TipCalculatorScreenUiState,
     snackbarHostState: SnackbarHostState
 ) {
     val focusManager = LocalFocusManager.current
