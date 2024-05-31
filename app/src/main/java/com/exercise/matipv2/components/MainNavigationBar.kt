@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.exercise.matipv2.data.NavBarItems
+import com.exercise.matipv2.ui.navigation.NavBarItems
 
 @Composable
 fun MainNavigationBar(

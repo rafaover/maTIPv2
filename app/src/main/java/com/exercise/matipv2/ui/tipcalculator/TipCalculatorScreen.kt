@@ -30,7 +30,6 @@ import com.exercise.matipv2.components.calculator.TotalTipAmount
 import com.exercise.matipv2.components.common.ButtonToOpenDialog
 import com.exercise.matipv2.components.common.EditTextForm
 import com.exercise.matipv2.components.common.RoundTheTipSwitch
-import com.exercise.matipv2.data.TipCalculatorScreenState
 import com.exercise.matipv2.ui.MainScreenViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -38,7 +37,7 @@ import kotlinx.coroutines.runBlocking
 @Composable
 fun TipCalculatorScreen(
     viewModel: MainScreenViewModel,
-    uiState: TipCalculatorScreenState,
+    uiState: TipCalculatorScreenUiState,
     snackbarHostState: SnackbarHostState
 ) {
     val focusManager = LocalFocusManager.current

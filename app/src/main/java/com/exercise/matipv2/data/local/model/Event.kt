@@ -1,4 +1,4 @@
-package com.exercise.matipv2.data.model
+package com.exercise.matipv2.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

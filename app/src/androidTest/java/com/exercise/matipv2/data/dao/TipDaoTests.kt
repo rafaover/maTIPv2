@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.filters.MediumTest
-import com.exercise.matipv2.data.MatipDatabase
-import com.exercise.matipv2.data.model.Tip
+import com.exercise.matipv2.data.local.MatipDatabase
+import com.exercise.matipv2.data.local.dao.EventDao
+import com.exercise.matipv2.data.local.dao.TipDao
+import com.exercise.matipv2.data.local.model.Tip
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After

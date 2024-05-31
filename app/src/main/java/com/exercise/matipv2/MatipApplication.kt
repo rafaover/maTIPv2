@@ -1,7 +1,7 @@
 package com.exercise.matipv2
 
 import android.app.Application
-import com.exercise.matipv2.data.NavBarItems
+import com.exercise.matipv2.ui.navigation.NavBarItems
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

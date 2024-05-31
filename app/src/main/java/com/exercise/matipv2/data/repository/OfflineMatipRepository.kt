@@ -1,10 +1,10 @@
 package com.exercise.matipv2.data.repository
 
-import com.exercise.matipv2.data.dao.EventDao
-import com.exercise.matipv2.data.dao.TipDao
-import com.exercise.matipv2.data.model.Event
-import com.exercise.matipv2.data.model.EventWithTips
-import com.exercise.matipv2.data.model.Tip
+import com.exercise.matipv2.data.local.dao.EventDao
+import com.exercise.matipv2.data.local.dao.TipDao
+import com.exercise.matipv2.data.local.model.Event
+import com.exercise.matipv2.data.local.model.EventWithTips
+import com.exercise.matipv2.data.local.model.Tip
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

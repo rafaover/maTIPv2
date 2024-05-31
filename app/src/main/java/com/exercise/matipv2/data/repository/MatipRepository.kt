@@ -1,8 +1,8 @@
 package com.exercise.matipv2.data.repository
 
-import com.exercise.matipv2.data.model.Event
-import com.exercise.matipv2.data.model.EventWithTips
-import com.exercise.matipv2.data.model.Tip
+import com.exercise.matipv2.data.local.model.Event
+import com.exercise.matipv2.data.local.model.EventWithTips
+import com.exercise.matipv2.data.local.model.Tip
 import kotlinx.coroutines.flow.Flow
 
 interface MatipRepository {

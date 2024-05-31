@@ -1,4 +1,4 @@
-package com.exercise.matipv2.data
+package com.exercise.matipv2.ui.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons

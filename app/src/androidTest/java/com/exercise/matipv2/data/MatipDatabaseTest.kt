@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.test.filters.SmallTest
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.exercise.matipv2.data.local.MatipDatabase
 import org.junit.After
 import org.junit.Assert.assertNotNull
 import org.junit.Before

@@ -1,6 +1,6 @@
-package com.exercise.matipv2.data
+package com.exercise.matipv2.ui.tipcalculator
 
-data class TipCalculatorScreenState(
+data class TipCalculatorScreenUiState(
     var roundUp: Boolean = false,
     var splitShare: Int = 0,
     var finalTip: String = ""

@@ -29,7 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.exercise.matipv2.R
-import com.exercise.matipv2.data.model.Event
+import com.exercise.matipv2.data.local.model.Event
 import com.exercise.matipv2.ui.MainScreenViewModel
 import kotlinx.coroutines.flow.Flow
 

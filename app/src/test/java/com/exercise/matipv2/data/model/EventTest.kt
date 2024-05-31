@@ -1,6 +1,7 @@
 package com.exercise.matipv2.data.model
 
 import androidx.test.filters.SmallTest
+import com.exercise.matipv2.data.local.model.Event
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

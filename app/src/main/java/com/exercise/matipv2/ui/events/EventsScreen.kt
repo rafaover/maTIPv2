@@ -30,7 +30,7 @@ import com.exercise.matipv2.components.common.FabAdd
 import com.exercise.matipv2.components.events.AddAnEventDialog
 import com.exercise.matipv2.components.events.AllTipsFromEventCounter
 import com.exercise.matipv2.components.events.SwipeBox
-import com.exercise.matipv2.data.model.Event
+import com.exercise.matipv2.data.local.model.Event
 import com.exercise.matipv2.ui.MainScreenViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

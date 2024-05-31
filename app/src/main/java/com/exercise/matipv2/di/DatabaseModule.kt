@@ -2,7 +2,7 @@ package com.exercise.matipv2.di
 
 import android.content.Context
 import androidx.room.Room
-import com.exercise.matipv2.data.MatipDatabase
+import com.exercise.matipv2.data.local.MatipDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
