@@ -138,7 +138,7 @@ fun TipCalculatorScreen(
                             val lastTipSaved = viewModel.getLastTipSaved()
                             viewModel.addTipToEvent(lastTipSaved, event.id)
                         }
-                        viewModel.resetState()
+                        viewModel.resetCalculateTipScreen()
                         focusManager.clearFocus()
                         viewModel.updateShowSnackBar(true)
                     }

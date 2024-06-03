@@ -36,7 +36,7 @@ class MainScreenViewModel @Inject constructor (
     var tipPercentInput by mutableStateOf("")
 
     init {
-        resetState()
+        resetCalculateTipScreen()
     }
 
     /*
@@ -99,7 +99,9 @@ class MainScreenViewModel @Inject constructor (
         return calculatedTip
     }
 
-    fun resetState() {
+    fun resetCalculateTipScreen() {
+        tipAmountInput = ""
+        tipPercentInput = ""
         _uiState.value = TipCalculatorScreenUiState()
     }
 

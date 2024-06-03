@@ -67,7 +67,9 @@ fun AddTipToEventDialogBox(
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
                     )
+
                     /* Button to Save the selected event */
+
                     TextButton(
                         enabled = selectedOption != null,
                         onClick = {
