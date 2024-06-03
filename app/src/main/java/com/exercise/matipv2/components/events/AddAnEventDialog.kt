@@ -60,7 +60,10 @@ fun AddAnEventDialog(
                         enabled = viewModel.newEventName.isNotBlank(),
                         onClick = { onSaveRequest() },
                     ) {
-                        Text(stringResource(R.string.save))
+                        Text(
+                            text = stringResource(R.string.save),
+                            style = MaterialTheme.typography.bodyLarge
+                        )
                     }
                 }
                 EditTextForm(

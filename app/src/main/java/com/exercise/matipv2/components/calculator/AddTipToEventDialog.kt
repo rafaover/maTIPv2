@@ -77,7 +77,10 @@ fun AddTipToEventDialogBox(
                         modifier = Modifier
                             .padding(dimensionResource(R.dimen.padding_button))
                     ) {
-                        Text(stringResource(R.string.confirm))
+                        Text(
+                            text = stringResource(R.string.confirm),
+                            style = MaterialTheme.typography.bodyLarge
+                        )
                     }
                 }
                 if (allEventsFlow.isNotEmpty()) {

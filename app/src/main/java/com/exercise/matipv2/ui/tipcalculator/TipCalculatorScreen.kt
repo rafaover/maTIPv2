@@ -115,6 +115,10 @@ fun TipCalculatorScreen(
             onRoundUpChange = { viewModel.updateRoundUp(it) }
         )
 
+        /** Button to Open [AddTipToEventDialogBox] to add tip to event
+         * after [EditTextForm] elements are filled.
+         */
+
         ButtonToOpenDialog(
             dataIsPresent = tipAmountInput.isNotEmpty() && tipPercentInput.isNotEmpty(),
             updateShowDialog = { viewModel.updateShowAddEventDialog(true) },
