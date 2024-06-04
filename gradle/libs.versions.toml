@@ -17,6 +17,10 @@ androidtestrunner = "1.5.2"
 androidXTestRules = "1.5.0"
 testEspresso = "3.5.1"
 testExtJunit = "1.1.5"
+androidGradlePlugin = "8.4.1"
+hiltDagger = "2.51.1"
+## Needs to update version with Kotlin
+ksp = "1.9.0-1.0.13"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -63,4 +67,9 @@ androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", vers
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "testExtJunit" }
 
 [plugins]
-
+android-gradle-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = 'com.android.library', version.ref = "androidGradlePlugin" }
+kotlin-android = { id = 'org.jetbrains.kotlin.android', version.ref = "kotlin" }
+ksp = { id = 'com.google.devtools.ksp', version.ref = "ksp" }
+hiltDagger = { id = 'com.google.dagger.hilt.android', version.ref = "hiltDagger" }
+roomDb = { id = 'androidx.room', version.ref = "roomdb" }
