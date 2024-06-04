@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hiltDagger)
     alias(libs.plugins.roomDb)
+    alias(libs.plugins.kotlin.compose.compiler)
 }
 
 android {
@@ -39,9 +40,7 @@ android {
     buildFeatures {
         compose true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion '1.5.0'
-    }
+
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
@@ -49,6 +48,10 @@ android {
     }
     room {
         schemaDirectory "$projectDir/schemas"
+    }
+    composeCompiler {
+        enableStrongSkippingMode = true
+        includeSourceInformation = true
     }
 }
 
