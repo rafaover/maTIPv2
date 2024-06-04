@@ -1,6 +1,7 @@
 [versions]
 composeBom = "2024.05.00"
-kotlin = "1.9.0"
+androidActivity = "1.9.0"
+kotlin = "2.0.0"
 coreKtx = "1.13.1"
 hiltAndroid = "2.51.1"
 coroutinesAndroid = "1.8.1"
@@ -20,11 +21,11 @@ testExtJunit = "1.1.5"
 androidGradlePlugin = "8.4.1"
 hiltDagger = "2.51.1"
 ## Needs to update version with Kotlin
-ksp = "1.9.0-1.0.13"
+ksp = "2.0.0-1.0.21"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "kotlin" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidActivity" }
 jetbrains-kotlin-kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutinesAndroid" }
 
@@ -73,3 +74,4 @@ kotlin-android = { id = 'org.jetbrains.kotlin.android', version.ref = "kotlin" }
 ksp = { id = 'com.google.devtools.ksp', version.ref = "ksp" }
 hiltDagger = { id = 'com.google.dagger.hilt.android', version.ref = "hiltDagger" }
 roomDb = { id = 'androidx.room', version.ref = "roomdb" }
+kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
