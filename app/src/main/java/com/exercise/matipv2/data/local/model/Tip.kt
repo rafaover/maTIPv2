@@ -13,5 +13,5 @@ data class Tip(
     @ColumnInfo(name = "tip_percent")
     val tipPercent: String,
     @ColumnInfo(name = "event_id")
-    var eventId: Int? = null
+    var eventId: Int
 )
