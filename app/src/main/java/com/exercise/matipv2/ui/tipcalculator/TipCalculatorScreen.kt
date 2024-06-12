@@ -22,7 +22,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.R
 import com.exercise.matipv2.components.calculator.AddTipToEventDialogBox
 import com.exercise.matipv2.components.calculator.SplitCounter
@@ -31,8 +30,6 @@ import com.exercise.matipv2.components.common.ButtonToOpenDialog
 import com.exercise.matipv2.components.common.EditTextForm
 import com.exercise.matipv2.components.common.RoundTheTipSwitch
 import com.exercise.matipv2.ui.MainScreenViewModel
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 @Composable
 fun TipCalculatorScreen(
@@ -41,8 +38,8 @@ fun TipCalculatorScreen(
     snackbarHostState: SnackbarHostState
 ) {
     val focusManager = LocalFocusManager.current
-    val tipAmountInput = viewModel.tipAmountInput
-    val tipPercentInput = viewModel.tipPercentInput
+    val tipAmountInput = uiState.tipAmount
+    val tipPercentInput = uiState.tipPercent
 
     Column(
         modifier = Modifier
@@ -131,17 +128,11 @@ fun TipCalculatorScreen(
             AddTipToEventDialogBox(
                 viewModel = viewModel,
                 allEvents = viewModel.getAllEvents(),
-                onEventSelected = { event ->
-                    runBlocking {
-                        viewModel.insertTip()
-                        viewModel.viewModelScope.launch {
-                            val lastTipSaved = viewModel.getLastTipSaved()
-                            viewModel.addTipToEvent(lastTipSaved, event.id)
-                        }
-                        viewModel.resetCalculateTipScreen()
-                        focusManager.clearFocus()
-                        viewModel.updateShowSnackBar(true)
-                    }
+                onEventSelected = {
+                    viewModel.insertTip()
+                    focusManager.clearFocus()
+                    viewModel.updateShowSnackBar(true)
+                    viewModel.resetCalculateTipScreen()
                 }
             )
         }

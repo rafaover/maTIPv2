@@ -73,7 +73,9 @@ fun AddTipToEventDialogBox(
                     TextButton(
                         enabled = selectedOption != null,
                         onClick = {
-                            selectedOption?.let { onEventSelected(it) }
+                            selectedOption?.let { event ->
+                                onEventSelected(event)
+                            }
                             viewModel.updateShowAddEventDialog(false)
                         },
                         modifier = Modifier
@@ -97,7 +99,10 @@ fun AddTipToEventDialogBox(
                                     .height(56.dp)
                                     .selectable(
                                         selected = (event == selectedOption),
-                                        onClick = { onOptionSelected(event) },
+                                        onClick = {
+                                            onOptionSelected(event)
+                                            viewModel.updateEventId(event.id)
+                                        },
                                         role = Role.RadioButton
                                     ),
                                 verticalAlignment = Alignment.CenterVertically

@@ -6,10 +6,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.exercise.matipv2.ui.tipcalculator.TipCalculatorScreenUiState
 import com.exercise.matipv2.data.local.model.Event
 import com.exercise.matipv2.data.local.model.Tip
 import com.exercise.matipv2.data.repository.MatipRepository
+import com.exercise.matipv2.ui.tipcalculator.TipCalculatorScreenUiState
 import com.exercise.matipv2.util.calculateTip
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -32,9 +32,6 @@ class MainScreenViewModel @Inject constructor (
     var showSnackBar by mutableStateOf(false)
     var newEventName by mutableStateOf("")
 
-    var tipAmountInput by mutableStateOf("")
-    var tipPercentInput by mutableStateOf("")
-
     init {
         resetCalculateTipScreen()
     }
@@ -48,11 +45,11 @@ class MainScreenViewModel @Inject constructor (
     }
 
     fun updateTipAmount(amount: String) {
-        tipAmountInput = amount
+        updateState { it.copy(tipAmount = amount) }
     }
 
     fun updateTipPercent(tipPercent: String) {
-        tipPercentInput = tipPercent
+        updateState { it.copy(tipPercent = tipPercent)}
     }
 
     fun updateRoundUp(roundUp: Boolean) {
@@ -63,6 +60,10 @@ class MainScreenViewModel @Inject constructor (
         viewModelScope.launch(Dispatchers.IO) {
             matipRepository.updateEvent(event)
         }
+    }
+
+    fun updateEventId(eventId: Int) {
+        updateState { it.copy(eventId = eventId) }
     }
 
     fun updateNewEventName(eventName: String) {
@@ -90,18 +91,16 @@ class MainScreenViewModel @Inject constructor (
     @SuppressLint("VisibleForTests")
     fun updateFinalTip(): String {
         val calculatedTip = calculateTip(
-            amount = tipAmountInput,
-            tipPercent = tipPercentInput,
+            amount = uiState.value.tipAmount,
+            tipPercent = uiState.value.tipPercent,
             roundUp = uiState.value.roundUp,
             tipSplit = uiState.value.splitShare
         )
-        _uiState.value = uiState.value.copy(finalTip = calculatedTip)
+        updateState { it.copy(finalTip = calculatedTip)}
         return calculatedTip
     }
 
     fun resetCalculateTipScreen() {
-        tipAmountInput = ""
-        tipPercentInput = ""
         _uiState.value = TipCalculatorScreenUiState()
     }
 
@@ -115,7 +114,11 @@ class MainScreenViewModel @Inject constructor (
 
     fun insertTip() {
         viewModelScope.launch(Dispatchers.IO) {
-            val tip = uiState.value.toTip()
+            val tip = Tip(
+                tipAmount = uiState.value.finalTip,
+                tipPercent = uiState.value.tipPercent,
+                eventId = uiState.value.eventId
+            )
             matipRepository.insertTip(tip)
         }
     }
@@ -127,12 +130,10 @@ class MainScreenViewModel @Inject constructor (
         updateNewEventName("")
     }
 
-    fun addTipToEvent(tip: Tip, eventId: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            tip.eventId = eventId
-            matipRepository.updateTip(tip)
-        }
-    }
+//    suspend fun addTipToEvent(tip: Tip, eventId: Int) {
+//            tip.eventId = eventId
+//            matipRepository.updateTip(tip)
+//    }
 
     /*
     * Delete Functions
@@ -150,9 +151,9 @@ class MainScreenViewModel @Inject constructor (
     * Get Functions
     */
 
-    suspend fun getLastTipSaved(): Tip {
-        return matipRepository.getLastTipSaved()
-    }
+//    suspend fun getLastTipSaved(): Tip {
+//        return matipRepository.getLastTipSaved()
+//    }
 
     fun getAllEvents(): Flow<List<Event>> {
         return matipRepository.getAllEvents()
@@ -170,9 +171,9 @@ class MainScreenViewModel @Inject constructor (
     * Extension Functions
     */
 
-    private fun TipCalculatorScreenUiState.toTip(): Tip = Tip(
-        tipAmount = finalTip,
-        tipPercent = tipPercentInput
-    )
+//    private fun TipCalculatorScreenUiState.toTip(): Tip = Tip(
+//        tipAmount = finalTip,
+//        tipPercent = tipPercent
+//    )
 }
 
