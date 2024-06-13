@@ -66,7 +66,7 @@ fun EventsScreen(
                                 .height(70.dp),
                             item = event,
                             getName = { event.name },
-                            detailsWhenClickListItem = {
+                            mainTrailItemInfo = {
                                 AllTipsFromEventCounter(viewModel, event)
                             },
                             listItemTrailingIcon = Icons.Filled.ChevronRight

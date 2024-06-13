@@ -17,11 +17,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
+/**
+ * Component that represents a list item with a trailing icon.
+ * [item] is the item to be displayed.
+ * [getName] is a function that returns the name of the item to be used as title.
+ * [mainTrailItemInfo] is a composable that displays the main information of TrailItem.
+ */
+
+
 @Composable
 fun <T> ListItemComponent(
     item: T,
     getName: (T) -> String,
-    detailsWhenClickListItem: @Composable (T) -> Unit,
+    mainTrailItemInfo: @Composable (T) -> Unit,
     listItemTrailingIcon: ImageVector,
     modifier: Modifier
     ) {
@@ -48,7 +56,7 @@ fun <T> ListItemComponent(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                detailsWhenClickListItem(item)
+                mainTrailItemInfo(item)
                 Spacer(Modifier.width(16.dp))
                 Icon(
                     imageVector = listItemTrailingIcon,
