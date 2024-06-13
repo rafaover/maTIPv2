@@ -1,24 +1,15 @@
 package com.exercise.matipv2.ui.events
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.Icon
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -34,6 +25,7 @@ import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.R
 import com.exercise.matipv2.components.common.ConfirmationAlertDialog
 import com.exercise.matipv2.components.common.FabAdd
+import com.exercise.matipv2.components.common.ListItemComponent
 import com.exercise.matipv2.components.events.AddAnEventDialog
 import com.exercise.matipv2.components.events.AllTipsFromEventCounter
 import com.exercise.matipv2.components.events.SwipeBox
@@ -68,42 +60,16 @@ fun EventsScreen(
                         },
                         onEdit = { viewModel.updateEvent(event) }
                     ) {
-                        ListItem(
+                        ListItemComponent(
                             modifier = Modifier
                                 .clickable { navigateTo(event) }
                                 .height(70.dp),
-                            headlineContent = {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Spacer(
-                                        modifier = Modifier
-                                            .width(4.dp)
-                                            .height(36.dp)
-                                            .background(MaterialTheme.colorScheme.primary)
-                                    )
-                                    Spacer(Modifier.width(12.dp))
-                                    Text(
-                                        text = event.name,
-                                        style = MaterialTheme.typography.bodyLarge
-                                    )
-                                }
+                            item = event,
+                            getName = { event.name },
+                            detailsWhenClickListItem = {
+                                AllTipsFromEventCounter(viewModel, event)
                             },
-                            trailingContent = {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    AllTipsFromEventCounter(viewModel, event)
-                                    Spacer(Modifier.width(16.dp))
-                                    Icon(
-                                        imageVector = Icons.Filled.ChevronRight,
-                                        contentDescription = null,
-                                        modifier = Modifier
-                                            .padding(end = 12.dp)
-                                            .size(24.dp)
-                                    )
-                                }
-                            }
+                            listItemTrailingIcon = Icons.Filled.ChevronRight
                         )
                     }
                 }
