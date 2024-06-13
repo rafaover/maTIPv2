@@ -16,6 +16,7 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="fab_add_event">Add an Event</string>
 
 <!--    Lists Screen Strings-->
     <string name="event_tab">Lists</string>
