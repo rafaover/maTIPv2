@@ -3,7 +3,10 @@ package com.exercise.matipv2.data.local.model
 import androidx.room.Embedded
 import androidx.room.Relation
 
-/* Collects an event with all its tips */
+/**
+ * Collects an [Event] with all their tips.
+ * Uses the foreign Key on [Tip].
+*/
 data class EventWithTips(
     @Embedded val event: Event,
     @Relation(

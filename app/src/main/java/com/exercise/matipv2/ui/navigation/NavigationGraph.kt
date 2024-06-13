@@ -33,6 +33,7 @@ fun NavigationGraph(
             )
         }
         composable(NavBarItems.Events.route) {
+            viewModel.updateShowSnackBar(false)
             EventsScreen(
                 allEvents = viewModel.getAllEvents(),
                 viewModel = viewModel,
