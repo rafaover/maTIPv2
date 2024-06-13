@@ -47,13 +47,17 @@ fun EventTipListScreen(
     eventId: Int,
     onBackClick: () -> Unit,
 ) {
+    /** Get Event by ID from database */
+    val event = viewModel
+        .getEventById(eventId)
+        .collectAsState(null)
+
+    /** Get the list of tips for the Event collected on variable "event" above */
     val eventTipList by viewModel
         .getAllTipsFromEvent(eventId)
         .collectAsState(emptyList())
 
-    val event = viewModel
-        .getEventById(eventId).collectAsState(null)
-
+    /** Share the list of tips using [shareTextWithApps] */
     val context = LocalContext.current
 
     Dialog(
@@ -94,10 +98,14 @@ fun EventTipListScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Tip List",
+                            text = stringResource(R.string.tip_list_title),
                             style = MaterialTheme.typography.titleLarge,
                             modifier = Modifier.padding(dimensionResource(R.dimen.padding_sml))
                         )
+
+                        /** Button to [shareTextWithApps].
+                         * Sharing list of Tips from Event
+                         * */
                         Icon(
                             modifier = Modifier
                                 .size(24.dp)

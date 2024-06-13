@@ -20,4 +20,5 @@
     <string name="delete">Apagar</string>
     <string name="back">Voltar</string>
     <string name="fab_add_event">Adicione um Evento</string>
+    <string name="tip_list_title">Gorjetas</string>
 </resources>

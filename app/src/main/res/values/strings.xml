@@ -23,6 +23,7 @@
     <string name="select_list">Select a List</string>
     <string name="create_list">Create List</string>
     <string name="list_name">List</string>
+    <string name="tip_list_title">Tips</string>
 
 <!--    Dialogs Strings-->
     <string name="dialog_title">Delete Event</string>
