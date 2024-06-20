@@ -36,31 +36,31 @@ class OfflineMatipRepositoryTest {
 
     @Test
     fun insertTip() = runBlocking {
-        val tip = Tip(1, "100", "10", null)
+        val tip = Tip(1, "100", "10", 1)
         repository.insertTip(tip)
         verify(mockTipDao).insertTip(tip)
     }
 
     @Test
     fun deleteTip() = runBlocking {
-        val tip = Tip(1, "100", "10", null)
+        val tip = Tip(1, "100", "10", 1)
         repository.deleteTip(tip)
         verify(mockTipDao).deleteTip(tip)
     }
 
     @Test
     fun updateTip() = runBlocking {
-        val tip1 = Tip(1, "100", "10", null)
+        val tip1 = Tip(1, "100", "10", 1)
         repository.insertTip(tip1)
-        val tip2 = Tip(1, "200", "20", null)
+        val tip2 = Tip(1, "200", "20", 1)
         repository.updateTip(tip2)
         verify(mockTipDao).updateTip(tip2)
     }
 
     @Test
     fun getAllTips() = runBlocking {
-        val tip1 = Tip(1, "100", "10", null)
-        val tip2 = Tip(2, "200", "20", null)
+        val tip1 = Tip(1, "100", "10", 1)
+        val tip2 = Tip(2, "200", "20", 1)
         `when`(mockTipDao.getAllTips()).thenReturn(flowOf(listOf(tip1, tip2)))
         val allTips = repository.getAllTips().first()
         verify(mockTipDao).getAllTips()
@@ -69,7 +69,7 @@ class OfflineMatipRepositoryTest {
 
     @Test
     fun getLastTipSaved() = runBlocking {
-        val tip = Tip(1, "100", "10", null)
+        val tip = Tip(1, "100", "10", 1)
         `when`(mockTipDao.getLastTipSaved()).thenReturn(tip)
         val lastTip = repository.getLastTipSaved()
         verify(mockTipDao).getLastTipSaved()
