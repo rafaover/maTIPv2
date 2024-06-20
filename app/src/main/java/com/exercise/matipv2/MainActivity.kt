@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.exercise.matipv2.ui.MainScreen
 import com.exercise.matipv2.ui.MainScreenViewModel
 import com.exercise.matipv2.ui.theme.MaTIPv2Theme
@@ -18,6 +19,7 @@ class MainActivity : ComponentActivity() {
     private val mainScreenViewModel: MainScreenViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContent {
             MaTIPv2Theme {
                 Surface(

@@ -1,6 +1,6 @@
 <resources>
 <!--    Main Screen Strings-->
-    <string name="app_name" translatable="false">maTIP</string>
+    <string name="app_name" translatable="false">MaTip</string>
     <string name="matip_logo">Matip Logo</string>
     <string name="calculate_tip">Calculate Tip</string>
     <string name="bill_amount">Bill Amount</string>
