@@ -10,12 +10,13 @@ import androidx.compose.ui.Modifier
 @Composable
 fun FabAdd(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    contentDescription: String
 ) {
     FloatingActionButton(
         modifier = modifier,
         onClick = { onClick() },
     ) {
-        Icon(Icons.Filled.Add, "FAB to add an Event")
+        Icon(Icons.Filled.Add, contentDescription)
     }
 }

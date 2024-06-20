@@ -19,4 +19,6 @@
     <string name="dialog_delete_event_text">Você tem certeza que deseja apagar %1$s e todas as gorjetas inclusas?</string>
     <string name="delete">Apagar</string>
     <string name="back">Voltar</string>
+    <string name="matip_logo">Matip Logo</string>
+    <string name="add_a_list">Crie uma Lista</string>
 </resources>
