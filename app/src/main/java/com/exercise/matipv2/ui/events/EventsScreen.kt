@@ -62,7 +62,9 @@ fun EventsScreen(
                     ) {
                         ListItemComponent(
                             modifier = Modifier
-                                .clickable { navigateTo(event) }
+                                .clickable(onClickLabel = event.name) {
+                                    navigateTo(event)
+                                }
                                 .height(70.dp),
                             item = event,
                             getName = { event.name },
@@ -82,7 +84,8 @@ fun EventsScreen(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(dimensionResource(R.dimen.padding_mid)),
-            onClick = { viewModel.updateShowAddEventDialog(true) }
+            onClick = { viewModel.updateShowAddEventDialog(true) },
+            contentDescription = stringResource(R.string.add_a_list)
         )
 
         /** Conditional attached to [FabAdd] composable above to
