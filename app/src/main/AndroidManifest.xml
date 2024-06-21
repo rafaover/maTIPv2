@@ -15,8 +15,7 @@
         tools:targetApi="34">
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MaTIPv2.Splash">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
