@@ -37,9 +37,9 @@ fun RoundTheTipSwitch(
                 .testTag("RoundTheTipSwitch")
                 .semantics {
                     stateDescription = if (roundUp) {
-                        "Switch is on"
+                        "Round Up On"
                     } else {
-                        "Switch is off"
+                        "Round Up Off"
                     }
                 },
             checked = roundUp,

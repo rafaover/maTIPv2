@@ -35,18 +35,21 @@ fun SwipeBox(
     lateinit var icon: ImageVector
     lateinit var alignment: Alignment
     val color: Color
+    lateinit var description: String
 
     when (swipeState.dismissDirection) {
         SwipeToDismissBoxValue.EndToStart -> {
             icon = Icons.Outlined.Delete
             alignment = Alignment.CenterEnd
             color = MaterialTheme.colorScheme.errorContainer
+            description = "Delete List"
         }
 
         SwipeToDismissBoxValue.StartToEnd -> {
             icon = Icons.Outlined.Edit
             alignment = Alignment.CenterStart
             color = Color.Green.copy(alpha = 0.3f)
+            description = "Edit List"
         }
 
         SwipeToDismissBoxValue.Settled -> {
@@ -70,7 +73,7 @@ fun SwipeBox(
                 Icon(
                     modifier = Modifier.minimumInteractiveComponentSize(),
                     imageVector = icon,
-                    contentDescription = null
+                    contentDescription = description,
                 )
             }
         }

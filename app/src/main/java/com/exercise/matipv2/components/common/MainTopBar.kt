@@ -47,7 +47,7 @@ fun MainTopBar() {
                     modifier = Modifier
                         .padding(start = dimensionResource(R.dimen.padding_mid)),
                     imageVector = Icons.Filled.Menu,
-                    contentDescription = "Menu Icon"
+                    contentDescription = stringResource(R.string.options_menu)
                 )
             }
         },
