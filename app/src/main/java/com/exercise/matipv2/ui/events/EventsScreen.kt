@@ -20,6 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.R
@@ -45,6 +47,7 @@ fun EventsScreen(
 
     Box(
         modifier = Modifier
+            .semantics { contentDescription = "Lists Screen. ${allEventsFlow.count()} lists" }
             .padding(16.dp)
             .fillMaxSize()
     ) {
@@ -62,7 +65,9 @@ fun EventsScreen(
                     ) {
                         ListItemComponent(
                             modifier = Modifier
-                                .clickable { navigateTo(event) }
+                                .clickable(onClickLabel = event.name) {
+                                    navigateTo(event)
+                                }
                                 .height(70.dp),
                             item = event,
                             getName = { event.name },
@@ -82,7 +87,8 @@ fun EventsScreen(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(dimensionResource(R.dimen.padding_mid)),
-            onClick = { viewModel.updateShowAddEventDialog(true) }
+            onClick = { viewModel.updateShowAddEventDialog(true) },
+            contentDescription = stringResource(R.string.add_a_list)
         )
 
         /** Conditional attached to [FabAdd] composable above to

@@ -118,7 +118,7 @@ fun EventTipListScreen(
                                 },
                             imageVector = Icons.Default.Share,
                             tint = MaterialTheme.colorScheme.primary,
-                            contentDescription = "Share"
+                            contentDescription = stringResource(R.string.share_tip_list)
                         )
                     }
                     HorizontalDivider(

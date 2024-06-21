@@ -16,12 +16,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import com.exercise.matipv2.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainTopBar() {
     CenterAlignedTopAppBar(
+        modifier = Modifier.semantics { contentDescription = "Top Bar" },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.surfaceTint.copy(alpha = 0.1f),
         ),
@@ -33,7 +37,7 @@ fun MainTopBar() {
                 } else {
                     painterResource(R.drawable.matip_logo_sml)
                 },
-                contentDescription = "Matip Logo",
+                contentDescription = stringResource(R.string.matip_logo),
             )
         },
         navigationIcon = {
@@ -46,7 +50,7 @@ fun MainTopBar() {
                     modifier = Modifier
                         .padding(start = dimensionResource(R.dimen.padding_mid)),
                     imageVector = Icons.Filled.Menu,
-                    contentDescription = "Menu Icon"
+                    contentDescription = stringResource(R.string.options_menu)
                 )
             }
         },
