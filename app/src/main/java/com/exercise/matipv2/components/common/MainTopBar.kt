@@ -17,12 +17,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import com.exercise.matipv2.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainTopBar() {
     CenterAlignedTopAppBar(
+        modifier = Modifier.semantics { contentDescription = "Top Bar" },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.surfaceTint.copy(alpha = 0.1f),
         ),

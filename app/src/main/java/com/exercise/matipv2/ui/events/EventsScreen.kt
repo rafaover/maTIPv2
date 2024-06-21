@@ -47,7 +47,7 @@ fun EventsScreen(
 
     Box(
         modifier = Modifier
-            .semantics { contentDescription = "Events Screen" }
+            .semantics { contentDescription = "Lists Screen. ${allEventsFlow.count()} lists" }
             .padding(16.dp)
             .fillMaxSize()
     ) {
