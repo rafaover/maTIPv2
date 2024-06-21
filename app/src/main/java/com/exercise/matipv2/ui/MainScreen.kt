@@ -27,8 +27,9 @@ fun MainScreen(viewModel: MainScreenViewModel) {
     val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
-        modifier = Modifier.semantics(mergeDescendants = true) {
-            contentDescription = "Main Screen with a Tip Calculator"
+        modifier = Modifier.semantics {
+            contentDescription = "Main Screen with a TopBar, Tip Calculator Screen and " +
+                    "bottom Navigation Bar"
         },
         topBar = { MainTopBar() },
         bottomBar = { MainNavigationBar(navController = navController) },
