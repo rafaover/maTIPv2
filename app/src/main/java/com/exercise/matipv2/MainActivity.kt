@@ -18,8 +18,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val mainScreenViewModel: MainScreenViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
+
         super.onCreate(savedInstanceState)
-        installSplashScreen()
         setContent {
             MaTIPv2Theme {
                 Surface(
