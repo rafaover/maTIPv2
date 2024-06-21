@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="matip_logo">Matip Logo</string>
     <string name="calculate_tip">Calcular Gorjeta</string>
     <string name="bill_amount">Total da Conta</string>
     <string name="tip_amount">Gorjeta</string>
@@ -20,5 +21,9 @@
     <string name="delete">Apagar</string>
     <string name="back">Voltar</string>
     <string name="fab_add_event">Adicione um Evento</string>
+    <string name="options_menu">Menu</string>
+    <string name="share_tip_list">Compartilhar Lista de Gorjetas</string>
+    <string name="add_a_list">Criar uma Lista</string>
+    <string name="main_screen">Tela Principal</string>
     <string name="tip_list_title">Gorjetas</string>
 </resources>

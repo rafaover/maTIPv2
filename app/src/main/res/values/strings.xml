@@ -32,4 +32,5 @@
     <string name="dialog_delete_event_text">Are you sure you want to delete %1$s and all its tips?</string>
     <string name="add_a_list">Add a List</string>
     <string name="main_screen">Main Screen</string>
+    <string name="fab_add_event">Add a List</string>
 </resources>
