@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -44,6 +46,7 @@ fun TipCalculatorScreen(
 
     Column(
         modifier = Modifier
+            .semantics { contentDescription = "Tip Calculator Screen" }
             .fillMaxSize()
             .padding(40.dp)
             .verticalScroll(rememberScrollState()),

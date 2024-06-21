@@ -21,4 +21,7 @@
     <string name="back">Voltar</string>
     <string name="matip_logo">Matip Logo</string>
     <string name="add_a_list">Crie uma Lista</string>
+    <string name="options_menu">Opçôes</string>
+    <string name="share_tip_list">Compartilhar Lista de Gorjetas</string>
+    <string name="main_screen">Main Screen</string>
 </resources>
