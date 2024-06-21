@@ -20,6 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import com.exercise.matipv2.R
@@ -45,6 +47,7 @@ fun EventsScreen(
 
     Box(
         modifier = Modifier
+            .semantics { contentDescription = "Events Screen" }
             .padding(16.dp)
             .fillMaxSize()
     ) {
