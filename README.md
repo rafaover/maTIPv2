@@ -6,7 +6,7 @@ Crowdfunding life goals with a little tip
 - [x] Store Tips based on events or trips, so you access the total money spent.
 - [x] Split Tips among friends.
 - [x] Create lists and access the total spent on a specific event or trip.
-- [ ] Share the total split with the group.
+- [x] Share the total split with the group.
 
 ## TOOLS:
 
@@ -19,3 +19,10 @@ Crowdfunding life goals with a little tip
 - Room for local storage
 - Coroutines
 - JUnit/Mockito for tests
+
+Future Plans:
+- KMP Migration
+- Compose Multiplatform Implementation
+- Authentication
+- Seamless Payment (Stable or Crypto)
+- Module for Hospitality worker check crowdfunding projects and money support
