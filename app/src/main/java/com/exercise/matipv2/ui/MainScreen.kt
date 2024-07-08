@@ -17,7 +17,6 @@ import androidx.navigation.compose.rememberNavController
 import com.exercise.matipv2.components.MainNavigationBar
 import com.exercise.matipv2.components.common.MainTopBar
 import com.exercise.matipv2.ui.navigation.NavigationGraph
-import kotlinx.coroutines.flow.merge
 
 @SuppressLint("VisibleForTests")
 @Composable
