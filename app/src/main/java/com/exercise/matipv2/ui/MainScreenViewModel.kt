@@ -147,6 +147,12 @@ class MainScreenViewModel @Inject constructor (
         }
     }
 
+    fun deleteTip(tip: Tip) {
+        viewModelScope.launch(Dispatchers.IO) {
+            matipRepository.deleteTip(tip)
+        }
+    }
+
     /*
     * Get Functions
     */
