@@ -59,6 +59,8 @@ fun EventsScreen(
                     SwipeBox(
                         onDelete = {
                             selectedEvent = event
+
+                            /** Opens [ConfirmationAlertDialog] to confirm Delete an Event. */
                             viewModel.updateShowDeleteEventDialog(true)
                         },
                         onEdit = { viewModel.updateEvent(event) }
@@ -122,6 +124,7 @@ fun EventsScreen(
                 confirmButtonText = stringResource(R.string.delete),
                 onConfirm = {
                     viewModel.deleteEvent(selectedEvent)
+                    viewModel.deleteTipsFromEvent(selectedEvent!!.id)
                     viewModel.updateShowDeleteEventDialog(false)
                 },
                 onDismiss = {
