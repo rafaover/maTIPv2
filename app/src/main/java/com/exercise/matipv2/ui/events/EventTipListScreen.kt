@@ -130,6 +130,9 @@ fun EventTipListScreen(
                     LazyColumn(
                         userScrollEnabled = true
                     ) {
+                        /**
+                         * Display rows of tips from specific List(Event).
+                         */
                         itemsIndexed(eventTipList) { _, tip ->
                             ListItemComponent(
                                 item = tip,
