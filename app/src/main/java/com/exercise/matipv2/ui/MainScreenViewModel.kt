@@ -153,6 +153,16 @@ class MainScreenViewModel @Inject constructor (
         }
     }
 
+    fun deleteTipsFromEvent(eventId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            getAllTipsFromEvent(eventId).collect { tips ->
+                tips.forEach { tip ->
+                    deleteTip(tip)
+                }
+            }
+        }
+    }
+
     /*
     * Get Functions
     */
