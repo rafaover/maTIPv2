@@ -8,6 +8,12 @@ import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.provideContent
 import androidx.glance.text.Text
 
+class TipCalculatorWidgetReceiver: GlanceAppWidgetReceiver() {
+
+    /** Let [TipCalculatorWidgetReceiver] know which GlanceAppWidget to use */
+    override val glanceAppWidget: GlanceAppWidget = TipCalculatorWidget()
+}
+
 class TipCalculatorWidget: GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
@@ -17,10 +23,4 @@ class TipCalculatorWidget: GlanceAppWidget() {
             }
         }
     }
-}
-
-class TipCalculatorWidgetReceiver: GlanceAppWidgetReceiver() {
-
-    /** Let [TipCalculatorWidgetReceiver] know which GlanceAppWidget to use */
-    override val glanceAppWidget: GlanceAppWidget = TipCalculatorWidget()
 }
