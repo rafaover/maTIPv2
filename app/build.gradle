@@ -42,6 +42,10 @@ android {
         compose true
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14"
+    }
+
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
@@ -73,6 +77,11 @@ dependencies {
     debugImplementation libs.androidx.ui.tooling
     debugImplementation libs.androidx.ui.test.manifest
     implementation(libs.androidx.core.splashscreen)
+
+    // Glance
+    implementation libs.androidx.glance
+    implementation libs.androidx.glance.appwidget
+    implementation libs.androidx.glance.material3
 
     // Coroutines
     implementation libs.kotlinx.coroutines.android
