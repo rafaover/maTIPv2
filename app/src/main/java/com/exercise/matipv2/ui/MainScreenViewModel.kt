@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.exercise.matipv2.data.local.model.Event
+import com.exercise.matipv2.data.local.model.List
 import com.exercise.matipv2.data.local.model.Tip
 import com.exercise.matipv2.data.repository.MatipRepository
 import com.exercise.matipv2.ui.tipcalculator.TipCalculatorScreenUiState
@@ -27,10 +27,10 @@ class MainScreenViewModel @Inject constructor (
     private val _uiState = MutableStateFlow(TipCalculatorScreenUiState())
     val uiState = _uiState.asStateFlow()
 
-    var showAddEventDialog by mutableStateOf(false)
-    var showDeleteEventDialog by mutableStateOf(false)
+    var showAddListDialog by mutableStateOf(false)
+    var showDeleteListDialog by mutableStateOf(false)
     var showSnackBar by mutableStateOf(false)
-    var newEventName by mutableStateOf("")
+    var newListName by mutableStateOf("")
 
     init {
         resetCalculateTipScreen()
@@ -56,26 +56,26 @@ class MainScreenViewModel @Inject constructor (
         updateState { it.copy(roundUp = roundUp) }
     }
 
-    fun updateEvent(event: Event) {
+    fun updateList(list: List) {
         viewModelScope.launch(Dispatchers.IO) {
-            matipRepository.updateEvent(event)
+            matipRepository.updateList(list)
         }
     }
 
-    fun updateEventId(eventId: Int) {
-        updateState { it.copy(eventId = eventId) }
+    fun updateListId(listId: Int) {
+        updateState { it.copy(listId = listId) }
     }
 
-    fun updateNewEventName(eventName: String) {
-        newEventName = eventName
+    fun updateNewListName(listName: String) {
+        newListName = listName
     }
 
-    fun updateShowAddEventDialog(showDialog: Boolean) {
-        showAddEventDialog = showDialog
+    fun updateShowAddListDialog(showDialog: Boolean) {
+        showAddListDialog = showDialog
     }
 
-    fun updateShowDeleteEventDialog(showDialog: Boolean) {
-        showDeleteEventDialog = showDialog
+    fun updateShowDeleteListDialog(showDialog: Boolean) {
+        showDeleteListDialog = showDialog
     }
 
     fun increaseCounter() {
@@ -117,21 +117,21 @@ class MainScreenViewModel @Inject constructor (
             val tip = Tip(
                 tipAmount = uiState.value.finalTip,
                 tipPercent = uiState.value.tipPercent,
-                eventId = uiState.value.eventId
+                listId = uiState.value.listId
             )
             matipRepository.insertTip(tip)
         }
     }
 
-    fun insertEvent(event: Event) {
+    fun insertList(list: List) {
         viewModelScope.launch(Dispatchers.IO) {
-            matipRepository.insertEvent(event)
+            matipRepository.insertList(list)
         }
-        updateNewEventName("")
+        updateNewListName("")
     }
 
-//    suspend fun addTipToEvent(tip: Tip, eventId: Int) {
-//            tip.eventId = eventId
+//    suspend fun addTipToList(tip: Tip, listId: Int) {
+//            tip.listId = listId
 //            matipRepository.updateTip(tip)
 //    }
 
@@ -139,10 +139,10 @@ class MainScreenViewModel @Inject constructor (
     * Delete Functions
     */
 
-    fun deleteEvent(event: Event?) {
+    fun deleteList(list: List?) {
         viewModelScope.launch(Dispatchers.IO) {
-            if (event != null) {
-                matipRepository.deleteEvent(event)
+            if (list != null) {
+                matipRepository.deleteList(list)
             }
         }
     }
@@ -153,9 +153,9 @@ class MainScreenViewModel @Inject constructor (
         }
     }
 
-    fun deleteTipsFromEvent(eventId: Int) {
+    fun deleteTipsFromList(listId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            getAllTipsFromEvent(eventId).collect { tips ->
+            getAllTipsFromList(listId).collect { tips ->
                 tips.forEach { tip ->
                     deleteTip(tip)
                 }
@@ -171,16 +171,16 @@ class MainScreenViewModel @Inject constructor (
 //        return matipRepository.getLastTipSaved()
 //    }
 
-    fun getAllEvents(): Flow<List<Event>> {
-        return matipRepository.getAllEvents()
+    fun getAllLists(): Flow<kotlin.collections.List<List>> {
+        return matipRepository.getAllLists()
     }
 
-    fun getEventById(eventId: Int): Flow<Event> {
-        return matipRepository.getEventById(eventId)
+    fun getListById(listId: Int): Flow<List> {
+        return matipRepository.getListById(listId)
     }
 
-    fun getAllTipsFromEvent(eventId: Int): Flow<List<Tip>> {
-        return matipRepository.getAllTipsFromEvent(eventId)
+    fun getAllTipsFromList(eventId: Int): Flow<kotlin.collections.List<Tip>> {
+        return matipRepository.getAllTipsFromList(eventId)
     }
 
     /*

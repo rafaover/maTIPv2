@@ -21,14 +21,14 @@ sealed class NavBarItems(
         selectedIcon = Icons.Filled.Home,
         unselectedIcon = Icons.Outlined.Home
     )
-    object Events : NavBarItems(
+    object Lists : NavBarItems(
         R.string.event_tab,
-        "events",
+        "lists",
         selectedIcon = Icons.AutoMirrored.Filled.ViewList,
         unselectedIcon = Icons.AutoMirrored.Outlined.ViewList
     )
 
     companion object {
-        val values = listOf(TipCalculator, Events)
+        val values = listOf(TipCalculator, Lists)
     }
 }

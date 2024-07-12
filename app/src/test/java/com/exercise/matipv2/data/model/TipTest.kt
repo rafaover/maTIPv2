@@ -17,13 +17,13 @@ class TipTest {
         val expectedEventId = 1
 
         // When
-        val tip = Tip(id = expectedId, tipAmount = expectedTipAmount, tipPercent = expectedTipPercent, eventId = expectedEventId)
+        val tip = Tip(id = expectedId, tipAmount = expectedTipAmount, tipPercent = expectedTipPercent, listId = expectedEventId)
 
         // Then
         assertEquals(expectedId, tip.id)
         assertEquals(expectedTipAmount, tip.tipAmount)
         assertEquals(expectedTipPercent, tip.tipPercent)
-        assertEquals(expectedEventId, tip.eventId)
+        assertEquals(expectedEventId, tip.listId)
     }
 
 }

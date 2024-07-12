@@ -34,8 +34,8 @@ class MatipDatabaseTest {
     }
 
     @Test
-    fun eventDao() {
-        val eventDao = db.eventDao()
+    fun listDao() {
+        val eventDao = db.listDao()
         assertNotNull(eventDao)
     }
 

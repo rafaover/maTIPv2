@@ -6,5 +6,5 @@ data class TipCalculatorScreenUiState(
     var roundUp: Boolean = false,
     var splitShare: Int = 1,
     var finalTip: String = "",
-    var eventId: Int = 0
+    var listId: Int = 0
 )

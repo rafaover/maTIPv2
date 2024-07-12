@@ -25,7 +25,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.exercise.matipv2.R
-import com.exercise.matipv2.components.calculator.AddTipToEventDialogBox
+import com.exercise.matipv2.components.calculator.AddTipToListDialogBox
 import com.exercise.matipv2.components.calculator.SplitCounter
 import com.exercise.matipv2.components.calculator.TotalTipAmount
 import com.exercise.matipv2.components.common.ButtonToOpenDialog
@@ -116,23 +116,23 @@ fun TipCalculatorScreen(
             onRoundUpChange = { viewModel.updateRoundUp(it) }
         )
 
-        /** Button to Open [AddTipToEventDialogBox] to add tip to event
+        /** Button to Open [AddTipToListDialogBox] to add tip to list
          * after [EditTextForm] elements are filled.
          */
 
         ButtonToOpenDialog(
             dataIsPresent = tipAmountInput.isNotEmpty() && tipPercentInput.isNotEmpty(),
-            updateShowDialog = { viewModel.updateShowAddEventDialog(true) },
+            updateShowDialog = { viewModel.updateShowAddListDialog(true) },
             buttonText = stringResource(R.string.add_tip_to_event)
         )
 
         /** Conditional attached to [ButtonToOpenDialog] above, opening dialog */
 
-        if(viewModel.showAddEventDialog) {
-            AddTipToEventDialogBox(
+        if(viewModel.showAddListDialog) {
+            AddTipToListDialogBox(
                 viewModel = viewModel,
-                allEvents = viewModel.getAllEvents(),
-                onEventSelected = {
+                allLists = viewModel.getAllLists(),
+                onListSelected = {
                     runBlocking {
                         viewModel.insertTip()
                     }
@@ -143,13 +143,13 @@ fun TipCalculatorScreen(
             )
         }
 
-        /** Snackbar to show confirmation from [AddTipToEventDialogBox],
-         * that tip was added to event */
+        /** Snackbar to show confirmation from [AddTipToListDialogBox],
+         * that tip was added to list */
 
         if (viewModel.showSnackBar) {
             LaunchedEffect(snackbarHostState) {
                 snackbarHostState.showSnackbar(
-                    message = "Tip added to event",
+                    message = "Tip added to list",
                     duration = SnackbarDuration.Short
                 )
             }

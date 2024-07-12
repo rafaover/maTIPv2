@@ -5,7 +5,7 @@ Crowdfunding life goals with a little tip
 
 - [x] Store Tips based on events or trips, so you access the total money spent.
 - [x] Split Tips among friends.
-- [x] Create lists and access the total spent on a specific event or trip.
+- [x] Create lists and access the total spent on a specific list or trip.
 - [x] Share the total split with the group.
 
 ## TOOLS:

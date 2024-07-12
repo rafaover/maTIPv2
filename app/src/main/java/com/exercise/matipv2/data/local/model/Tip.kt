@@ -19,8 +19,8 @@ data class Tip(
     val tipPercent: String,
 
     /**
-     * The [Event] id that the [Tip] is associated with.
+     * The [List] id that the [Tip] is associated with.
      */
-    @ColumnInfo(name = "event_id")
-    var eventId: Int
+    @ColumnInfo(name = "list_id")
+    var listId: Int
 )
