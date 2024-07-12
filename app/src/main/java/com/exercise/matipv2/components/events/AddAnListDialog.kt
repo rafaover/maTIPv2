@@ -21,11 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.exercise.matipv2.R
 import com.exercise.matipv2.components.common.EditTextForm
-import com.exercise.matipv2.ui.lists.ListsViewModel
+import com.exercise.matipv2.ui.MainScreenViewModel
 
 @Composable
 fun AddAnListDialog(
-    viewModel: ListsViewModel,
+    viewModel: MainScreenViewModel,
     onSaveRequest: () -> Unit
 ) {
     Dialog(

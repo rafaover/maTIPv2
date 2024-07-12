@@ -44,10 +44,9 @@ import com.exercise.matipv2.util.tipListToString
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListTipListScreen(
-    viewModel: ListsViewModel,
+    viewModel: MainScreenViewModel,
     onDismissRequest: () -> Unit,
     listId: Int,
-    deleteTip: MainScreenViewModel,
     onBackClick: () -> Unit,
 ) {
     /** Get List by ID from database */
@@ -141,7 +140,7 @@ fun ListTipListScreen(
                                 mainTrailItemInfo = { },
                                 listItemTrailingIcon = Icons.Default.DeleteForever,
                                 trailingIconContentDescription = stringResource(R.string.delete),
-                                onClickTrailingIcon = { deleteTip.deleteTip(tip) },
+                                onClickTrailingIcon = { viewModel.deleteTip(tip) },
                                 onClickLabel = context.getString(R.string.tip_will_be_deleted),
                                 modifier = Modifier.height(70.dp)
                             )
