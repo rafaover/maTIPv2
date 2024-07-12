@@ -11,7 +11,7 @@ import org.junit.Test
 class ListWithTipsTest {
 
     @Test
-    fun testEventWithTips_correctValues() {
+    fun testListWithTips_correctValues() {
         val list = List(1, "List 1")
         val tip1 = Tip(1, "2500", "10", 1)
         val tip2 = Tip(2, "3500", "10", 1)

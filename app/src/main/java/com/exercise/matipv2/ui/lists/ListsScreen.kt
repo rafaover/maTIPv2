@@ -117,7 +117,7 @@ fun ListsScreen(
             ConfirmationAlertDialog(
                 title = stringResource(R.string.dialog_title),
                 message = stringResource(
-                    id = R.string.dialog_delete_event_text,
+                    id = R.string.dialog_delete_list_text,
                     listName ?: "List"
                 ),
                 icon = Icons.Filled.Info,

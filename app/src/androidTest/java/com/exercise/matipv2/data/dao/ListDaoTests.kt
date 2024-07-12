@@ -48,70 +48,70 @@ class ListDaoTests {
     /* Test case to insert and read list */
     @Test
     @Throws(Exception::class)
-    fun insertEvent_GetList() = runTest {
-        val list = List(id = 1, name = "EventTest")
+    fun insertList_GetList() = runTest {
+        val list = List(id = 1, name = "ListTest")
         listDao.insertList(list)
-        val byEventName = listDao.getListByName("EventTest").first()
-        assertEquals(byEventName, list)
+        val byListName = listDao.getListByName("ListTest").first()
+        assertEquals(byListName, list)
     }
 
     /* Test case to insert and delete list */
     @Test
     @Throws(Exception::class)
-    fun insertEvent_DeleteList() = runTest {
-        val list = List(id = 1, name = "EventTest")
+    fun insertList_DeleteList() = runTest {
+        val list = List(id = 1, name = "ListTest")
         listDao.insertList(list)
         listDao.deleteList(list)
-        val byEventName = listDao.getListByName("EventTest").first()
-        assertEquals(byEventName, null)
+        val byListName = listDao.getListByName("ListTest").first()
+        assertEquals(byListName, null)
     }
 
     /* Test case to get all Lists and Read all */
     @Test
     @Throws(Exception::class)
-    fun insertEvents_getAllLists() = runTest {
+    fun insertLists_getAllLists() = runTest {
         for (i in 1..5) {
-            val list = List(id = i, name = "EventTest$i")
+            val list = List(id = i, name = "ListTest$i")
             listDao.insertList(list)
         }
-        val allEvents = listDao.getAllLists().first()
-        assertEquals(allEvents.size, 5)
-        assertEquals(allEvents[0].name, "EventTest1")
-        assertEquals(allEvents[1].name, "EventTest2")
+        val allLists = listDao.getAllLists().first()
+        assertEquals(allLists.size, 5)
+        assertEquals(allLists[0].name, "ListTest1")
+        assertEquals(allLists[1].name, "ListTest2")
     }
 
     @Test
     @Throws(Exception::class)
-    fun updateEvent_getList() = runTest {
-        val list = List(id = 1, name = "EventTest")
+    fun updateList_getList() = runTest {
+        val list = List(id = 1, name = "ListTest")
         listDao.insertList(list)
-        val updatedList = List(id = 1, name = "EventTestUpdated")
+        val updatedList = List(id = 1, name = "ListTestUpdated")
         listDao.updateList(updatedList)
-        val byEventName = listDao.getListByName("EventTestUpdated").first()
-        assertEquals(byEventName, updatedList)
+        val byListName = listDao.getListByName("ListTestUpdated").first()
+        assertEquals(byListName, updatedList)
     }
 
     @Test
     @Throws(Exception::class)
     fun getAllListsWithTips() = runBlocking {
-        // Add 10 events
+        // Add 10 Lists
         for (i in 1..10) {
-            val list = List(id = i, name = "EventTest$i")
+            val list = List(id = i, name = "ListTest$i")
             listDao.insertList(list)
         }
-        // Add 3 tips to EventTest1
+        // Add 3 tips to ListTest1
         for (i in 1..3) {
             val tip = Tip(id = i, tipAmount = "${i*250}", tipPercent = "${i*2}", listId = 1)
             tipDao.insertTip(tip)
         }
-        // Add 3 tips to EventTest2
+        // Add 3 tips to ListTest2
         for (i in 4..6) {
             val tip = Tip(id = i, tipAmount = "${i*250}", tipPercent = "${i*3}", listId = 2)
             tipDao.insertTip(tip)
         }
-        val getAllEvents = listDao.getAllLists().first() // 10
-        val eventsWithTips = listDao.getAllListsWithTips().first() // 2
-        assertEquals(getAllEvents.size, 10)
-        assertEquals(eventsWithTips.size, 2)
+        val getAllLists = listDao.getAllLists().first() // 10
+        val listsWithTips = listDao.getAllListsWithTips().first() // 2
+        assertEquals(getAllLists.size, 10)
+        assertEquals(listsWithTips.size, 2)
     }
 }

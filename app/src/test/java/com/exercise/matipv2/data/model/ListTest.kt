@@ -9,7 +9,7 @@ import org.junit.Test
 class ListTest {
 
     @Test
-    fun eventModel_correctlyStoresData() {
+    fun listModel_correctlyStoresData() {
         // Given
         val expectedId = 1
         val expectedName = "Test List"

@@ -22,7 +22,7 @@ sealed class NavBarItems(
         unselectedIcon = Icons.Outlined.Home
     )
     object Lists : NavBarItems(
-        R.string.event_tab,
+        R.string.list_tab,
         "lists",
         selectedIcon = Icons.AutoMirrored.Filled.ViewList,
         unselectedIcon = Icons.AutoMirrored.Outlined.ViewList

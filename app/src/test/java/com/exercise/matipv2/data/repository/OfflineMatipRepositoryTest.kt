@@ -88,41 +88,41 @@ class OfflineMatipRepositoryTest {
 
     @Test
     fun insertList() = runBlocking {
-        val list = List(1, "EventTest1")
+        val list = List(1, "ListTest1")
         repository.insertList(list)
         verify(mockListDao).insertList(list)
     }
 
     @Test
-    fun deleteEvent() = runBlocking {
-        val list = List(1, "EventTest1")
+    fun deleteList() = runBlocking {
+        val list = List(1, "ListTest1")
         repository.deleteList(list)
         verify(mockListDao).deleteList(list)
     }
 
     @Test
     fun updateList() = runBlocking {
-        val list1 = List(1, "EventTest1")
+        val list1 = List(1, "ListTest1")
         repository.insertList(list1)
-        val list2 = List(1, "EventTest2")
+        val list2 = List(1, "ListTest2")
         repository.updateList(list2)
         verify(mockListDao).updateList(list2)
     }
 
     @Test
     fun getAllLists() = runBlocking {
-        val list1 = List(1, "EventTest1")
-        val list2 = List(2, "EventTest2")
+        val list1 = List(1, "ListTest1")
+        val list2 = List(2, "ListTest2")
         `when`(mockListDao.getAllLists()).thenReturn(flowOf(listOf(list1, list2)))
-        val allEvents = repository.getAllLists().first()
+        val allLists = repository.getAllLists().first()
         verify(mockListDao).getAllLists()
-        assertEquals(listOf(list1, list2), allEvents)
+        assertEquals(listOf(list1, list2), allLists)
     }
 
     @Test
     fun getAllListsWithTips() = runBlocking {
-        val list1 = List(1, "EventTest1")
-        val list2 = List(2, "EventTest2")
+        val list1 = List(1, "ListTest1")
+        val list2 = List(2, "ListTest2")
         val tip1 = Tip(1, "100", "10", 1)
         val tip2 = Tip(2, "200", "20", 2)
         val listWithTips1 = ListWithTips(list1, listOf(tip1))
@@ -130,17 +130,17 @@ class OfflineMatipRepositoryTest {
         `when`(mockListDao.getAllListsWithTips())
             .thenReturn(flowOf(listOf(listWithTips1, listWithTips2)))
 
-        val allEventsWithTips = repository.getAllListsWithTips().first()
+        val allListsWithTips = repository.getAllListsWithTips().first()
         verify(mockListDao).getAllListsWithTips()
-        assertEquals(listOf(listWithTips1, listWithTips2), allEventsWithTips)
+        assertEquals(listOf(listWithTips1, listWithTips2), allListsWithTips)
     }
 
     @Test
     fun getListByName() = runBlocking {
-        val list = List(1, "EventTest1")
-        `when`(mockListDao.getListByName("EventTest1")).thenReturn(flowOf(list))
-        val eventByName = repository.getListByName("EventTest1").first()
-        verify(mockListDao).getListByName("EventTest1")
-        assertEquals(list, eventByName)
+        val list = List(1, "ListTest1")
+        `when`(mockListDao.getListByName("ListTest1")).thenReturn(flowOf(list))
+        val listByName = repository.getListByName("ListTest1").first()
+        verify(mockListDao).getListByName("ListTest1")
+        assertEquals(list, listByName)
     }
 }
