@@ -26,7 +26,7 @@ object DatabaseModule {
     }
 
     @Provides
-    fun getEventDao(database: MatipDatabase) = database.eventDao()
+    fun getListDao(database: MatipDatabase) = database.listDao()
     @Provides
     fun getTipDao(database: MatipDatabase) = database.tipDao()
 }
