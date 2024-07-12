@@ -38,7 +38,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ListsScreen(
-    viewModel: MainScreenViewModel,
+    viewModel: ListsViewModel,
     allLists: Flow<kotlin.collections.List<List>>,
     navigateTo: (List) -> Unit
 ) {

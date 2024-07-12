@@ -7,10 +7,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.exercise.matipv2.data.local.model.List
 import com.exercise.matipv2.ui.MainScreenViewModel
+import com.exercise.matipv2.ui.lists.ListsViewModel
 
 @Composable
 fun AllTipsFromListCounter(
-    viewModel: MainScreenViewModel,
+    viewModel: ListsViewModel,
     list: List
 ) {
     val tipsFromList by viewModel
