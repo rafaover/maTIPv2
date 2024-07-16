@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.gradle.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.hiltDagger)
     alias(libs.plugins.roomDb)
     alias(libs.plugins.kotlin.compose.compiler)
 }
@@ -97,10 +96,6 @@ dependencies {
     // Navigation
     implementation libs.androidx.navigation.compose
     androidTestImplementation libs.androidx.navigation.testing
-
-    // Hilt
-    implementation libs.hilt.android
-    ksp libs.ksp.hilt
 
     // Koin
     implementation(libs.koin.androidx.compose)

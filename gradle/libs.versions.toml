@@ -5,7 +5,6 @@ coreSplashscreen = "1.0.1"
 koinCompose = "3.5.6"
 kotlin = "2.0.0"
 coreKtx = "1.13.1"
-hiltAndroid = "2.51.1"
 coroutinesAndroid = "1.8.1"
 lifecycle = "2.8.3"
 navigationCompose = "2.7.7"
@@ -21,7 +20,6 @@ androidXTestRules = "1.6.1"
 testEspresso = "3.6.1"
 testExtJunit = "1.2.1"
 androidGradlePlugin = "8.4.2"
-hiltDagger = "2.51.1"
 ## Needs to update version with Kotlin
 ksp = "2.0.0-1.0.21"
 
@@ -56,10 +54,6 @@ androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomdb" 
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "roomdb" }
 ksp-room = { module = "androidx.room:room-compiler", version.ref = "roomdb" }
 
-#Hilt
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
-ksp-hilt = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
-
 #Koin
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
 
@@ -78,6 +72,5 @@ android-gradle-application = { id = "com.android.application", version.ref = "an
 android-library = { id = 'com.android.library', version.ref = "androidGradlePlugin" }
 kotlin-android = { id = 'org.jetbrains.kotlin.android', version.ref = "kotlin" }
 ksp = { id = 'com.google.devtools.ksp', version.ref = "ksp" }
-hiltDagger = { id = 'com.google.dagger.hilt.android', version.ref = "hiltDagger" }
 roomDb = { id = 'androidx.room', version.ref = "roomdb" }
 kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
