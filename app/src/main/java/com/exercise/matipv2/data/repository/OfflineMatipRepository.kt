@@ -6,9 +6,8 @@ import com.exercise.matipv2.data.local.model.List
 import com.exercise.matipv2.data.local.model.ListWithTips
 import com.exercise.matipv2.data.local.model.Tip
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class OfflineMatipRepository @Inject constructor (
+class OfflineMatipRepository (
     private val tipDao: TipDao,
     private val listDao: ListDao
 ) : MatipRepository {

@@ -101,4 +101,7 @@ dependencies {
     // Hilt
     implementation libs.hilt.android
     ksp libs.ksp.hilt
+
+    // Koin
+    implementation(libs.koin.androidx.compose)
 }

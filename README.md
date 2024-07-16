@@ -15,7 +15,7 @@ Crowdfunding life goals with a little tip
 - StateFlow and ViewModel for State management
 - Material Design 3
 - Navigation Compose
-- Hilt for Dependency Injection
+- Koin for Dependency Injection
 - Room for local storage
 - Coroutines
 - JUnit/Mockito for tests

@@ -2,6 +2,7 @@
 composeBom = "2024.06.00"
 androidActivity = "1.9.0"
 coreSplashscreen = "1.0.1"
+koinCompose = "3.5.6"
 kotlin = "2.0.0"
 coreKtx = "1.13.1"
 hiltAndroid = "2.51.1"
@@ -58,6 +59,9 @@ ksp-room = { module = "androidx.room:room-compiler", version.ref = "roomdb" }
 #Hilt
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 ksp-hilt = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
+
+#Koin
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
 
 #Testing
 junit = { module = "junit:junit", version.ref = "junit" }
