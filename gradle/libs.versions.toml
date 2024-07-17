@@ -2,7 +2,6 @@
 composeBom = "2024.06.00"
 androidActivity = "1.9.0"
 coreSplashscreen = "1.0.1"
-coreKtxVersion = "1.6.1"
 koinCompose = "3.5.6"
 kotlin = "2.0.0"
 coreKtx = "1.13.1"
@@ -68,7 +67,6 @@ androidx-runner = { module = "androidx.test:runner", version.ref = "androidtestr
 androidx-rules = { module = "androidx.test:rules", version.ref = "androidXTestRules" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "testEspresso" }
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "testExtJunit" }
-core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
 
 [plugins]
 android-gradle-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
