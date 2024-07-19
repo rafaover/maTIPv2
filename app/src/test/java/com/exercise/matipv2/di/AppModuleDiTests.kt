@@ -11,5 +11,6 @@ class CheckModulesTestL: KoinTest {
     @Test
     fun checkAllModules() {
         appModule.verify()
+        databaseModule.verify()
     }
 }
