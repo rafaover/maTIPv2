@@ -17,6 +17,7 @@ mockitoCore = "5.12.0"
 mockitoKotlin = "5.3.1"
 androidtestrunner = "1.6.1"
 androidXTestRules = "1.6.1"
+coreKtxVersion = "1.6.1"
 testEspresso = "3.6.1"
 testExtJunit = "1.2.1"
 androidGradlePlugin = "8.4.2"
@@ -67,6 +68,7 @@ androidx-runner = { module = "androidx.test:runner", version.ref = "androidtestr
 androidx-rules = { module = "androidx.test:rules", version.ref = "androidXTestRules" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "testEspresso" }
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "testExtJunit" }
+core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
 
 [plugins]
 android-gradle-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

@@ -1,8 +1,10 @@
 package com.exercise.matipv2
 
 import androidx.test.filters.SmallTest
+import com.exercise.matipv2.data.local.model.Tip
 import com.exercise.matipv2.util.calculateTip
 import com.exercise.matipv2.util.stringAmountToDouble
+import com.exercise.matipv2.util.tipListToString
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -34,6 +36,18 @@ class TipUtilsTests {
         val roundUp = false
         val expected = "$10.00"
         val actual = calculateTip(amount, tipPercent, 2, roundUp)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun testTipListToString() {
+        val tipList = listOf(
+            Tip(1, "10", "10", 1),
+            Tip(2, "15", "15", 1),
+            Tip(3, "20", "20", 1)
+        )
+        val expected = "10\n15\n20"
+        val actual = tipListToString(tipList)
         assertEquals(expected, actual)
     }
 }
