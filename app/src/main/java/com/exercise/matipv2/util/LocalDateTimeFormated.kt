@@ -7,7 +7,7 @@ import kotlinx.datetime.format
 import kotlinx.datetime.format.char
 import kotlinx.datetime.todayIn
 
-fun localDateTimeParsed(): String {
+fun localDateTimeFormated(): String {
     val todayDate: LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault())
 
     val todayDateFormat = todayDate.format(LocalDate.Format {

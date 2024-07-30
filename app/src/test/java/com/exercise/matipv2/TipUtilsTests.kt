@@ -3,6 +3,7 @@ package com.exercise.matipv2
 import androidx.test.filters.SmallTest
 import com.exercise.matipv2.data.local.model.Tip
 import com.exercise.matipv2.util.calculateTip
+import com.exercise.matipv2.util.localDateTimeFormated
 import com.exercise.matipv2.util.stringAmountToDouble
 import com.exercise.matipv2.util.tipListToString
 import org.junit.Assert.assertEquals
@@ -42,12 +43,23 @@ class TipUtilsTests {
     @Test
     fun testTipListToString() {
         val tipList = listOf(
-            Tip(1, "10", "10", 1),
-            Tip(2, "15", "15", 1),
-            Tip(3, "20", "20", 1)
+            Tip(1, "10", "10", 1, "10/10/2021"),
+            Tip(2, "15", "15", 1, "10/10/2021"),
+            Tip(3, "20", "20", 1, "10/10/2021")
         )
         val expected = "10\n15\n20"
         val actual = tipListToString(tipList)
         assertEquals(expected, actual)
+    }
+
+    /** I want to assert the format of the date, but I can't predict the exact date.
+     * So I'll just check if the format is correct
+     */
+    @Test
+    fun testLocalDateTimeFormated() {
+        val actual = localDateTimeFormated()
+        val regex = Regex("\\d{2}/\\d{2}/\\d{4}")
+        assertEquals(true, regex.matches(actual))
+
     }
 }

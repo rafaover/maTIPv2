@@ -36,31 +36,31 @@ class OfflineMatipRepositoryTest {
 
     @Test
     fun insertTip() = runBlocking {
-        val tip = Tip(1, "100", "10", 1)
+        val tip = Tip(1, "100", "10", 1, "10/10/2021")
         repository.insertTip(tip)
         verify(mockTipDao).insertTip(tip)
     }
 
     @Test
     fun deleteTip() = runBlocking {
-        val tip = Tip(1, "100", "10", 1)
+        val tip = Tip(1, "100", "10", 1, "10/10/2021")
         repository.deleteTip(tip)
         verify(mockTipDao).deleteTip(tip)
     }
 
     @Test
     fun updateTip() = runBlocking {
-        val tip1 = Tip(1, "100", "10", 1)
+        val tip1 = Tip(1, "100", "10", 1, "10/10/2021")
         repository.insertTip(tip1)
-        val tip2 = Tip(1, "200", "20", 1)
+        val tip2 = Tip(1, "200", "20", 1, "10/10/2021")
         repository.updateTip(tip2)
         verify(mockTipDao).updateTip(tip2)
     }
 
     @Test
     fun getAllTips() = runBlocking {
-        val tip1 = Tip(1, "100", "10", 1)
-        val tip2 = Tip(2, "200", "20", 1)
+        val tip1 = Tip(1, "100", "10", 1, "10/10/2021")
+        val tip2 = Tip(2, "200", "20", 1, "10/10/2021")
         `when`(mockTipDao.getAllTips()).thenReturn(flowOf(listOf(tip1, tip2)))
         val allTips = repository.getAllTips().first()
         verify(mockTipDao).getAllTips()
@@ -69,7 +69,7 @@ class OfflineMatipRepositoryTest {
 
     @Test
     fun getLastTipSaved() = runBlocking {
-        val tip = Tip(1, "100", "10", 1)
+        val tip = Tip(1, "100", "10", 1, "10/10/2021")
         `when`(mockTipDao.getLastTipSaved()).thenReturn(tip)
         val lastTip = repository.getLastTipSaved()
         verify(mockTipDao).getLastTipSaved()
@@ -78,8 +78,8 @@ class OfflineMatipRepositoryTest {
 
     @Test
     fun getAllTipsFromList() = runBlocking {
-        val tip1 = Tip(1, "100", "10", 1)
-        val tip2 = Tip(2, "200", "20", 1)
+        val tip1 = Tip(1, "100", "10", 1, "10/10/2021")
+        val tip2 = Tip(2, "200", "20", 1, "10/10/2021")
         `when`(mockTipDao.getAllTipsFromList(1)).thenReturn(flowOf(listOf(tip1, tip2)))
         val allTips = repository.getAllTipsFromList(1).first()
         verify(mockTipDao).getAllTipsFromList(1)
@@ -123,8 +123,8 @@ class OfflineMatipRepositoryTest {
     fun getAllListsWithTips() = runBlocking {
         val list1 = List(1, "ListTest1")
         val list2 = List(2, "ListTest2")
-        val tip1 = Tip(1, "100", "10", 1)
-        val tip2 = Tip(2, "200", "20", 2)
+        val tip1 = Tip(1, "100", "10", 1, "10/10/2021")
+        val tip2 = Tip(2, "200", "20", 2, "10/10/2021")
         val listWithTips1 = ListWithTips(list1, listOf(tip1))
         val listWithTips2 = ListWithTips(list2, listOf(tip2))
         `when`(mockListDao.getAllListsWithTips())
