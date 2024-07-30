@@ -70,7 +70,7 @@ fun ListsScreen(
                                 .clickable(onClickLabel = list.name) {
                                     navigateTo(list)
                                 }
-                                .height(70.dp),
+                                .height(60.dp),
                             item = list,
                             getName = { list.name },
                             mainTrailItemInfo = {
