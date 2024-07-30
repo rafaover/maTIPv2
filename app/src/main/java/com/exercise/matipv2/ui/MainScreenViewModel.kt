@@ -114,7 +114,8 @@ class MainScreenViewModel (
             val tip = Tip(
                 tipAmount = uiState.value.finalTip,
                 tipPercent = uiState.value.tipPercent,
-                listId = uiState.value.listId
+                listId = uiState.value.listId,
+                dateCreated = uiState.value.dateCreated
             )
             matipRepository.insertTip(tip)
         }
@@ -126,11 +127,6 @@ class MainScreenViewModel (
         }
         updateNewListName("")
     }
-
-//    suspend fun addTipToList(tip: Tip, listId: Int) {
-//            tip.listId = listId
-//            matipRepository.updateTip(tip)
-//    }
 
     /*
     * Delete Functions

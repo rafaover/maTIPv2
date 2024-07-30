@@ -101,12 +101,24 @@ class ListDaoTests {
         }
         // Add 3 tips to ListTest1
         for (i in 1..3) {
-            val tip = Tip(id = i, tipAmount = "${i*250}", tipPercent = "${i*2}", listId = 1)
+            val tip = Tip(
+                id = i,
+                tipAmount = "${i*250}",
+                tipPercent = "${i*2}",
+                listId = 1,
+                dateCreated = "01/01/2021"
+            )
             tipDao.insertTip(tip)
         }
         // Add 3 tips to ListTest2
         for (i in 4..6) {
-            val tip = Tip(id = i, tipAmount = "${i*250}", tipPercent = "${i*3}", listId = 2)
+            val tip = Tip(
+                id = i,
+                tipAmount = "${i*250}",
+                tipPercent = "${i*3}",
+                listId = 2,
+                dateCreated = "01/01/2021"
+            )
             tipDao.insertTip(tip)
         }
         val getAllLists = listDao.getAllLists().first() // 10
