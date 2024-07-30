@@ -11,6 +11,7 @@ import com.exercise.matipv2.data.local.model.Tip
 import com.exercise.matipv2.data.repository.MatipRepository
 import com.exercise.matipv2.ui.tipcalculator.TipCalculatorScreenUiState
 import com.exercise.matipv2.util.calculateTip
+import com.exercise.matipv2.util.localDateTimeFormated
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,6 +32,7 @@ class MainScreenViewModel (
 
     init {
         resetCalculateTipScreen()
+        updateDateCreated()
     }
 
     /*
@@ -51,6 +53,10 @@ class MainScreenViewModel (
 
     fun updateRoundUp(roundUp: Boolean) {
         updateState { it.copy(roundUp = roundUp) }
+    }
+
+    private fun updateDateCreated() {
+        updateState { it.copy(dateCreated = localDateTimeFormated()) }
     }
 
     fun updateList(list: List) {
