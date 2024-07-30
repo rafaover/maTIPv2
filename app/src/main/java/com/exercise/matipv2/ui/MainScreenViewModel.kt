@@ -11,6 +11,7 @@ import com.exercise.matipv2.data.local.model.Tip
 import com.exercise.matipv2.data.repository.MatipRepository
 import com.exercise.matipv2.ui.tipcalculator.TipCalculatorScreenUiState
 import com.exercise.matipv2.util.calculateTip
+import com.exercise.matipv2.util.localDateTimeFormated
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,6 +32,7 @@ class MainScreenViewModel (
 
     init {
         resetCalculateTipScreen()
+        updateDateCreated()
     }
 
     /*
@@ -51,6 +53,10 @@ class MainScreenViewModel (
 
     fun updateRoundUp(roundUp: Boolean) {
         updateState { it.copy(roundUp = roundUp) }
+    }
+
+    private fun updateDateCreated() {
+        updateState { it.copy(dateCreated = localDateTimeFormated()) }
     }
 
     fun updateList(list: List) {
@@ -114,7 +120,8 @@ class MainScreenViewModel (
             val tip = Tip(
                 tipAmount = uiState.value.finalTip,
                 tipPercent = uiState.value.tipPercent,
-                listId = uiState.value.listId
+                listId = uiState.value.listId,
+                dateCreated = uiState.value.dateCreated
             )
             matipRepository.insertTip(tip)
         }
@@ -126,11 +133,6 @@ class MainScreenViewModel (
         }
         updateNewListName("")
     }
-
-//    suspend fun addTipToList(tip: Tip, listId: Int) {
-//            tip.listId = listId
-//            matipRepository.updateTip(tip)
-//    }
 
     /*
     * Delete Functions
