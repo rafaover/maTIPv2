@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 fun <T> ListItemComponent(
     item: T,
     getName: (T) -> String,
+    overLineContent: @Composable () -> Unit = {},
     mainTrailItemInfo: @Composable (T) -> Unit,
     listItemTrailingIcon: ImageVector,
     trailingIconContentDescription: String = "",
@@ -37,43 +38,49 @@ fun <T> ListItemComponent(
     onClickLabel: String = "",
     modifier: Modifier
     ) {
-    ListItem(
-        modifier = modifier,
-        headlineContent = {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Spacer(
-                    modifier = Modifier
-                        .width(4.dp)
-                        .height(36.dp)
-                        .background(MaterialTheme.colorScheme.primary)
-                )
-                Spacer(Modifier.width(12.dp))
-                Text(
-                    text = getName(item),
-                    style = MaterialTheme.typography.bodyLarge
-                )
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.background(MaterialTheme.colorScheme.surface)
+
+    ) {
+        Spacer(
+            modifier = Modifier
+                .width(4.dp)
+                .height(40.dp)
+                .background(MaterialTheme.colorScheme.primary)
+        )
+        ListItem(
+            modifier = modifier,
+            overlineContent = overLineContent,
+            headlineContent = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = getName(item),
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                }
+            },
+            trailingContent = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    mainTrailItemInfo(item)
+                    Spacer(Modifier.width(16.dp))
+                    Icon(
+                        imageVector = listItemTrailingIcon,
+                        contentDescription = trailingIconContentDescription,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier
+                            .padding(end = 12.dp)
+                            .clickable(onClickLabel = onClickLabel) {
+                                onClickTrailingIcon()
+                            }
+                            .size(24.dp)
+                    )
+                }
             }
-        },
-        trailingContent = {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                mainTrailItemInfo(item)
-                Spacer(Modifier.width(16.dp))
-                Icon(
-                    imageVector = listItemTrailingIcon,
-                    contentDescription = trailingIconContentDescription,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier
-                        .padding(end = 12.dp)
-                        .clickable(onClickLabel = onClickLabel) {
-                            onClickTrailingIcon()
-                        }
-                        .size(24.dp)
-                )
-            }
-        }
-    )
+        )
+    }
 }

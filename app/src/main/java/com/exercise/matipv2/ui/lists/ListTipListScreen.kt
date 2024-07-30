@@ -135,6 +135,7 @@ fun ListTipListScreen(
                          */
                         itemsIndexed(listTipList) { _, tip ->
                             ListItemComponent(
+                                overLineContent = { Text(text = tip.dateCreated) },
                                 item = tip,
                                 getName = { tip.tipAmount },
                                 mainTrailItemInfo = { },
