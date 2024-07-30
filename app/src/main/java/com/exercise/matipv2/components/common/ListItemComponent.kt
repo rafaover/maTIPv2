@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 fun <T> ListItemComponent(
     item: T,
     getName: (T) -> String,
+    todayDate: String = "",
     mainTrailItemInfo: @Composable (T) -> Unit,
     listItemTrailingIcon: ImageVector,
     trailingIconContentDescription: String = "",
@@ -39,6 +40,12 @@ fun <T> ListItemComponent(
     ) {
     ListItem(
         modifier = modifier,
+        overlineContent = {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Spacer(Modifier.width(16.dp))
+                Text(text = todayDate)
+            }
+        },
         headlineContent = {
             Row(
                 verticalAlignment = Alignment.CenterVertically
