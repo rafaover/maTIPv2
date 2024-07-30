@@ -22,5 +22,11 @@ data class Tip(
      * The [List] id that the [Tip] is associated with.
      */
     @ColumnInfo(name = "list_id")
-    var listId: Int
+    var listId: Int,
+
+    /**
+     * The date of the [Tip] creation.
+     */
+    @ColumnInfo(name = "date_created")
+    val dateCreated: String
 )
