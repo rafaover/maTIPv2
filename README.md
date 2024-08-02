@@ -7,6 +7,9 @@ Crowdfunding life goals with a little tip
 - [x] Split Tips among friends.
 - [x] Create lists and access the total spent on a specific list or trip.
 - [x] Share the total split with the group.
+- [ ] Authentication
+- [ ] List personal projects to be crowdfunded
+- [ ] Link your project to a wallet and receive funds. (Currency/Crypto)
 
 ## TOOLS:
 
@@ -23,6 +26,4 @@ Crowdfunding life goals with a little tip
 Future Plans:
 - KMP Migration
 - Compose Multiplatform Implementation
-- Authentication
 - Seamless Payment (Stable or Crypto)
-- Module for Hospitality worker check crowdfunding projects and money support
