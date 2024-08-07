@@ -1,7 +1,7 @@
 
 ![LOGO_whiteback](https://github.com/rafaover/maTIPv2/assets/59352318/6702bf58-7c68-4c4f-a063-8bacd616c52a)
 
-![GitHub last commit](https://img.shields.io/github/last-commit/rafaover/matipv2) | ![GitHub Release](https://img.shields.io/github/v/release/rafaover/matipv2) | ![GitHub Tag](https://img.shields.io/github/v/tag/rafaover/matipv2)
+![GitHub last commit](https://img.shields.io/github/last-commit/rafaover/matipv2) ![GitHub Release](https://img.shields.io/github/v/release/rafaover/matipv2) 
 
 
 
