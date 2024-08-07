@@ -1,6 +1,9 @@
 
 ![LOGO_whiteback](https://github.com/rafaover/maTIPv2/assets/59352318/6702bf58-7c68-4c4f-a063-8bacd616c52a)
 
+![GitHub last commit](https://img.shields.io/github/last-commit/rafaover/matipv2)
+
+
 Crowdfunding life goals with a little tip
 
 - [x] Store Tips based on events or trips, so you access the total money spent.
